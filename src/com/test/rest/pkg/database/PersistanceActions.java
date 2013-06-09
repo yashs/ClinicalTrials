@@ -132,8 +132,8 @@ public class PersistanceActions {
 		// TODO Auto-generated method stub
 
 		String [] urlParams = hashCode.split(";");
-		System.out.println(urlParams[0].split("\\[")[1]+"\n"+urlParams[1].split("]")[0]);
-		System.out.println("SELECT * FROM users where name = '"+urlParams[0].split("\\[")[1]+"'");
+//		System.out.println(urlParams[0].split("\\[")[1]+"\n"+urlParams[1].split("]")[0]);
+//		System.out.println("SELECT * FROM users where name = '"+urlParams[0].split("\\[")[1]+"'");
 		Database database= new Database();
 		Connection connection;
 		try {

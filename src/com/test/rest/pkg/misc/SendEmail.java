@@ -20,7 +20,7 @@ public class SendEmail
     private static String DEBUG = "true";
     private static String SOCKET_FACTORY = "javax.net.ssl.SSLSocketFactory";
     private static String SUBJECT = "Confirm Clinical Trial Registration";
-    private static String TEXT = "This is a test message from Clinical Trials. Please click the below link to confirm your registration.\n";
+    private static String TEXT = "This is a Validation message from Clinical Trials. Please click the below link to confirm your registration.\n";
  
     public static synchronized void send(String to, String confirmLink) {
         

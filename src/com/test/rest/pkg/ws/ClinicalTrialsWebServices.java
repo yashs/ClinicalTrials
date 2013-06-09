@@ -109,14 +109,14 @@ public class ClinicalTrialsWebServices {
 	      @Context HttpServletResponse servletResponse) throws Exception {
 	  	pwd = EncryptPassword.encrypt(pwd);
 	  	name.replace(" ", "_");
-	  	System.out.println("This is the Encrypted Password:     "+pwd);
+	  	//System.out.println("This is the Encrypted Password:     "+pwd);
 		UserInfo parm = new UserInfo(id,name,dob,email,"male",pwd);
 		Database database= new Database();
 	    Connection connection = database.Get_Connection();
 		PersistanceActions project= new PersistanceActions();
 		project.setDBRecords(connection,parm);
 
-		SendEmail.send(email, "http://localhost:8080/NewRestWS/rest/params/confirmRegistration?hasCode="+name+";"+EncryptPassword.encrypt(id));
+		SendEmail.send(email, "http://localhost:8080/NewRestWS/rest/params/confirmRegistration?hashCode="+name+";"+EncryptPassword.encrypt(id));
 		
 	    DefaultParam.instance.getModel().put(id, parm);    
 	    try {
