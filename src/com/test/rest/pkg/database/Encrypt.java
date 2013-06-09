@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import sun.misc.BASE64Encoder;
  
-public final class EncryptPassword {
+public final class Encrypt {
     public static synchronized String encrypt(String plaintext) throws Exception {
         MessageDigest msgDigest = null;
         String hashValue = null;

@@ -146,9 +146,9 @@ public class PersistanceActions {
 
 				String ssnDB = rs.getString("ssn");
 
-				System.out.println(hashCode+"\n"+urlParams[0]+"\n"+urlParams[1]+"\n"+EncryptPassword.encrypt(ssnDB));
+				System.out.println(hashCode+"\n"+urlParams[0]+"\n"+urlParams[1]+"\n"+Encrypt.encrypt(ssnDB));
 
-				if(urlParams[1].split("]")[0].equals(EncryptPassword.encrypt(ssnDB))){
+				if(urlParams[1].split("]")[0].equals(Encrypt.encrypt(ssnDB))){
 					String psString = "UPDATE users SET user_status = true where name = '"+urlParams[0].split("\\[")[1]+"'";
 					ps = connection.prepareStatement(psString);
 					ps.executeUpdate();

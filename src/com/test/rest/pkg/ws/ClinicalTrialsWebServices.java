@@ -20,7 +20,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.test.rest.pkg.clinicaltrials.ClinicalTrials;
 import com.test.rest.pkg.database.Database;
-import com.test.rest.pkg.database.EncryptPassword;
+import com.test.rest.pkg.database.Encrypt;
 import com.test.rest.pkg.database.PersistanceActions;
 import com.test.rest.pkg.misc.SendEmail;
 import com.test.rest.pkg.misc.UserInfo;
@@ -105,7 +105,7 @@ public class ClinicalTrialsWebServices {
 	      @FormParam("email") String email,
 	      @FormParam("pwd") String pwd,
 	      @Context HttpServletResponse servletResponse) throws Exception {
-	  	pwd = EncryptPassword.encrypt(pwd);
+	  	pwd = Encrypt.encrypt(pwd);
 	  	name.replace(" ", "_");
 	  	//System.out.println("This is the Encrypted Password:     "+pwd);
 		UserInfo parm = new UserInfo(id,name,dob,email,"male",pwd);
@@ -114,7 +114,7 @@ public class ClinicalTrialsWebServices {
 		PersistanceActions project= new PersistanceActions();
 		project.setDBRecords(connection,parm);
 
-		SendEmail.send(email, "http://localhost:8080/NewRestWS/rest/params/confirmRegistration?hashCode="+name+";"+EncryptPassword.encrypt(id));
+		SendEmail.send(email, "http://localhost:8080/NewRestWS/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 		
 	    DefaultParam.instance.getModel().put(id, parm);    
 	    try {
