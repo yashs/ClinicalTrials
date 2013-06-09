@@ -57,8 +57,7 @@ public class ClinicalTrialsWebServices {
     Connection connection = database.Get_Connection();
 	PersistanceActions project= new PersistanceActions();
 	project.getDBRecords(connection);
-    params.addAll(DefaultParam.instance.getModel().values());
-    System.out.println("This is the URL:     "+uriInfo.getQueryParameters());	  	
+    params.addAll(DefaultParam.instance.getModel().values());	  	
     return params; 
   }
   
