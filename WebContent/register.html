@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Form to create a new resource</title>
+</head>
+<body>
+	<form action="../NewRestWS/rest/params" method="POST">
+		SSN<input name="id" /> <br> 
+		NAME: <input name="name"/><br>
+		DateOfBirth:<input name="dob"/><br>
+		Sex:
+		Male <input type="radio"  name="male" value="Male"/>
+		Female <input type="radio"  name="female" value="female"/><br>
+		EmailID: <input name="email" value="abc@pqr.com"/><br>	
+		Password: <input name="pwd" min="8" max="18"/><br>
+		Confirm Password: <input name="confpwd" min="8" max="18"/><br>	
+		<br> <input type="submit" value="Submit" />
+		
+	</form>
+</body>
+</html>

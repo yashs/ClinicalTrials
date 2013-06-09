@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study rank="1213">
+  <!-- This xml conforms to an XML Schema at:
+    http://clinicaltrials.gov/ct2/html/images/info/public.xsd
+ and an XML DTD at:
+    http://clinicaltrials.gov/ct2/html/images/info/public.dtd -->
+  <required_header>
+    <download_date>Information obtained from ClinicalTrials.gov on March 28, 2013</download_date>
+    <link_text>Link to the current ClinicalTrials.gov record.</link_text>
+    <url>http://clinicaltrials.gov/show/NCT00425685</url>
+  </required_header>
+  <id_info>
+    <org_study_id>Use of ECM in acute MI</org_study_id>
+    <secondary_id>ECMO and AMI</secondary_id>
+    <nct_id>NCT00425685</nct_id>
+  </id_info>
+  <brief_title>Use of ECMO in Acute MI</brief_title>
+  <official_title>Use of Extracorporeal Membrane Oxygenation in Treatment of Acute Myocardial Infarction Following Cardiac Surgery Procedures</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Johann Wolfgang Goethe University Hospitals</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <source>Johann Wolfgang Goethe University Hospitals</source>
+  <oversight_info>
+    <authority>Ethical Commity of JW Goethe University:GERMANY</authority>
+  </oversight_info>
+  <brief_summary>
+    <textblock>
+      ECMO offers an acceptable cardiopulmonary support in adults with similar hospital survival
+      rates as other mechanical support. It is versatile and salvages some patients, who may
+      otherwise die. Improvement in intermediate term outcome will require multidisciplinary
+      approach to protect organ function and limit organ injury during this support.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Extracorporeal membrane oxygenation (ECMO) is an established treatment option in patients
+      with Cardiogenic Schock. We retrospectively reviewed early and mid-term outcome as well as
+      predictors of survival during using ECMO. This report reviews our experience with this
+      support system in last 3 years.
+    </textblock>
+  </detailed_description>
+  <overall_status>Active, not recruiting</overall_status>
+  <start_date>January 2003</start_date>
+  <completion_date>December 2006</completion_date>
+  <phase>N/A</phase>
+  <study_type>Observational</study_type>
+  <study_design>Observational Model:  Defined Population, Primary Purpose:  Screening, Time Perspective:  Longitudinal, Time Perspective:  Retrospective/Prospective</study_design>
+  <enrollment>60</enrollment>
+  <condition>ECMO and Acute MI</condition>
+  <eligibility>
+    <criteria>
+      <textblock>
+        Inclusion Criteria:
+
+          -  Acute MI
+
+        Exclusion Criteria:
+
+          -  Contraindication against ECMO
+      </textblock>
+    </criteria>
+    <gender>Both</gender>
+    <minimum_age>17 Years</minimum_age>
+    <maximum_age>90 Years</maximum_age>
+    <healthy_volunteers>No</healthy_volunteers>
+  </eligibility>
+  <overall_official>
+    <last_name>Farhad Bakhtiary, MD</last_name>
+    <role>Principal Investigator</role>
+    <affiliation>JW Goethe University</affiliation>
+  </overall_official>
+  <verification_date>January 2007</verification_date>
+  <lastchanged_date>January 22, 2007</lastchanged_date>
+  <firstreceived_date>January 22, 2007</firstreceived_date>
+  <keyword>cardiopulmonary resuscitation, ECMO, shock, survival, heart failure, transplantation, heart assist device.</keyword>
+  <has_expanded_access>No</has_expanded_access>
+  <condition_browse>
+    <!-- CAUTION:  The following MeSH terms are assigned with an imperfect algorithm  -->
+    <mesh_term>Myocardial Infarction</mesh_term>
+  </condition_browse>
+  <!-- Results have not yet been posted for this study                                -->
+</clinical_study>

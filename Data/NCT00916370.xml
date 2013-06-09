@@ -1,0 +1,1479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study rank="1258">
+  <!-- This xml conforms to an XML Schema at:
+    http://clinicaltrials.gov/ct2/html/images/info/public.xsd
+ and an XML DTD at:
+    http://clinicaltrials.gov/ct2/html/images/info/public.dtd -->
+  <required_header>
+    <download_date>Information obtained from ClinicalTrials.gov on March 28, 2013</download_date>
+    <link_text>Link to the current ClinicalTrials.gov record.</link_text>
+    <url>http://clinicaltrials.gov/show/NCT00916370</url>
+  </required_header>
+  <id_info>
+    <org_study_id>06-373</org_study_id>
+    <nct_id>NCT00916370</nct_id>
+  </id_info>
+  <brief_title>SPIRIT PRIME Clinical Trial</brief_title>
+  <acronym>SPIRIT PRIME</acronym>
+  <official_title>SPIRIT PRIME Clinical Trial.</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Abbott Vascular</agency>
+      <agency_class>Industry</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <source>Abbott Vascular</source>
+  <oversight_info>
+    <authority>United States: Food and Drug Administration</authority>
+    <authority>Australia: Department of Health and Ageing Therapeutic Goods Administration</authority>
+    <has_dmc>Yes</has_dmc>
+  </oversight_info>
+  <brief_summary>
+    <textblock>
+      To evaluate the safety and effectiveness of the XIENCE PRIME and XIENCE PRIME Long Lesion
+      (LL) Everolimus Eluting Coronary Stent System (EECSS) in improving coronary luminal diameter
+      in subjects with symptomatic heart disease due to a maximum of two de novo native coronary
+      artery lesions, each in a different epicardial vessel.
+    </textblock>
+  </brief_summary>
+  <overall_status>Active, not recruiting</overall_status>
+  <start_date>June 2009</start_date>
+  <completion_date type="Anticipated">April 2016</completion_date>
+  <primary_completion_date type="Actual">March 2011</primary_completion_date>
+  <phase>Phase 3</phase>
+  <study_type>Interventional</study_type>
+  <study_design>Allocation:  Non-Randomized, Endpoint Classification:  Safety/Efficacy Study, Intervention Model:  Parallel Assignment, Masking:  Open Label, Primary Purpose:  Treatment</study_design>
+  <primary_outcome>
+    <measure>Target Lesion Failure (TLF)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>The composite rate of:
+Cardiac Death Target Vessel Myocardial Infarction (TV-MI) and Clinically Indicated Target Lesion Revascularization (CI-TLR) per protocol.</description>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Procedure Time</measure>
+    <time_frame>From insertion to withdrawal of guide catheter</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Procedure time is defined as time between insertion and withdrawal of guide catheter.</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>In-hospital is less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI)Per Protocol - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure.</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/All MI</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>in-hospital</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/All MI/All Coronary Revascularization</measure>
+    <time_frame>In-hospital is defined as hospitalization less than or equal to 7 days post index procedure</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol Definition</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death (Cardiac, Vascular, Non-cardiovascular)</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI) - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI) - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI) - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI) - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI) - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI) - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Target Vessel-Myocardial Infarction (TV-MI) - Q-wave and Non Q-wave (Defined as MI Not Clearly Attributable to a Non-target Vessel)</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Device Success (Lesion Basis)</measure>
+    <time_frame>From the start of index procedure to end of index procedure</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Device success is defined as achievement of a final in-stent residual diameter stenosis of &lt; 50% (by QCA).</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Procedural Success (Subject Basis)</measure>
+    <time_frame>From the start of index procedure to end of index procedure</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Procedure success is defined as achievement of a final in-stent diameter stenosis of &lt; 50% (by QCA).  Per Protocol.</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Non-target Vessel MI (Q-wave, Non Q-wave)</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated-Target Lesion Revascularization</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Clinically Indicated Target Vessel Revascularization (TVR = TLR and Non-TLR in TV)</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TLR (CI and Non-CI)</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All TVR (CI and Non-CI)</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Coronary Revascularization (TVR and Non-TVR)</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>No</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/All MI</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/All MI</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/All MI</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/All MI</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/All MI</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/All MI</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol Definition</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol Definition</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Per Protocol Definition</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Cardiac Death/ All MI/CI-TLR</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/ All MI/All Coronary Revascularization</measure>
+    <time_frame>30 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/ All MI/All Coronary Revascularization</measure>
+    <time_frame>180 days</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/ All MI/All Coronary Revascularization</measure>
+    <time_frame>1 year</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/ All MI/All Coronary Revascularization</measure>
+    <time_frame>2 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/ All MI/All Coronary Revascularization</measure>
+    <time_frame>3 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/ All MI/All Coronary Revascularization</measure>
+    <time_frame>4 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>All Death/ All MI/All Coronary Revascularization</measure>
+    <time_frame>5 years</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Stent Thrombosis (Per Protocol and Per ARC)</measure>
+    <time_frame>Acute (≤1 day)</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Definite and Probable</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Stent Thrombosis (Per Protocol and Per ARC)</measure>
+    <time_frame>Subacute  (&gt;1 - 30 days)</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Definite and Probable</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Stent Thrombosis (Per Protocol and Per ARC)</measure>
+    <time_frame>Acute/Subacute (0 - 30 days)</time_frame>
+    <safety_issue>Yes</safety_issue>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Stent Thrombosis (Per Protocol and Per ARC)</measure>
+    <time_frame>Late (31 - 393 days)</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Definite and Probable</description>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Stent Thrombosis (Per Protocol and Per ARC)</measure>
+    <time_frame>Overall (0-393 days)</time_frame>
+    <safety_issue>Yes</safety_issue>
+    <description>Definite and Probable</description>
+  </secondary_outcome>
+  <number_of_arms>2</number_of_arms>
+  <enrollment type="Actual">505</enrollment>
+  <condition>Myocardial Ischemia</condition>
+  <condition>Coronary Artery Stenosis</condition>
+  <condition>Coronary Disease</condition>
+  <condition>Coronary Artery Disease</condition>
+  <condition>Coronary Restenosis</condition>
+  <arm_group>
+    <arm_group_label>Core size registry</arm_group_label>
+    <arm_group_type>Experimental</arm_group_type>
+    <description>Core size indicates the range of diameters of the stents used.</description>
+  </arm_group>
+  <arm_group>
+    <arm_group_label>Long lesion registry</arm_group_label>
+    <arm_group_type>Experimental</arm_group_type>
+    <description>Use of long lesion stents.</description>
+  </arm_group>
+  <intervention>
+    <intervention_type>Device</intervention_type>
+    <intervention_name>Core size Xience Prime</intervention_name>
+    <description>Core size includes a range of stent sizes.</description>
+    <arm_group_label>Core size registry</arm_group_label>
+  </intervention>
+  <intervention>
+    <intervention_type>Device</intervention_type>
+    <intervention_name>Xience Prime Long Lesion (LL)</intervention_name>
+    <description>Long lesion stent sizes include a range of sizes.</description>
+    <arm_group_label>Long lesion registry</arm_group_label>
+  </intervention>
+  <eligibility>
+    <criteria>
+      <textblock>
+        Inclusion Criteria:
+
+          1. Subject must be at least 18 years of age.
+
+          2. Subject or a legally authorized representative must provide written informed consent
+             prior to any study related procedure, per site requirements.
+
+          3. Subject must have evidence of myocardial ischemia (e.g., stable or unstable angina,
+             silent ischemia, positive functional study or a reversible change in the
+             electrocardiogram (ECG) consistent with ischemia).
+
+          4. Subject must be an acceptable candidate for coronary artery bypass graft (CABG)
+             surgery.
+
+          5. Subject must agree to undergo all protocol-required follow-up procedures.
+
+          6. Subject must agree not to participate in any other clinical study for a period of one
+             year following the index procedure.
+
+        Angiographic Inclusion Criteria
+
+          1. One or two de novo target lesions each in a different epicardial vessel.
+
+          2. If there are two target lesions, both lesions must satisfy the angiographic
+             eligibility criteria for that registry.
+
+             o Multiple focal de novo lesions in a target vessel that can be covered by a single
+             stent are allowed.
+
+          3. The target lesion(s) must be located in a major artery or branch with a visually
+             estimated diameter stenosis of ≥ 50% and &lt; 100% with a TIMI flow of ≥ 1.
+
+          4. Target lesion(s) must be located in a native coronary artery with reference vessel
+             diameter (RVD) by visual estimation of:
+
+               -  ≥ 2.25 mm and ≤ 4.25 mm for treatment by the core size XIENCE PRIME EECS
+
+               -  ≥ 2.5 mm and ≤ 4.25 mm for treatment by the XIENCE PRIME LL EECS
+
+          5. Target lesion(s) must be located in a native coronary artery with length by visual
+             estimation of:
+
+               -  ≤ 22 mm for treatment by the core size XIENCE PRIME EECS
+
+               -  &gt; 22 mm and ≤ 32 mm for treatment by the XIENCE PRIME LL EECS
+
+        Exclusion Criteria:
+
+          1. Subject has had a known diagnosis of acute myocardial infarction (AMI) preceding the
+             index procedure (CK-MB ≥ 2 times upper limit of normal) and CK and CK-MB have not
+             returned to within normal limits at the time of procedure.
+
+          2. The subject is currently experiencing clinical symptoms consistent with new onset
+             AMI, such as nitrate-unresponsive prolonged chest pain with ischemic ECG changes.
+
+          3. Subject has current unstable cardiac arrhythmias associated with hemodynamic
+             instability.
+
+          4. Subject has a known left ventricular ejection fraction (LVEF) &lt; 30% (LVEF may be
+             obtained at the time of the index procedure if the value is unknown and if
+             necessary).
+
+          5. Subject has received coronary brachytherapy in any epicardial vessel (target or non
+             target).
+
+          6. Subject has received any organ transplant or is on a waiting list for any organ
+             transplant.
+
+          7. Subject is receiving or scheduled to receive chemotherapy for malignancy within 30
+             days prior to or within one year after the index procedure.
+
+          8. Subject is receiving or scheduled to receive planned radiotherapy to the
+             chest/mediastinum.
+
+          9. Subject is receiving immunosuppressant therapy or has known immunosuppressive or
+             autoimmune disease (e.g. human immunodeficiency virus, systemic lupus erythematosus
+             etc.).
+
+         10. Subject is receiving chronic anticoagulation therapy (e.g., heparin, coumadin).
+
+         11. Subject will require Low Molecular Weight Heparin (LMWH) post-procedure.
+
+         12. Subject has a known hypersensitivity or contraindication to aspirin,
+             heparin/bivalirudin, clopidogrel/ticlopidine, everolimus, cobalt, chromium, nickel,
+             tungsten, acrylic and fluoro polymers or contrast sensitivity that cannot be
+             adequately pre-medicated.
+
+         13. Elective surgery is planned within 12 months after the procedure that will require
+             discontinuing either aspirin or clopidogrel.
+
+         14. Subject has a platelet count &lt; 100,000 cells/mm3 or &gt; 700,000 cells/mm3, a white
+             blood cell (WBC) of &lt; 3,000 cells/mm3, or documented or suspected liver disease
+             (including laboratory evidence of hepatitis).
+
+         15. Subject has known renal insufficiency (examples being but not limited to estimated
+             glomerular filtration rate (eGFR) &lt; 60 ml/kg/m2, serum creatinine level ≥ 2.5 mg/dL,
+             or on dialysis).
+
+         16. Subject has a history of bleeding diathesis or coagulopathy or will refuse blood
+             transfusions.
+
+         17. Subject has had a cerebrovascular accident/stroke or transient ischemic neurological
+             attack (TIA) within the past six months.
+
+         18. Subject has had a significant gastro-intestinal or significant urinary bleed within
+             the past six months.
+
+         19. Subject has extensive peripheral vascular disease that precludes safe 6 French sheath
+             insertion.
+
+         20. Subject has other medical illness (e.g., cancer or congestive heart failure) or known
+             history of substance abuse (alcohol, cocaine, heroin etc.) that may cause
+             non-compliance with the protocol, confound the data interpretation or is associated
+             with a limited life expectancy (i.e., less than one year).
+
+         21. Subject is currently participating in another clinical study that has not yet
+             completed its primary endpoint.
+
+         22. Pregnant or nursing subjects and those who plan pregnancy in the period up to 1 year
+             following index procedure. Female subjects of child-bearing potential must have a
+             negative pregnancy test done within 7 days prior to the index procedure per site
+             standard test.
+
+        Angiographic Exclusion Criteria All angiographic exclusion criteria are based on visual
+        estimation.
+
+          1. Target lesion located within an arterial or saphenous vein graft or distal to a
+             diseased (vessel irregularity per angiogram and &gt; 20% stenosed lesion) arterial or
+             saphenous vein graft.
+
+          2. Target lesion involving a bifurcation with a side branch ≥ 2 mm in diameter and/or
+             ostial lesion &gt; 40% stenosed or side branch requiring protection guide wire, or side
+             branch requiring dilatation.
+
+          3. Target lesion with total occlusion (TIMI flow 0), prior to crossing with the wire.
+
+          4. Another lesion requiring revascularization is located in the same epicardial vessel
+             of the target lesion.
+
+          5. Restenotic target lesion.
+
+          6. Aorto-ostial target lesion (within 3 mm of the aorta junction).
+
+          7. Target lesion is in a left main location.
+
+          8. Target lesion located within 2 mm of the origin of the LAD or LCX.
+
+          9. Extreme angulation (≥ 90 °) or excessive tortuosity (≥ two 45° angles) proximal to or
+             within the lesion.
+
+         10. Heavy calcification proximal to or within the target lesion.
+
+         11. Target vessel contains thrombus as indicated in the angiographic images.
+
+         12. Target lesion has a high probability that a procedure other than pre-dilatation and
+             stenting will be required at the time of index procedure for treatment of the target
+             vessel (e.g. atherectomy, cutting balloon).
+
+         13. Target vessel is previously treated with any type of PCI (e.g. balloon angioplasty,
+             stent, cutting balloon, atherectomy) &lt; 9 months prior to index procedure.
+
+         14. Non-target vessel is previously treated with any type of PCI &lt; 90 days prior to the
+             index procedure.
+
+         15. Additional clinically significant lesion(s) (e.g. %DS ≥ 50%) in a target vessel or
+             side branch for which PCI may be required &lt; 90 days after the index procedure.
+      </textblock>
+    </criteria>
+    <gender>Both</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+    <healthy_volunteers>No</healthy_volunteers>
+  </eligibility>
+  <overall_official>
+    <last_name>Marco Costa, MD, PhD</last_name>
+    <role>Principal Investigator</role>
+    <affiliation>University Hospital Case Medical Center</affiliation>
+  </overall_official>
+  <location>
+    <facility>
+      <name>Thomas Hospital</name>
+      <address>
+        <city>Fairhope</city>
+        <state>Alabama</state>
+        <zip>36532</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Scottsdale Healthcare</name>
+      <address>
+        <city>Scottsdale</city>
+        <state>Arizona</state>
+        <zip>85260</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Mercy General Hospital</name>
+      <address>
+        <city>Sacramento</city>
+        <state>California</state>
+        <zip>95819</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Washington Hospital Center</name>
+      <address>
+        <city>Washington</city>
+        <state>District of Columbia</state>
+        <zip>20010</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Morton Plant Hospital</name>
+      <address>
+        <city>Clearwater</city>
+        <state>Florida</state>
+        <zip>33765</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Vincents Medical Center</name>
+      <address>
+        <city>Jacksonville</city>
+        <state>Florida</state>
+        <zip>32204</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Orlando Regional Medical Center</name>
+      <address>
+        <city>Orlando</city>
+        <state>Florida</state>
+        <zip>32806</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Sacred Heart Hospital of Pensicola</name>
+      <address>
+        <city>Pensacola</city>
+        <state>Florida</state>
+        <zip>32504-8721</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. John's Hospital</name>
+      <address>
+        <city>Springfield</city>
+        <state>Illinois</state>
+        <zip>62701</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Vincent Heart Center of Indiana</name>
+      <address>
+        <city>Indianapolis</city>
+        <state>Indiana</state>
+        <zip>46260</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Iowa Heart Center P.C.</name>
+      <address>
+        <city>West Des Moines</city>
+        <state>Iowa</state>
+        <zip>50314</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>University of Kansas Hospital</name>
+      <address>
+        <city>Kansas City</city>
+        <state>Kansas</state>
+        <zip>66160</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Willis Knighton Health System, Pierremont</name>
+      <address>
+        <city>Shreveport</city>
+        <state>Louisiana</state>
+        <zip>71105</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Johns Hopkins Hospital</name>
+      <address>
+        <city>Baltimore</city>
+        <state>Maryland</state>
+        <zip>21287</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Union Memorial Hospital</name>
+      <address>
+        <city>Baltimore</city>
+        <state>Maryland</state>
+        <zip>21218</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Peninsula Regional Medical Center</name>
+      <address>
+        <city>Salisbury</city>
+        <state>Maryland</state>
+        <zip>21801</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Washington Adventist Hospital</name>
+      <address>
+        <city>Takoma Park</city>
+        <state>Maryland</state>
+        <zip>20912</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Cape Cod Hospital</name>
+      <address>
+        <city>Hyannis</city>
+        <state>Massachusetts</state>
+        <zip>02601</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Bay Regional Medical Center</name>
+      <address>
+        <city>Bay City</city>
+        <state>Michigan</state>
+        <zip>48706</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Borgess Medical Center</name>
+      <address>
+        <city>Kalamazoo</city>
+        <state>Michigan</state>
+        <zip>49048</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Northern Michigan Hospital</name>
+      <address>
+        <city>Petoskey</city>
+        <state>Michigan</state>
+        <zip>49770</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Beaumont Hospital</name>
+      <address>
+        <city>Royal Oak</city>
+        <state>Michigan</state>
+        <zip>48073</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Abbott Northwestern Hospital</name>
+      <address>
+        <city>Minneapolis</city>
+        <state>Minnesota</state>
+        <zip>55407</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Luke's Hospital</name>
+      <address>
+        <city>Kansas City</city>
+        <state>Missouri</state>
+        <zip>64111</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Barnes Jewish Hospital</name>
+      <address>
+        <city>St. Louis</city>
+        <state>Missouri</state>
+        <zip>63110</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Patrick Hospital</name>
+      <address>
+        <city>Missoula</city>
+        <state>Montana</state>
+        <zip>59802</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Cooper Health System</name>
+      <address>
+        <city>Camden</city>
+        <state>New Jersey</state>
+        <zip>08103</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>The Valley Hospital</name>
+      <address>
+        <city>Ridgewood</city>
+        <state>New Jersey</state>
+        <zip>07450</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Gotham Cardiology</name>
+      <address>
+        <city>New York</city>
+        <state>New York</state>
+        <zip>10011</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Mount Sinai Medical Center</name>
+      <address>
+        <city>NY</city>
+        <state>New York</state>
+        <zip>10029</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Presbyterian Hospital - Charlotte</name>
+      <address>
+        <city>Charlotte</city>
+        <state>North Carolina</state>
+        <zip>28233</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Forsyth Medical Center</name>
+      <address>
+        <city>Winston-Salem</city>
+        <state>North Carolina</state>
+        <zip>27103</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Wake Forest University Baptist Medical Center</name>
+      <address>
+        <city>Winston-Salem</city>
+        <state>North Carolina</state>
+        <zip>27157</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>The Christ Hospital</name>
+      <address>
+        <city>Cincinnati</city>
+        <state>Ohio</state>
+        <zip>45219</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>University Hospitals of Cleveland</name>
+      <address>
+        <city>Cleveland</city>
+        <state>Ohio</state>
+        <zip>44106</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Riverside Methodist Hospital</name>
+      <address>
+        <city>Columbus</city>
+        <state>Ohio</state>
+        <zip>43214</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>EMH Regional Medical Center</name>
+      <address>
+        <city>Elyria</city>
+        <state>Ohio</state>
+        <zip>44035</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Vincent Mercy Medical Center</name>
+      <address>
+        <city>Toledo</city>
+        <state>Ohio</state>
+        <zip>43608</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Hillcrest Medical Center</name>
+      <address>
+        <city>Tulsa</city>
+        <state>Oklahoma</state>
+        <zip>74104</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Providence St. Vincent Medical Center</name>
+      <address>
+        <city>Portland</city>
+        <state>Oregon</state>
+        <zip>97225</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Geisinger Medical Center</name>
+      <address>
+        <city>Danville</city>
+        <state>Pennsylvania</state>
+        <zip>17822</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Pinnacle Health @ Harrisburg Hospital</name>
+      <address>
+        <city>Harrisburg</city>
+        <state>Pennsylvania</state>
+        <zip>17043</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Allegheny General Hospital</name>
+      <address>
+        <city>Pittsburgh</city>
+        <state>Pennsylvania</state>
+        <zip>15212</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>AnMed Health</name>
+      <address>
+        <city>Anderson</city>
+        <state>South Carolina</state>
+        <zip>29621</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Sanford USD Medical Center</name>
+      <address>
+        <city>Sioux Falls</city>
+        <state>South Dakota</state>
+        <zip>57104</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Wellmont Holston Valley Medical Center</name>
+      <address>
+        <city>Kingsport</city>
+        <state>Tennessee</state>
+        <zip>37660</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Northwest Texas Healthcare System</name>
+      <address>
+        <city>Amarillo</city>
+        <state>Texas</state>
+        <zip>79106</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Heart Hospital of Austin</name>
+      <address>
+        <city>Austin</city>
+        <state>Texas</state>
+        <zip>78756</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Luke's Episcopal Hospital</name>
+      <address>
+        <city>Houston</city>
+        <state>Texas</state>
+        <zip>77030</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>The Methodist Hospital</name>
+      <address>
+        <city>Pearland</city>
+        <state>Texas</state>
+        <zip>77581</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Fletcher Allen Health Care</name>
+      <address>
+        <city>Burlington</city>
+        <state>Vermont</state>
+        <zip>05401</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Sentara Norfolk General Hospital</name>
+      <address>
+        <city>Norfolk</city>
+        <state>Virginia</state>
+        <zip>23507</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Overlake Hospital Medical Center</name>
+      <address>
+        <city>Bellevue</city>
+        <state>Washington</state>
+        <zip>98004</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Joseph Hospital</name>
+      <address>
+        <city>Bellingham</city>
+        <state>Washington</state>
+        <zip>98225</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Heart Clinics Northwest/ Sacred Heart Medical Center</name>
+      <address>
+        <city>Spokane</city>
+        <state>Washington</state>
+        <zip>99204</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Aurora St. Luke's Medical Center</name>
+      <address>
+        <city>Milwaukee</city>
+        <state>Wisconsin</state>
+        <zip>53215</zip>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Wesley Hospital</name>
+      <address>
+        <city>Auchenflower</city>
+        <state>Queensland</state>
+        <country>Australia</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>The Prince Charles Hospital</name>
+      <address>
+        <city>Chermside</city>
+        <state>Queensland</state>
+        <zip>4061</zip>
+        <country>Australia</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Monash Heart</name>
+      <address>
+        <city>Clayton</city>
+        <state>Victoria</state>
+        <zip>3168</zip>
+        <country>Australia</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>St. Vincent's Hospital</name>
+      <address>
+        <city>Melbourne</city>
+        <state>Victoria</state>
+        <zip>3065</zip>
+        <country>Australia</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Epworth Hospital</name>
+      <address>
+        <city>Richmond</city>
+        <state>Victoria</state>
+        <zip>3121</zip>
+        <country>Australia</country>
+      </address>
+    </facility>
+  </location>
+  <location>
+    <facility>
+      <name>Royal Perth Hospital</name>
+      <address>
+        <city>Perth</city>
+        <state>Western Australia</state>
+        <country>Australia</country>
+      </address>
+    </facility>
+  </location>
+  <location_countries>
+    <country>United States</country>
+    <country>Australia</country>
+  </location_countries>
+  <verification_date>November 2012</verification_date>
+  <lastchanged_date>November 13, 2012</lastchanged_date>
+  <firstreceived_date>June 5, 2009</firstreceived_date>
+  <firstreceived_results_date>May 1, 2012</firstreceived_results_date>
+  <responsible_party>
+    <responsible_party_type>Sponsor</responsible_party_type>
+  </responsible_party>
+  <keyword>drug eluting stents</keyword>
+  <keyword>stents</keyword>
+  <keyword>Angioplasty</keyword>
+  <keyword>myocardial ischemia</keyword>
+  <keyword>coronary artery stenosis</keyword>
+  <keyword>Coronary Disease</keyword>
+  <keyword>Coronary Artery Disease</keyword>
+  <keyword>Coronary Restenosis</keyword>
+  <keyword>Long lesion</keyword>
+  <is_fda_regulated>Yes</is_fda_regulated>
+  <is_section_801>Yes</is_section_801>
+  <has_expanded_access>No</has_expanded_access>
+  <condition_browse>
+    <!-- CAUTION:  The following MeSH terms are assigned with an imperfect algorithm  -->
+    <mesh_term>Constriction, Pathologic</mesh_term>
+    <mesh_term>Coronary Artery Disease</mesh_term>
+    <mesh_term>Myocardial Ischemia</mesh_term>
+    <mesh_term>Coronary Disease</mesh_term>
+    <mesh_term>Ischemia</mesh_term>
+    <mesh_term>Coronary Stenosis</mesh_term>
+    <mesh_term>Coronary Restenosis</mesh_term>
+  </condition_browse>
+  <!-- Results are available for this study                                           -->
+</clinical_study>
