@@ -87,7 +87,6 @@ public class ClinicalTrialsWebServices {
   public String confirmRegistration() {
    // MultivaluedMap<String,String> urlParameters = uriInfo.getQueryParameters();
     String hashCode = uriInfo.getQueryParameters().toString();
-	System.out.println("This is It\t"+hashCode);  
 	boolean valid = PersistanceActions.validate(hashCode); 
 	if (valid) 
 		return String.valueOf("Thanks for validating the email. Registraiton Successful.");
