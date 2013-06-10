@@ -128,7 +128,7 @@ public class PersistanceActions {
 		}
 	}
 
-	public static boolean validate(String hashCode) {
+	public static boolean validateConfirmationLink(String hashCode) {
 		// TODO Auto-generated method stub
 
 		String [] urlParams = hashCode.split(";");
