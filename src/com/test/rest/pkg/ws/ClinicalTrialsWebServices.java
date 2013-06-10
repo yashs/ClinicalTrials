@@ -106,7 +106,9 @@ public class ClinicalTrialsWebServices {
 	      @FormParam("pwd") String pwd,
 	      @Context HttpServletResponse servletResponse) throws Exception {
 	  	pwd = Encrypt.encrypt(pwd);
-	  	name.replace(" ", "_");
+	  	System.out.println(name);
+	  	name=name.replace(" ", "_");
+	  	System.out.println(name);
 	  	//System.out.println("This is the Encrypted Password:     "+pwd);
 		UserInfo parm = new UserInfo(id,name,dob,email,"male",pwd);
 		Database database= new Database();
@@ -114,7 +116,7 @@ public class ClinicalTrialsWebServices {
 		PersistanceActions project= new PersistanceActions();
 		project.setDBRecords(connection,parm);
 
-		SendEmail.send(email, "http://localhost:8080/NewRestWS/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 		
 	    DefaultParam.instance.getModel().put(id, parm);    
 	    try {
