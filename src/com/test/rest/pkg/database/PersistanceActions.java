@@ -13,6 +13,29 @@ import com.test.rest.pkg.ws.DefaultParam;
 public class PersistanceActions {
 
 
+	public String userAuthenticate(Connection connection, String email, String pwd) throws Exception
+	{
+		try
+		{
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM Users Where email='"+email+"'");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				if(rs.getString("password").equals(pwd))
+					if(!rs.getBoolean("user_status"))
+						return "Please Activate Your Account";
+					else{
+								return "AUTHENTICATED";
+					}
+			}
+		}
+		catch(Exception e)
+		{
+			throw e;
+		}
+		return "Authentication Failed";
+	}
+
 	public void getDBRecords(Connection connection) throws Exception
 	{
 		try
@@ -131,6 +154,7 @@ public class PersistanceActions {
 	public static boolean validateConfirmationLink(String hashCode) {
 		// TODO Auto-generated method stub
 
+		hashCode=hashCode.replace(" ", "+");
 		String [] urlParams = hashCode.split(";");
 		Database database= new Database();
 		Connection connection;
@@ -143,7 +167,7 @@ public class PersistanceActions {
 			while(rs.next()){
 
 				String ssnDB = rs.getString("ssn");
-
+				ssnDB = ssnDB.replace(" ", "+");
 				System.out.println(hashCode+"\n"+urlParams[0]+"\n"+urlParams[1]+"\n"+Encrypt.encrypt(ssnDB));
 
 				if(urlParams[1].split("]")[0].equals(Encrypt.encrypt(ssnDB))){

@@ -95,7 +95,7 @@ public class ClinicalTrialsWebServices {
   }
   
   @POST
-  //@Path("/add")
+  @Path("/add")
   @Produces(MediaType.TEXT_HTML)
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   public void newParameters(@FormParam("id") String id,
@@ -119,13 +119,35 @@ public class ClinicalTrialsWebServices {
 		
 	    DefaultParam.instance.getModel().put(id, parm);    
 	    try {
-			servletResponse.sendRedirect("../register.html");
+			servletResponse.sendRedirect("../../register.html");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	  }
   
+  @POST
+  @Path("/login")
+  @Produces(MediaType.TEXT_HTML)
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  public String login(
+	      @FormParam("email") String email,
+	      @FormParam("pwd") String pwd,
+	      @Context HttpServletResponse servletResponse) throws Exception {
+	  	pwd = Encrypt.encrypt(pwd);		
+		Database database= new Database();
+	    Connection connection = database.Get_Connection();
+		PersistanceActions project= new PersistanceActions();
+		String isAuth = project.userAuthenticate(connection, email, pwd);
+	    try {
+			//servletResponse.sendRedirect("../../register.html");
+	    	return isAuth;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	  }
   
   // Defines that the next path parameter after todos is
   // treated as a parameter and passed to the TodoResources
