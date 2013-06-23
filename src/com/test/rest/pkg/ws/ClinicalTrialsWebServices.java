@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -133,20 +135,49 @@ public class ClinicalTrialsWebServices {
   public String login(
 	      @FormParam("email") String email,
 	      @FormParam("pwd") String pwd,
-	      @Context HttpServletResponse servletResponse) throws Exception {
+	      @Context HttpServletResponse servletResponse,
+	      @Context HttpServletRequest servletRequest) throws Exception {
 	  	pwd = Encrypt.encrypt(pwd);		
 		Database database= new Database();
 	    Connection connection = database.Get_Connection();
 		PersistanceActions project= new PersistanceActions();
 		String isAuth = project.userAuthenticate(connection, email, pwd);
 	    try {
-			//servletResponse.sendRedirect("../../register.html");
-	    	return isAuth;
+			if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
+				HttpSession session = servletRequest.getSession(true);
+				session.setAttribute("user_email", email);
+				servletResponse.sendRedirect("../../landing.html");
+			}
+			else
+				servletResponse.sendRedirect("../../loginFailed.html");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	  }
+  
+  @POST
+  @Path("/pref")
+  @Produces(MediaType.TEXT_HTML)
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  public String preferences(
+	      @FormParam("mcname") List<String> studyType,
+	      @FormParam("Gender") List<String> gender,
+	      @FormParam("Status") List<String> status,
+	      @Context HttpServletResponse servletResponse,
+	      @Context HttpServletRequest servletRequest) throws Exception {
+	  
+	  	HttpSession session = servletRequest.getSession(true);
+		Database database= new Database();
+	    Connection connection = database.Get_Connection();
+		PersistanceActions project= new PersistanceActions();
+		System.out.println(session.getAttribute("user_email"));
+		System.out.println(studyType.toString());
+		
+		project.setPrefs(connection, studyType, gender, status, session.getAttribute("user_email").toString());
+		
+		return "Your Preferences have been set";
 	  }
   
   // Defines that the next path parameter after todos is

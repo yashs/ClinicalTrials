@@ -81,6 +81,25 @@ public class PersistanceActions {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setPrefs(Connection connection, List<String> perm, List<String> gender, List<String> status, String userEmail)
+	{
+		try
+		{
+			String query="INSERT into Preferences values (?,?,?,?)";
+			System.out.println(query);
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1,userEmail);
+			ps.setString(2,perm.toString());
+			ps.setString(3,gender.toString());
+			ps.setString(4,status.toString());
+			ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	public List<ClinicalTrials> getTrialRecords(Connection connection) throws Exception
 	{

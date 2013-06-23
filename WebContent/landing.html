@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<h1>Setup Your Preferences</h1>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Login Credentials</title>
+</head>
+<body>
+<form action="../ClinicalTrials/rest/params/pref" method="POST">
+		
+		<p> Study Type:
+		<p><tr>
+				<td><input type="checkbox" name="mcname" value="Observational"/>Observational</td>
+				<td><input type="checkbox" name="mcname" value="CardioVascular"/>Cardio Vascular</td>
+				<td><input type="checkbox" name="mcname" value="Interventional"/>Interventional</td>
+		</tr></p>
+		<p> Gender:
+		
+		<p><tr>
+				<td><input type="checkbox" name="Gender" value="Male"/>Male</td>
+				<td><input type="checkbox" name="Gender" value="Female"/>Female</td>
+		</tr></p>
+		
+		<p><tr>
+				<td><input type="checkbox" name="Status" value="Active"/>Active</td>
+				<td><input type="checkbox" name="Status" value="Recruiting"/>Recruiting</td>
+				<td><input type="checkbox" name="Status" value="Suspended"/>Suspended</td>
+				<td><input type="checkbox" name="Status" value="Completed"/>Completed</td>
+		</tr></p>
+		<br /> <input type="submit" value="Submit" />		
+	</form>
+</body>
+</html>
