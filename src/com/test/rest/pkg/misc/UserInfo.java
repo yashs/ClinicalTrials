@@ -3,7 +3,7 @@ package com.test.rest.pkg.misc;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "users")
 public class UserInfo {
 	
   private String id=null;
