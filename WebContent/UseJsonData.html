@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Hello Jersey</title>
+<link href="Sencha/sencha-touch.css" rel="stylesheet" type="text/css" />
+<link href="Sencha/styles.css" rel="stylesheet" type="text/css" />
+<script src="Sencha/sencha-touch-all.js" type="text/javascript"></script>
+<script src="Sencha/ext-all.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+Ext.onReady(function() {
+	Ext.define('Bond', {
+        extend: 'Ext.data.Model',
+        fields: ['id', 'name', 'gender', 'password','dateOfBirth', 'emailID']
+    });
+
+    var store = new Ext.data.Store({
+        model: 'Bond',
+        proxy: {
+            type: 'ajax',
+            url: 'http://localhost:8080/ClinicalTrials/rest/params/xmlGet',
+            reader: {
+                type: 'json',
+                root: 'users'
+            }
+        }
+    });
+    store.load();
+	
+	Ext.create('Ext.grid.Panel', {
+		fullscreen: true,
+        title: 'User Information',
+        store : store,
+        columns: [
+                  {header: "id", width: 60, dataIndex: 'id', sortable: true},
+                  {header: "name", width: 60, dataIndex: 'name', sortable: true},
+                  {header: "gender", width: 60, dataIndex: 'gender', sortable: true},
+                  {header: "password", width: 100, dataIndex: 'password', sortable: true},
+                  {header: "dateOfBirth", width: 100, dataIndex: 'dateOfBirth', sortable: true},
+                  {header: "emailID", width:80, dataIndex: 'emailID', sortable: true}
+              ],
+        height: 200,
+        width: 1000,
+        renderTo: Ext.getBody()
+    });
+	 
+	});
+</script>
+</head>
+<body>
+</body>
+</html>
