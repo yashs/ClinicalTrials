@@ -2,7 +2,7 @@ package com.test.rest.pkg.clinicaltrials;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement (name = "ClinicalTrials")
 public class ClinicalTrials {
 
 	private String trialId=null;
@@ -19,12 +19,13 @@ public class ClinicalTrials {
 	private String phase=null;
 	private String criteria=null;
 	private String gender=null;
-	private String minAge=null;
-	private String maxAge=null;
+	private int minAge=00;
+	private int maxAge=00;
 	private String officialLastName=null;
 	private String officialRole=null;
 	private String officialAffiliation=null;
 	private String retDate=null;
+	private String tags=null;
 
 	public ClinicalTrials(){
 		
@@ -34,8 +35,8 @@ public class ClinicalTrials {
 			String sponsors, String authority, String studyType,
 			String studyDesign, String summary, String status, String stDate,
 			String endDate, String phase, String criteria, String gender,
-			String minAge, String maxAge, String officialLastName,
-			String officialRole, String officialAffiliation, String retDate) {
+			int minAge, int maxAge, String officialLastName,
+			String officialRole, String officialAffiliation, String retDate, String tags) {
 		super();
 		this.trialId = trialId;
 		this.briefTitle = briefTitle;
@@ -57,13 +58,20 @@ public class ClinicalTrials {
 		this.officialRole = officialRole;
 		this.officialAffiliation = officialAffiliation;
 		this.retDate=retDate;
+		this.tags=tags;
 	}
 
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
 
 	public String getTrialId() {
 		return trialId;
 	}
-
 
 	public void setTrialId(String trialId) {
 		this.trialId = trialId;
@@ -200,22 +208,22 @@ public class ClinicalTrials {
 	}
 
 
-	public String getMinAge() {
+	public int getMinAge() {
 		return minAge;
 	}
 
 
-	public void setMinAge(String minAge) {
+	public void setMinAge(int minAge) {
 		this.minAge = minAge;
 	}
 
 
-	public String getMaxAge() {
+	public int getMaxAge() {
 		return maxAge;
 	}
 
 
-	public void setMaxAge(String maxAge) {
+	public void setMaxAge(int maxAge) {
 		this.maxAge = maxAge;
 	}
 

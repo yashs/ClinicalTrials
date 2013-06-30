@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Hello Jersey</title>
+<link href="Sencha/sencha-touch.css" rel="stylesheet" type="text/css" />
+<link href="Sencha/styles.css" rel="stylesheet" type="text/css" />
+<script src="Sencha/sencha-touch-all.js" type="text/javascript"></script>
+<script src="Sencha/ext-all.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+Ext.onReady(function() {
+	Ext.define('Bond', {
+        extend: 'Ext.data.Model',
+        fields: ['trialId', 'briefTitle', 'officialTitle', 'sponsors','authority', 'studyType','studyDesign','summary','status','stDate','endDate','phase','criteria','gender','minAge','maxAge',
+                 'officialLastName','officialRole','officialAffiliation','retDate','tags']
+    });
+
+    var store = new Ext.data.Store({
+        model: 'Bond',
+        proxy: {
+            type: 'ajax',
+            url: 'http://localhost:8080/ClinicalTrials/rest/params/advSearchRes',
+            reader: {
+                type: 'json',
+                root: 'ClinicalTrials'
+            }
+        }
+    });
+    store.load();
+	
+	Ext.create('Ext.grid.Panel', {
+		fullscreen: true,
+        title: 'User Information',
+        store : store,
+        columns: [
+                  {header: "trialId", width: 60, dataIndex: 'trialId', sortable: true},
+                  {header: "briefTitle", width: 60, dataIndex: 'briefTitle', sortable: true},
+                  {header: "officialTitle", width: 60, dataIndex: 'officialTitle', sortable: true},
+                  {header: "sponsors", width: 100, dataIndex: 'sponsors', sortable: true},
+                  {header: "authority", width: 100, dataIndex: 'authority', sortable: true},
+                  {header: "studyType", width:80, dataIndex: 'studyType', sortable: true}
+                  
+                  {header: "studyDesign", width:80, dataIndex: 'studyDesign', sortable: true}
+                  {header: "summary", width:80, dataIndex: 'summary', sortable: true}
+                  {header: "status", width:80, dataIndex: 'status', sortable: true}
+                  {header: "stDate", width:80, dataIndex: 'stDate', sortable: true}
+                  {header: "endDate", width:80, dataIndex: 'endDate', sortable: true}
+                  {header: "phase", width:80, dataIndex: 'phase', sortable: true}
+                  {header: "criteria", width:80, dataIndex: 'criteria', sortable: true}
+                  {header: "gender", width:80, dataIndex: 'gender', sortable: true}
+                  {header: "minAge", width:80, dataIndex: 'minAge', sortable: true}
+                  {header: "maxAge", width:80, dataIndex: 'maxAge', sortable: true}
+                  {header: "officialLastName", width:80, dataIndex: 'officialLastName', sortable: true}
+                  {header: "officialRole", width:80, dataIndex: 'officialRole', sortable: true}
+                  {header: "officialAffiliation", width:80, dataIndex: 'officialAffiliation', sortable: true}
+                  {header: "retDate", width:80, dataIndex: 'retDate', sortable: true}
+                  {header: "tags", width:80, dataIndex: 'tags', sortable: true}
+              ],
+        height: 200,
+        width: 1000,
+        renderTo: Ext.getBody()
+    });
+	 
+	});
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -101,10 +101,13 @@ public class PersistanceActions {
 		}
 	}
 
-	public List<ClinicalTrials> getTrialRecords(Connection connection) throws Exception
+	public List<ClinicalTrials> getTrialRecords(Connection connection, String query) throws Exception
 	{
+		if(query==null || query.equals(""))
+			query = "SELECT * FROM clinical_trials ORDER BY trial_id ASC";
+		
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		PreparedStatement ps = connection.prepareStatement("SELECT * FROM clinical_trials ORDER BY trial_id ASC");
+		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next())
 		{
@@ -123,12 +126,13 @@ public class PersistanceActions {
 			trial.setPhase(rs.getString("phase"));
 			trial.setCriteria(rs.getString("criteria"));
 			trial.setGender(rs.getString("gender"));
-			trial.setMinAge(rs.getString("min_age"));
-			trial.setMaxAge(rs.getString("max_age"));
+			trial.setMinAge(rs.getInt("min_age"));
+			trial.setMaxAge(rs.getInt("max_age"));
 			trial.setOfficialLastName(rs.getString("official_last_name"));
 			trial.setOfficialRole(rs.getString("official_role"));
 			trial.setOfficialAffiliation(rs.getString("official_affiliation"));
 			trial.setRetDate(rs.getString("ret_date"));
+			trial.setTags(rs.getString("tags"));
 			trials.add(trial);
 		}
 		return trials;
@@ -139,8 +143,7 @@ public class PersistanceActions {
 	{
 		try
 		{
-			String query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			System.out.println(query);
+			String query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1,trial.getTrialId());
 			ps.setString(2,trial.getBriefTitle());
@@ -156,12 +159,13 @@ public class PersistanceActions {
 			ps.setString(12,trial.getPhase());
 			ps.setString(13,trial.getCriteria());
 			ps.setString(14,trial.getGender());
-			ps.setString(15,trial.getMinAge());
-			ps.setString(16,trial.getMaxAge());
+			ps.setInt(15,trial.getMinAge());
+			ps.setInt(16,trial.getMaxAge());
 			ps.setString(17,trial.getOfficialLastName());
 			ps.setString(18,trial.getOfficialRole());
 			ps.setString(19,trial.getOfficialAffiliation());
 			ps.setString(20,trial.getRetDate());
+			ps.setString(21,trial.getTags());
 			ps.executeUpdate();
 		}
 		catch(Exception e)
@@ -201,6 +205,106 @@ public class PersistanceActions {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public List<ClinicalTrials> getSearchedTrials(Connection connection, String status,
+			String result, String studyType, String ageGroup, String phase1, String phaseII, String phaseIII,
+			String phaseIV, String nih, String industry, String federal,
+			String university, String tags) {
+		
+		boolean flag = false;
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		
+		String query = "select * from clinical_trials where ";
+		
+		if(!status.equalsIgnoreCase("Open & Closed")){
+			flag = true;
+			if(status.equalsIgnoreCase("Open"))
+				query = query + "status != 'Completed' AND ";
+			else
+				query = query + "status = 'Completed' AND ";
+		}
+		
+		if(!studyType.equalsIgnoreCase("All Studies")){
+			flag = true;
+			if(studyType.equalsIgnoreCase("Interventional"))
+				query = query + "study_type = 'Interventional' AND ";
+			else if(studyType.contains("Observational"))
+				query = query + "study_type = 'Observational' AND ";
+			else
+				query = query + "study_type = 'Expanded Access' AND ";
+		}
+		
+		if(!ageGroup.equalsIgnoreCase("all")){
+			flag = true;
+			if(ageGroup.equalsIgnoreCase("Child"))
+				query = query + "min_age > 0 AND max_age < 18 AND ";
+			else if(ageGroup.contains("Adults"))
+				query = query + "min_age > 17 AND max_age < 65 AND ";
+			else
+				query = query + "max_age > 64 AND ";
+		}
+		
+		if (phase1.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "phase = 'Phase 1' AND ";
+		}
+		
+		if (phaseII.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "phase = 'Phase 2' AND ";
+		}
+		
+		if (phaseIII.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "phase = 'Phase 3' AND ";
+		}
+		
+		if (phaseIV.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "phase = 'Phase 4' AND ";
+		}
+		
+		if (nih.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "official_affiliation like '%NIH%' AND official_affiliation like '%nhlbi%' AND ";
+		}
+		
+		if (university.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "official_affiliation like '%university%' AND ";
+		}
+		
+		if (federal.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "official_affiliation like '%federal%' AND ";
+		}
+		
+		if (industry.equalsIgnoreCase("Yes")){
+			flag=true;
+			query = query + "official_affiliation not like '%fed%' and official_affiliation not like '%university%' and official_affiliation not like '%nih%' and official_affiliation not like '%nhlbi%' AND ";
+		}
+		
+		if(tags!=null){
+			flag=true;
+				if(!tags.equals(""))
+					query = query + "tags like'%"+tags+"%' AND ";
+		}
+		if(flag)
+			query = query.substring(0,query.length()-5);
+		else
+			query = query.substring(0,query.length()-8);
+		
+		System.out.println("This is the final query\n" + query);
+		
+		try {
+			trials = getTrialRecords(connection, query);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return trials;
 	}
 
 }

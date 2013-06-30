@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>Form to create a new resource</title>
 </head>
 <body>
-	<form action="../ClinicalTrials/rest/params/add" method="POST">
-		SSN<input name="id" /> <br> 
-		NAME: <input name="name"/><br>
-		DateOfBirth:<input name="dob"/><br>
+	<form action="../ClinicalTrials/rest/params/add" method="post">
+		SSN<input name="id" /> <br/> 
+		NAME: <input name="name"/><br/>
+		DateOfBirth:<input name="dob"/><br/>
 		Sex:
-		Male <input type="radio"  name="male" value="Male"/>
-		Female <input type="radio"  name="female" value="female"/><br>
-		EmailID: <input name="email" value="abc@pqr.com"/><br>	
-		Password: <input name="pwd" min="8" max="18"/><br>
-		Confirm Password: <input name="confpwd" min="8" max="18"/><br>	
-		<br> <input type="submit" value="Submit" />
+		Male <input type="radio"  name="sex" value="Male"/>
+		Female <input type="radio"  name="sex" value="female"/><br/>
+		EmailID: <input name="email" value="abc@pqr.com"/><br/>	
+		Password: <input name="pwd" type="password"/><br/>
+		Confirm Password: <input name="confpwd" type="password"/><br/>	
+		<br/> <input type="submit" value="Submit" />
 		
 	</form>
 </body>

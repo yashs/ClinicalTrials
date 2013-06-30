@@ -67,6 +67,55 @@ public class ClinicalTrialsWebServices {
 
 		return params; 
 	}
+	
+	@GET
+	@Path("advSearchRes")
+	@Produces({MediaType.APPLICATION_JSON})
+	public List<ClinicalTrials> getSearchedTrials(@Context HttpServletResponse servletResponse,@Context HttpServletRequest servletRequest) throws Exception {
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		HttpSession session = servletRequest.getSession(true);
+		trials = (List<ClinicalTrials>) session.getAttribute("advSearchedTrials");
+		return trials; 
+	}
+	
+	@POST
+	@Path("advSearch")
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public List<ClinicalTrials> populateSearchedTrials(@FormParam("status") String status,
+			@FormParam("result") String result,
+			@FormParam("studyType") String studyType,
+			@FormParam("ageGroup") String ageGroup,
+			@FormParam("Phase1") String phase1,
+			@FormParam("PhaseII") String phaseII,
+			@FormParam("PhaseIII") String phaseIII,
+			@FormParam("PhaseIV") String phaseIV,
+			@FormParam("NIH") String NIH,
+			@FormParam("Industry") String industry,
+			@FormParam("federal") String federal,
+			@FormParam("University") String university,
+			@FormParam("tags") String tags,
+			@Context HttpServletResponse servletResponse,
+			@Context HttpServletRequest servletRequest) throws Exception {
+		
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		Database database= new Database();
+		Connection connection = database.Get_Connection();
+		PersistanceActions project= new PersistanceActions();
+		trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
+		
+		HttpSession session = servletRequest.getSession(true);
+		session.setAttribute("advSearchedTrials", trials);
+		
+		try {
+			servletResponse.sendRedirect("http://localhost:8080/ClinicalTrials/rest/params/advSearchRes");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return trials; 
+	}
 
 	@GET
 	@Path("xmlGetJsonp")
@@ -91,7 +140,7 @@ public class ClinicalTrialsWebServices {
 		Database database= new Database();
 		Connection connection = database.Get_Connection();
 		PersistanceActions project= new PersistanceActions();
-		trials=project.getTrialRecords(connection);
+		trials=project.getTrialRecords(connection,null);
 		return trials; 
 	}
 
