@@ -220,80 +220,87 @@ public class PersistanceActions {
 		if(!status.equalsIgnoreCase("Open & Closed")){
 			flag = true;
 			if(status.equalsIgnoreCase("Open"))
-				query = query + "status != 'Completed' AND ";
+				query = query + "(status != 'Completed') AND ";
 			else
-				query = query + "status = 'Completed' AND ";
+				query = query + "(status = 'Completed') AND ";
 		}
 		
 		if(!studyType.equalsIgnoreCase("All Studies")){
 			flag = true;
 			if(studyType.equalsIgnoreCase("Interventional"))
-				query = query + "study_type = 'Interventional' AND ";
+				query = query + "(study_type = 'Interventional') AND ";
 			else if(studyType.contains("Observational"))
-				query = query + "study_type = 'Observational' AND ";
+				query = query + "(study_type = 'Observational') AND ";
 			else
-				query = query + "study_type = 'Expanded Access' AND ";
+				query = query + "(study_type = 'Expanded Access') AND ";
 		}
 		
 		if(!ageGroup.equalsIgnoreCase("all")){
 			flag = true;
 			if(ageGroup.equalsIgnoreCase("Child"))
-				query = query + "min_age > 0 AND max_age < 18 AND ";
+				query = query + "(min_age > 0 AND max_age < 18) AND ";
 			else if(ageGroup.contains("Adults"))
-				query = query + "min_age > 17 AND max_age < 65 AND ";
+				query = query + "(min_age > 17 AND max_age < 65) AND ";
 			else
-				query = query + "max_age > 64 AND ";
+				query = query + "(max_age > 64) AND ";
 		}
 		
-		if (phase1.equalsIgnoreCase("Yes")){
+		if(phase1.equalsIgnoreCase("Yes") || phaseII.equalsIgnoreCase("Yes") || phaseIII.equalsIgnoreCase("Yes") || phaseIV.equalsIgnoreCase("Yes")){
 			flag=true;
-			query = query + "phase = 'Phase 1' AND ";
-		}
+			String phaseQuery = "(";
+			
+			if (phase1.equalsIgnoreCase("Yes"))
+				phaseQuery = phaseQuery + "phase = 'Phase 1' OR ";
+
+			if (phaseII.equalsIgnoreCase("Yes"))
+				phaseQuery = phaseQuery + "phase = 'Phase 2' OR ";
+
+			if (phaseIII.equalsIgnoreCase("Yes"))
+				phaseQuery = phaseQuery + "phase = 'Phase 3' OR ";
+
+			if (phaseIV.equalsIgnoreCase("Yes"))
+				phaseQuery = phaseQuery + "phase = 'Phase 4' OR ";
+
+			phaseQuery = phaseQuery.substring(0,phaseQuery.length()-4);
+			query = query + phaseQuery + ") AND ";
+		}	
 		
-		if (phaseII.equalsIgnoreCase("Yes")){
-			flag=true;
-			query = query + "phase = 'Phase 2' AND ";
-		}
 		
-		if (phaseIII.equalsIgnoreCase("Yes")){
+		if(nih.equalsIgnoreCase("Yes") || university.equalsIgnoreCase("Yes") || federal.equalsIgnoreCase("Yes") || industry.equalsIgnoreCase("Yes")){
 			flag=true;
-			query = query + "phase = 'Phase 3' AND ";
-		}
+			String fundQuery = "(";
+				if (nih.equalsIgnoreCase("Yes")){
+					
+					fundQuery = fundQuery + "(official_affiliation like '%NIH%' OR official_affiliation like '%nhlbi%') OR ";
+				}
+				
+				if (university.equalsIgnoreCase("Yes")){
+					fundQuery = fundQuery + "(official_affiliation like '%university%') OR ";
+				}
+				
+				if (federal.equalsIgnoreCase("Yes")){
+					fundQuery = fundQuery + "(official_affiliation like '%federal%') OR ";
+				}
+				
+				if (industry.equalsIgnoreCase("Yes")){
+					fundQuery = fundQuery + "(official_affiliation not like '%fed%' OR official_affiliation not like '%university%' OR official_affiliation not like '%nih%' OR official_affiliation not like '%nhlbi%') OR ";
+				}
+				
+				fundQuery = fundQuery.substring(0,fundQuery.length()-4);
+				query = query + fundQuery + ") AND ";
+				
+		}	
+				
 		
-		if (phaseIV.equalsIgnoreCase("Yes")){
-			flag=true;
-			query = query + "phase = 'Phase 4' AND ";
-		}
-		
-		if (nih.equalsIgnoreCase("Yes")){
-			flag=true;
-			query = query + "official_affiliation like '%NIH%' AND official_affiliation like '%nhlbi%' AND ";
-		}
-		
-		if (university.equalsIgnoreCase("Yes")){
-			flag=true;
-			query = query + "official_affiliation like '%university%' AND ";
-		}
-		
-		if (federal.equalsIgnoreCase("Yes")){
-			flag=true;
-			query = query + "official_affiliation like '%federal%' AND ";
-		}
-		
-		if (industry.equalsIgnoreCase("Yes")){
-			flag=true;
-			query = query + "official_affiliation not like '%fed%' and official_affiliation not like '%university%' and official_affiliation not like '%nih%' and official_affiliation not like '%nhlbi%' AND ";
-		}
-		
-		if(tags!=null){
-			flag=true;
-				if(!tags.equals(""))
+		if(tags!=null)
+				if(!tags.equals("")){
+					flag=true;
 					query = query + "tags like'%"+tags+"%' AND ";
-		}
+				}
 		if(flag)
 			query = query.substring(0,query.length()-5);
 		else
-			query = query.substring(0,query.length()-8);
+			query = query.substring(0,query.length()-7);
 		
 		System.out.println("This is the final query\n" + query);
 		

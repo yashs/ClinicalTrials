@@ -108,7 +108,7 @@ public class ClinicalTrialsWebServices {
 		session.setAttribute("advSearchedTrials", trials);
 		
 		try {
-			servletResponse.sendRedirect("http://localhost:8080/ClinicalTrials/rest/params/advSearchRes");
+			servletResponse.sendRedirect("../../getTrials.html");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
