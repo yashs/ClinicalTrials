@@ -28,8 +28,8 @@ Ext.onReady(function() {
     });
     store.load();
 	
-	Ext.create('Ext.grid.Panel', {
-		fullscreen: true,
+	var grid = Ext.create('Ext.grid.Panel', {
+		
         title: 'Search Results',
         store : store,
         columns: [
@@ -55,14 +55,53 @@ Ext.onReady(function() {
                   {header: "Retrieval Date", width:80, dataIndex: 'retDate', sortable: true},
                   {header: "Tags", width:80, dataIndex: 'tags', sortable: true}
               ],
-        //height: 3000,
-        //width: 3000,
+       viewConfig: {
+           forceFit: true
+       },        
+       split: true,
+       region: 'north',
+       height: 300,
+        width: 1000,
         renderTo: Ext.getBody()
+    });
+	
+	// define a template to use for the detail view
+    var bookTplMarkup = [
+        'Tags: {tags}<br/>',
+        'Gender: {gender}<br/>'
+        
+    ];
+    var bookTpl = Ext.create('Ext.Template', bookTplMarkup);
+    
+	Ext.create('Ext.Panel', {
+        renderTo: 'binding-example',
+        frame: true,
+        title: 'Book List',
+        width: 1000,
+        height: 600,
+        layout: 'border',        
+        items: [
+            grid, {
+                id: 'detailPanel',
+                region: 'center',
+                bodyPadding: 7,
+                bodyStyle: "background: #eaeaea;",
+                html: 'Please select a book to see additional details.'
+        }]
+    });
+	
+	// update panel body on selection change
+    grid.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
+        if (selectedRecord.length) {
+            var detailPanel = Ext.getCmp('detailPanel');
+            bookTpl.overwrite(detailPanel.body, selectedRecord[0].data);
+        }
     });
 	 
 	});
 </script>
 </head>
 <body>
+<div id="binding-example"></div>
 </body>
 </html>
