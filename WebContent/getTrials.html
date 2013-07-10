@@ -7,6 +7,15 @@
 <link href="Sencha/styles.css" rel="stylesheet" type="text/css" />
 <script src="Sencha/sencha-touch-all.js" type="text/javascript"></script>
 <script src="Sencha/ext-all.js" type="text/javascript"></script>
+<style>
+.forwardButtonCls {
+   background: #ccc;
+   color: #ffffff;
+   font-size: 14px;
+   border: none;
+   }
+   
+</style>
 <script type="text/javascript">
 
 Ext.onReady(function() {
@@ -65,45 +74,79 @@ Ext.onReady(function() {
         renderTo: Ext.getBody()
     });
 	
-	// define a template to use for the detail view
+	var search = new Ext.form.FormPanel({
+		standardSubmit: true,
+        frame:true,
+        title: 'Search',
+        width: 350,
+        defaultType: 'textfield',
+        url: 'http://localhost:8080/ClinicalTrials/advSearch.html',
+        action: 'POST',
+        labelAlign: 'top',
+        buttonAlign:'center',
+		items: [{
+			 	
+			 	labelAlign: 'top',
+			 	name: 'StringSearch',
+                allowBlank:false,
+                tooltip: 'Enter Search String',
+               
+		}],
+        buttons: [{
+            text: 'Search',
+            id: "searchbtn",
+            cls: 'forwardButtonCls',
+            handler: function() {
+            	search.getForm().submit();
+            }
+        }] 
+    });
+		var advsearch = new Ext.form.FormPanel({
+		standardSubmit: true,
+        frame:true,
+        width: 350,
+        defaults: {width: 1000},
+        defaultType: 'textfield',
+        url: 'http://localhost:8080/ClinicalTrials/advSearch.html',
+        action: 'POST',
+        buttonAlign:'center',
+		buttons: [{
+            text: 'Advanced Search',
+            cls: 'forwardButtonCls',
+            handler: function() {
+            	advsearch.getForm().submit();
+            }
+        }] 
+    }); 
+
+    search.render('mytraditionalform');
+	advsearch.render('mytraditionalform');
+
+    // define a template to use for the detail view
     var bookTplMarkup = [
-		'<b>Trial ID:</b><br/><br/> {trialId}<br/><br/>',
-		'<b>Brief Title:</b><br/><br/> {briefTitle}<br/><br/>',
-		'<b>Official Title:</b><br/><br/> {officialTitle}<br/><br/>',
-		'<b>Sponsors:</b><br/><br/> {sponsors}<br/><br/>',
-		'<b>Authority:</b><br/><br/> {authority}<br/><br/>',
-		'<b>Study Type:</b><br/><br/> {studyType}<br/><br/>',
-		'<b>Study Design:</b><br/><br/> {studyDesign}<br/><br/>',
-		'<b>Status:</b><br/><br/> {status}<br/><br/>',
-		'<b>Start Date:</b><br/><br/> {stDate}<br/><br/>',
-		'<b>End Date:</b><br/><br/> {endDate}<br/><br/>',
-        '<b>Summary:</b><br/><br/> {summary}<br/><br/>',
-        '<b>Gender:</b><br/><br/> {gender}<br/><br/>',
-        '<b>Gender:</b><br/><br/> {gender}<br/><br/>',
+        'Tags: {tags}<br/>',
+        'Gender: {gender}<br/>'
+        
     ];
     var bookTpl = Ext.create('Ext.Template', bookTplMarkup);
     
-	var panel = new Ext.create('Ext.Panel', {
+	Ext.create('Ext.Panel', {
         renderTo: 'binding-example',
         frame: true,
-        autoscroll: true,
-        scroll: 'vertical',
-        centered: true,
-        modal: true,
-        draggable: true,
-        title: 'Clinical Trials List',
+        title: 'Book List',
         width: 1000,
-        height: 2000,
+        height: 600,
         layout: 'border',        
         items: [
-            grid,{
+            grid, {
                 id: 'detailPanel',
                 region: 'center',
                 bodyPadding: 7,
                 bodyStyle: "background: #eaeaea;",
-                html: 'Please select the clinical trial for more details.'
+                html: 'Please select a book to see additional details.'
         }]
     });
+	
 	// update panel body on selection change
     grid.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
         if (selectedRecord.length) {
@@ -111,11 +154,15 @@ Ext.onReady(function() {
             bookTpl.overwrite(detailPanel.body, selectedRecord[0].data);
         }
     });
-	 
+	
+     
+
+    	 
 	});
 </script>
 </head>
 <body>
+<div id="mytraditionalform"></div>
 <div id="binding-example"></div>
 </body>
 </html>
