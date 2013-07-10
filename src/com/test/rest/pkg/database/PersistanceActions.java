@@ -133,6 +133,7 @@ public class PersistanceActions {
 			trial.setOfficialAffiliation(rs.getString("official_affiliation"));
 			trial.setRetDate(rs.getString("ret_date"));
 			trial.setTags(rs.getString("tags"));
+			trial.setAllLocations(rs.getString("locations"));
 			trials.add(trial);
 		}
 		return trials;
@@ -143,7 +144,7 @@ public class PersistanceActions {
 	{
 		try
 		{
-			String query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1,trial.getTrialId());
 			ps.setString(2,trial.getBriefTitle());
@@ -166,6 +167,7 @@ public class PersistanceActions {
 			ps.setString(19,trial.getOfficialAffiliation());
 			ps.setString(20,trial.getRetDate());
 			ps.setString(21,trial.getTags());
+			ps.setString(22,trial.getAllLocations());
 			ps.executeUpdate();
 		}
 		catch(Exception e)

@@ -67,29 +67,43 @@ Ext.onReady(function() {
 	
 	// define a template to use for the detail view
     var bookTplMarkup = [
-        'Tags: {tags}<br/>',
-        'Gender: {gender}<br/>'
-        
+		'<b>Trial ID:</b><br/><br/> {trialId}<br/><br/>',
+		'<b>Brief Title:</b><br/><br/> {briefTitle}<br/><br/>',
+		'<b>Official Title:</b><br/><br/> {officialTitle}<br/><br/>',
+		'<b>Sponsors:</b><br/><br/> {sponsors}<br/><br/>',
+		'<b>Authority:</b><br/><br/> {authority}<br/><br/>',
+		'<b>Study Type:</b><br/><br/> {studyType}<br/><br/>',
+		'<b>Study Design:</b><br/><br/> {studyDesign}<br/><br/>',
+		'<b>Status:</b><br/><br/> {status}<br/><br/>',
+		'<b>Start Date:</b><br/><br/> {stDate}<br/><br/>',
+		'<b>End Date:</b><br/><br/> {endDate}<br/><br/>',
+        '<b>Summary:</b><br/><br/> {summary}<br/><br/>',
+        '<b>Gender:</b><br/><br/> {gender}<br/><br/>',
+        '<b>Gender:</b><br/><br/> {gender}<br/><br/>',
     ];
     var bookTpl = Ext.create('Ext.Template', bookTplMarkup);
     
-	Ext.create('Ext.Panel', {
+	var panel = new Ext.create('Ext.Panel', {
         renderTo: 'binding-example',
         frame: true,
-        title: 'Book List',
+        autoscroll: true,
+        scroll: 'vertical',
+        centered: true,
+        modal: true,
+        draggable: true,
+        title: 'Clinical Trials List',
         width: 1000,
-        height: 600,
+        height: 2000,
         layout: 'border',        
         items: [
-            grid, {
+            grid,{
                 id: 'detailPanel',
                 region: 'center',
                 bodyPadding: 7,
                 bodyStyle: "background: #eaeaea;",
-                html: 'Please select a book to see additional details.'
+                html: 'Please select the clinical trial for more details.'
         }]
     });
-	
 	// update panel body on selection change
     grid.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
         if (selectedRecord.length) {

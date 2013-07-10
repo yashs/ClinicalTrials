@@ -26,6 +26,7 @@ public class ClinicalTrials {
 	private String officialAffiliation=null;
 	private String retDate=null;
 	private String tags=null;
+	private String allLocations;
 
 	public ClinicalTrials(){
 		
@@ -36,7 +37,7 @@ public class ClinicalTrials {
 			String studyDesign, String summary, String status, String stDate,
 			String endDate, String phase, String criteria, String gender,
 			int minAge, int maxAge, String officialLastName,
-			String officialRole, String officialAffiliation, String retDate, String tags) {
+			String officialRole, String officialAffiliation, String retDate, String tags, String allLocations) {
 		super();
 		this.trialId = trialId;
 		this.briefTitle = briefTitle;
@@ -59,6 +60,15 @@ public class ClinicalTrials {
 		this.officialAffiliation = officialAffiliation;
 		this.retDate=retDate;
 		this.tags=tags;
+		this.allLocations = allLocations;
+	}
+
+	public String getAllLocations() {
+		return allLocations;
+	}
+
+	public void setAllLocations(String allLocations) {
+		this.allLocations = allLocations;
 	}
 
 	public String getTags() {
