@@ -26,7 +26,7 @@ public class ClinicalTrials {
 	private String officialAffiliation=null;
 	private String retDate=null;
 	private String tags=null;
-	private String allLocations;
+	private String allLocations=null;
 
 	public ClinicalTrials(){
 		
