@@ -3,14 +3,6 @@
 <!-- DW6 -->
 <head>
 <!-- Copyright 2005 Macromedia, Inc. All rights reserved. -->
-<style>
-.forwardButtonCls {
-   background: #ccc;
-   color: #ffffff;
-   font-size: 14px;
-   border: none;
-   }
-</style>
 <title>Login Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="templatefiles/mm_travel2.css" type="text/css" />
@@ -25,72 +17,6 @@ var monthname=new Array("January","February","March","April","May","June","July"
 //Ensure correct for language. English is "January 1, 2004"
 var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
 //---------------   END LOCALIZEABLE   ---------------
-</script>
-<script type="text/javascript">
-Ext.onReady(function() {
-	var formPanel = new Ext.create('Ext.form.Panel', {
-		standardSubmit: true,
-		frame: true,
-        title: 'Login',
-        width: 340,
-        bodyPadding: 5,
-        url: '../ClinicalTrials/rest/params/login',
-        action: 'POST',
-        fieldDefaults: {
-            labelAlign: 'left',
-            labelWidth: 90,
-            anchor: '100%'
-        },
-        items: [{
-            xtype: 'textfield',
-            name: 'email',
-            inputType: 'text',
-            fieldLabel: 'UserName',
-            allowBlank: false
-        },{
-            xtype: 'textfield',
-            name: 'pwd',
-            inputType: 'password',
-            fieldLabel: 'Password',
-            allowBlank: false
-        }],
-        
-        buttons: [{
-            text: 'Login',
-            cls: 'forwardButtonCls',
-            handler: function() {
-            	formPanel.getForm().submit();
-            }
-        	},{
-                text: 'Reset',
-                cls: 'forwardButtonCls',
-                handler: function(){
-                	formPanel.getForm().reset();
-                }
-            
-        }] 
-	});
-	var signup = new Ext.form.FormPanel({
-		standardSubmit: true,
-        frame: true,
-        title: 'Sign Up To Register',
-        width: 340,
-        defaults: {width: 340},
-        defaultType: 'textfield',
-        url: '../ClinicalTrials/register.html',
-        action: 'POST',
-        buttons: [{
-            text: 'Sign-up',
-            cls: 'forwardButtonCls',
-            handler: function() {
-            	signup.getForm().submit();
-            }
-        }] 
-    }); 
-
-	formPanel.render('bodytext');
-	signup.render('signupbtn');
-});
 </script>
 </head>
 <body bgcolor="#C0DFFD">
@@ -142,24 +68,24 @@ Ext.onReady(function() {
         </tr>
       </table>
  	<br />
-  	&nbsp;<br />
-  	&nbsp;<br />
-  	&nbsp;<br /> 	</td>
+  	</td>
     <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
     <td width="305" colspan="2" valign="top"><img src="templatefiles/mm_spacer.gif" alt="" width="305" height="1" border="0" /><br />
-	&nbsp;<br />
-	&nbsp;<br />
+	
 	<table border="0" cellspacing="0" cellpadding="0" width="705">
         <tr>
-          <td class="pageName">Welcome to Clinical Trials</td>
-		</tr>
+          <td class="pageName"><p>Thanks for Validating. <br />Registration Successful. Please login to your account <br />
+        <br /> <br />
+        <a href="index.html">Home</a></p></td>
+        </tr>
+       
+       
+		
+		
 	&nbsp;<br />
 	&nbsp;<br />
 		<tr>
-          <td class="bodyText" id="bodytext"></td>
-        </tr>
-        <tr>
-        <td id="signupbtn"></td>
+          <td class="bodyText" id="bodytext"><p></p></td>
         </tr>
       </table>
 	  <br />	  </td>

@@ -226,14 +226,25 @@ public class ClinicalTrialsWebServices {
 	@GET
 	@Path("/confirmRegistration")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String confirmRegistration() {
+	public void confirmRegistration(@Context HttpServletResponse servletResponse) {
 		// MultivaluedMap<String,String> urlParameters = uriInfo.getQueryParameters();
+		
 		String hashCode = uriInfo.getQueryParameters().toString();
 		boolean valid = PersistanceActions.validateConfirmationLink(hashCode); 
 		if (valid) 
-			return String.valueOf("Thanks for validating the email. Registraiton Successful.");
+			try {
+				servletResponse.sendRedirect("../../regValid.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		else
-			return String.valueOf("Could not Validate. Registration Failed.");
+			try {
+				servletResponse.sendRedirect("../../regInvalid.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	@POST
@@ -257,11 +268,11 @@ public class ClinicalTrialsWebServices {
 		PersistanceActions project= new PersistanceActions();
 		project.setDBRecords(connection,parm);
 
-		SendEmail.send(email, "../ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 
 		DefaultParam.instance.getModel().put(id, parm);    
 		try {
-			servletResponse.sendRedirect("../../register.html");
+			servletResponse.sendRedirect("../../regComplete.html");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
