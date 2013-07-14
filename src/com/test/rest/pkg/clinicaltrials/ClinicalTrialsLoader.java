@@ -17,10 +17,14 @@ import com.test.rest.pkg.database.PersistanceActions;
 public class ClinicalTrialsLoader {
 
 	public static void main(String argv[]) {
+		loadTrials();
+	}
 
+	public static void loadTrials() {
+		// TODO Auto-generated method stub
 		try {
 
-			File fXmlFile = new File("/Users/yasshrivastava/Downloads/ClinicalTrials");
+			File fXmlFile = new File("c:"+File.separator+"ClinicalTrials");
 			File[] xmlFiles = fXmlFile.listFiles();
 			int i=0;
 			for(File file:xmlFiles){
@@ -46,6 +50,7 @@ public class ClinicalTrialsLoader {
 				String officialAffiliation=null;
 				String retDate= null;
 				String tags = "";
+				String allLocations = "";
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(file);
@@ -66,10 +71,35 @@ public class ClinicalTrialsLoader {
 						}
 						if(tags.equals(""))
 							tags = "NULL";
-						System.out.println(tags);
 					}catch(Exception e){
-						tags="NA";
+						tags="NULL";
 					}
+					if(tags.length()>3001)
+						tags = tags.substring(0, 3001);
+
+					try{
+						NodeList locations = eElement.getElementsByTagName("location");
+						if(locations!=null)
+							for(int j=0;j<locations.getLength();j++){
+								allLocations = allLocations + ((Element)(locations.item(j))).getElementsByTagName("country").item(0).getTextContent() + ":" + ((Element)(locations.item(j))).getElementsByTagName("city").item(0).getTextContent() + ","; 
+								if(((Element)(locations.item(j))).getElementsByTagName("status").getLength()>0)
+									allLocations = allLocations + ((Element)(locations.item(j))).getElementsByTagName("status").item(0).getTextContent() + ";" ;
+								else 
+									allLocations = allLocations + "N/A;";
+							}
+						else
+							allLocations = "NA";
+					}catch(Exception e){
+						e.printStackTrace();
+						allLocations = "NA";
+					}
+					if(allLocations.length()>250001)
+						allLocations = allLocations.substring(0, 25000);
+					if(allLocations.equals(""))
+						allLocations ="NA";
+					if(allLocations.length() > 30000)
+						allLocations = allLocations.substring(0, 30000);
+					System.out.println(allLocations);
 					try{
 						retDate = (eElement.getElementsByTagName("download_date").item(0).getTextContent()).split(" on ")[1].trim();
 					}catch(Exception e){
@@ -115,6 +145,8 @@ public class ClinicalTrialsLoader {
 					}catch(Exception e){
 						summary ="NA";
 					}
+					if(summary.length()>4999)
+						summary = summary.substring(0, 4999);
 					try{
 						status = eElement.getElementsByTagName("overall_status").item(0).getTextContent();
 					}catch(Exception e){
@@ -140,6 +172,8 @@ public class ClinicalTrialsLoader {
 					}catch(Exception e){
 						criteria="NA";
 					}
+					if(criteria.length()>5001)
+						criteria = criteria.substring(0,5001);
 					try{
 						gender = eElement.getElementsByTagName("gender").item(0).getTextContent();
 					}catch(Exception e){
@@ -171,11 +205,21 @@ public class ClinicalTrialsLoader {
 						officialAffiliation ="NA";
 					}
 					ClinicalTrials record = new ClinicalTrials(trialId, briefTitle, officialTitle, sponsors, authority, studyType, studyDesign, 
-							summary, status, stDate, endDate, phase, criteria, gender, minAge, maxAge, officialLastName, officialRole, officialAffiliation, retDate, tags);
+							summary, status, stDate, endDate, phase, criteria, gender, minAge, maxAge, officialLastName, officialRole, officialAffiliation, retDate, tags, allLocations);
 					Database database= new Database();
-					Connection connection = database.Get_Connection();
-					PersistanceActions project= new PersistanceActions();
-					project.setTrialRecords(connection, record);
+					Connection connection = null;
+					try{
+						connection = database.Get_Connection();
+						PersistanceActions project= new PersistanceActions();
+						project.setTrialRecords(connection, record);
+						connection.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}finally{
+						if(connection!=null)
+							connection.close();
+					}
+					
 				}
 			}
 			System.out.println("\n\n\nCOUNT:\t"+i);
@@ -183,6 +227,7 @@ public class ClinicalTrialsLoader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }

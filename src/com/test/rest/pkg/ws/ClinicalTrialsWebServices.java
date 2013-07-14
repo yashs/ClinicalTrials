@@ -23,6 +23,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.sun.jersey.api.json.JSONWithPadding;
 import com.test.rest.pkg.clinicaltrials.ClinicalTrials;
+import com.test.rest.pkg.clinicaltrials.ClinicalTrialsLoader;
 import com.test.rest.pkg.database.Database;
 import com.test.rest.pkg.database.Encrypt;
 import com.test.rest.pkg.database.PersistanceActions;
@@ -67,7 +68,7 @@ public class ClinicalTrialsWebServices {
 
 		return params; 
 	}
-	
+
 	@GET
 	@Path("advSearchRes")
 	@Produces({MediaType.APPLICATION_JSON})
@@ -77,7 +78,7 @@ public class ClinicalTrialsWebServices {
 		trials = (List<ClinicalTrials>) session.getAttribute("advSearchedTrials");
 		return trials; 
 	}
-	
+
 	@POST
 	@Path("advSearch")
 	@Produces({MediaType.APPLICATION_JSON})
@@ -97,25 +98,78 @@ public class ClinicalTrialsWebServices {
 			@FormParam("tags") String tags,
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {
-		
+
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
 		Database database= new Database();
-		Connection connection = database.Get_Connection();
-		PersistanceActions project= new PersistanceActions();
-		trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
-		
-		HttpSession session = servletRequest.getSession(true);
-		session.setAttribute("advSearchedTrials", trials);
-		
-		try {
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
+			trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
+
+			HttpSession session = servletRequest.getSession(true);
+			session.setAttribute("advSearchedTrials", trials);
 			servletResponse.sendRedirect("../../getTrials.html");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
 		}
-		
+
 		return trials; 
 	}
+
+	@POST
+	@Path("basicSearch")
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public List<ClinicalTrials> populateBasicSearchedTrials(@FormParam("searchString") String searchString,
+			@Context HttpServletResponse servletResponse,
+			@Context HttpServletRequest servletRequest) throws Exception {
+
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		Database database= new Database();
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
+			trials = project.getSearchedTrials(connection,searchString);
+
+			HttpSession session = servletRequest.getSession(true);
+			session.setAttribute("advSearchedTrials", trials);
+
+			servletResponse.sendRedirect("../../getTrials.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
+		}
+
+		return trials; 
+	}
+
+	@GET
+	@Path("load")
+	//@Produces({MediaType.APPLICATION_JSON})
+	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public void loadClinicalTrials(
+			@Context HttpServletResponse servletResponse,
+			@Context HttpServletRequest servletRequest) throws Exception {
+
+		ClinicalTrialsLoader.loadTrials();
+
+		try {
+			servletResponse.sendRedirect("../../loginPage.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+
 
 	@GET
 	@Path("xmlGetJsonp")
@@ -123,11 +177,19 @@ public class ClinicalTrialsWebServices {
 	public JSONWithPadding getParametersjsonp(@QueryParam("callback") String callback) throws Exception{
 		List<UserInfo> params = new ArrayList<UserInfo>();
 		Database database= new Database();
-		Connection connection = database.Get_Connection();
-		PersistanceActions project= new PersistanceActions();
-		project.getDBRecords(connection);
-		params.addAll(DefaultParam.instance.getModel().values());
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
 
+			project.getDBRecords(connection);
+			params.addAll(DefaultParam.instance.getModel().values());
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
+		}
 		return new JSONWithPadding(params, callback);
 		//return (JSONWithPadding) params;
 	}
@@ -138,9 +200,17 @@ public class ClinicalTrialsWebServices {
 	public List<ClinicalTrials> getClinicalTrials() throws Exception {
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
 		Database database= new Database();
-		Connection connection = database.Get_Connection();
-		PersistanceActions project= new PersistanceActions();
-		trials=project.getTrialRecords(connection,null);
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
+			trials=project.getTrialRecords(connection,null);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
+		}
 		return trials; 
 	}
 
@@ -187,7 +257,7 @@ public class ClinicalTrialsWebServices {
 		PersistanceActions project= new PersistanceActions();
 		project.setDBRecords(connection,parm);
 
-		SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		SendEmail.send(email, "http://clinictrials.cloudapp.net/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 
 		DefaultParam.instance.getModel().put(id, parm);    
 		try {
@@ -209,10 +279,11 @@ public class ClinicalTrialsWebServices {
 			@Context HttpServletRequest servletRequest) throws Exception {
 		pwd = Encrypt.encrypt(pwd);		
 		Database database= new Database();
-		Connection connection = database.Get_Connection();
-		PersistanceActions project= new PersistanceActions();
-		String isAuth = project.userAuthenticate(connection, email, pwd);
-		try {
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
+			String isAuth = project.userAuthenticate(connection, email, pwd);
 			if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
 				HttpSession session = servletRequest.getSession(true);
 				session.setAttribute("user_email", email);
@@ -223,6 +294,9 @@ public class ClinicalTrialsWebServices {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
 		}
 		return null;
 	}
@@ -240,19 +314,27 @@ public class ClinicalTrialsWebServices {
 
 		HttpSession session = servletRequest.getSession(true);
 		Database database= new Database();
-		Connection connection = database.Get_Connection();
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
 		PersistanceActions project= new PersistanceActions();
 		System.out.println(session.getAttribute("user_email"));
 		System.out.println(studyType.toString());
 
 		project.setPrefs(connection, studyType, gender, status, session.getAttribute("user_email").toString());
-
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
+		}
 		return "Your Preferences have been set";
 	}
 
 	// Defines that the next path parameter after todos is
 	// treated as a parameter and passed to the TodoResources
-	// Allows to type http://localhost:8080/RestWS/rest/todos/1
+	// Allows to type http://clinictrials.cloudapp.net/RestWS/rest/todos/1
 	// 1 will be treaded as parameter todo and passed to TodoResource
 	@Path("{todo}")
 	public ParamResource getParameters(@PathParam("todo") String id) {

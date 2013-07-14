@@ -3,6 +3,7 @@ package com.test.rest.pkg.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,33 +16,47 @@ public class PersistanceActions {
 
 	public String userAuthenticate(Connection connection, String email, String pwd) throws Exception
 	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try
 		{
-			PreparedStatement ps = connection.prepareStatement("SELECT * FROM Users Where email='"+email+"'");
-			ResultSet rs = ps.executeQuery();
+			ps = connection.prepareStatement("SELECT * FROM Users Where email='"+email+"'");
+			rs = ps.executeQuery();
 			while(rs.next())
 			{
 				if(rs.getString("password").equals(pwd))
-					if(!rs.getBoolean("user_status"))
+					if(!rs.getBoolean("user_status")){
+						ps.close();
+						rs.close();
 						return "Please Activate Your Account";
+					}
 					else{
-								return "AUTHENTICATED";
+						ps.close(); 
+						rs.close();
+						return "AUTHENTICATED";
 					}
 			}
 		}
 		catch(Exception e)
 		{
 			throw e;
+		}finally{
+			if(ps!=null)
+				ps.close();
+			if(rs!=null)
+				rs.close();
 		}
 		return "Authentication Failed";
 	}
 
 	public void getDBRecords(Connection connection) throws Exception
 	{
+		PreparedStatement ps  = null;
+		ResultSet rs = null;
 		try
 		{
-			PreparedStatement ps = connection.prepareStatement("SELECT * FROM Users ORDER BY ssn DESC");
-			ResultSet rs = ps.executeQuery();
+			ps = connection.prepareStatement("SELECT * FROM Users ORDER BY ssn DESC");
+			rs = ps.executeQuery();
 			while(rs.next())
 			{
 				UserInfo feedObject = new UserInfo();
@@ -57,16 +72,22 @@ public class PersistanceActions {
 		catch(Exception e)
 		{
 			throw e;
+		}finally{
+			if(ps!=null)
+				ps.close();
+			if(rs!=null)
+				rs.close();
 		}
 	}
 
 	public void setDBRecords(Connection connection, UserInfo perm)
 	{
+		PreparedStatement ps = null;
 		try
 		{
 			String query="INSERT into Users values (?,?,?,?,?,?,?)";
 			System.out.println(query);
-			PreparedStatement ps = connection.prepareStatement(query);
+			ps = connection.prepareStatement(query);
 			ps.setInt(1,Integer.parseInt(perm.getId()));
 			ps.setString(2,perm.getName());
 			ps.setString(3,perm.getDateOfBirth());
@@ -79,16 +100,25 @@ public class PersistanceActions {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}finally{
+			if(ps!=null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 	}
 	
 	public void setPrefs(Connection connection, List<String> perm, List<String> gender, List<String> status, String userEmail)
 	{
+		PreparedStatement ps = null;
 		try
 		{
 			String query="INSERT into Preferences values (?,?,?,?)";
 			System.out.println(query);
-			PreparedStatement ps = connection.prepareStatement(query);
+			ps = connection.prepareStatement(query);
 			ps.setString(1,userEmail);
 			ps.setString(2,perm.toString());
 			ps.setString(3,gender.toString());
@@ -98,6 +128,14 @@ public class PersistanceActions {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}finally{
+			if(ps!=null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 	}
 
@@ -107,8 +145,12 @@ public class PersistanceActions {
 			query = "SELECT * FROM clinical_trials ORDER BY trial_id ASC";
 		
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try{
+		ps = connection.prepareStatement(query);
+		rs = ps.executeQuery();
 		while(rs.next())
 		{
 			ClinicalTrials trial = new ClinicalTrials();
@@ -133,7 +175,16 @@ public class PersistanceActions {
 			trial.setOfficialAffiliation(rs.getString("official_affiliation"));
 			trial.setRetDate(rs.getString("ret_date"));
 			trial.setTags(rs.getString("tags"));
+			trial.setAllLocations(rs.getString("locations"));
 			trials.add(trial);
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(ps!=null)
+				ps.close();
+			if(rs!=null)
+				rs.close();
 		}
 		return trials;
 	}
@@ -141,10 +192,14 @@ public class PersistanceActions {
 
 	public void setTrialRecords(Connection connection, ClinicalTrials trial)
 	{
+		PreparedStatement ps = null;
 		try
 		{
-			String query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement ps = connection.prepareStatement(query);
+			String query="SET NAMES 'utf8mb4'";
+			ps = connection.prepareStatement(query);
+			ps.execute();
+			query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			ps = connection.prepareStatement(query);
 			ps.setString(1,trial.getTrialId());
 			ps.setString(2,trial.getBriefTitle());
 			ps.setString(3,trial.getOfficialTitle());
@@ -166,11 +221,21 @@ public class PersistanceActions {
 			ps.setString(19,trial.getOfficialAffiliation());
 			ps.setString(20,trial.getRetDate());
 			ps.setString(21,trial.getTags());
+			ps.setString(22,trial.getAllLocations());
 			ps.executeUpdate();
+			ps.close();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}finally{
+			if(ps!=null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 	}
 
@@ -180,12 +245,13 @@ public class PersistanceActions {
 		hashCode=hashCode.replace(" ", "+");
 		String [] urlParams = hashCode.split(";");
 		Database database= new Database();
-		Connection connection;
+		Connection connection = null;
+		PreparedStatement ps =null;
+		ResultSet rs = null;
 		try {
 			connection = database.Get_Connection();
-			PreparedStatement ps = connection.prepareStatement("SELECT * FROM users where name = '"+urlParams[0].split("\\[")[1]+"'");
-
-			ResultSet rs = ps.executeQuery();
+			ps = connection.prepareStatement("SELECT * FROM users where name = '"+urlParams[0].split("\\[")[1]+"'");
+			rs = ps.executeQuery();
 
 			while(rs.next()){
 
@@ -203,8 +269,35 @@ public class PersistanceActions {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			try {
+				if(rs!=null)
+					rs.close();
+				if(ps!=null)
+					ps.close();
+				if(connection!=null)
+
+					connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
+	}
+	
+	public List<ClinicalTrials> getSearchedTrials(Connection connection, String searchString) {
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		String query = "select * from clinical_trials where trial_id='" +searchString +"' OR tags like '%" + searchString +"%'";
+		System.out.println(query);
+		try {
+			trials = getTrialRecords(connection, query);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return trials;
 	}
 
 	public List<ClinicalTrials> getSearchedTrials(Connection connection, String status,
@@ -313,5 +406,7 @@ public class PersistanceActions {
 		
 		return trials;
 	}
+
+
 
 }

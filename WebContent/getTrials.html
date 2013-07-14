@@ -21,14 +21,14 @@
 Ext.onReady(function() {
 	Ext.define('Bond', {
         extend: 'Ext.data.Model',
-        fields: ['trialId', 'briefTitle', 'officialTitle', 'sponsors','authority', 'studyType','studyDesign','summary','status','stDate','endDate','phase','criteria','gender','minAge','maxAge','officialLastName','officialRole','officialAffiliation','retDate','tags']
+        fields: ['trialId', 'briefTitle', 'officialTitle', 'sponsors','authority', 'studyType','studyDesign','summary','status','stDate','endDate','phase','criteria','gender','minAge','maxAge','officialLastName','officialRole','officialAffiliation','retDate','tags','allLocations']
     });
 
     var store = new Ext.data.Store({
         model: 'Bond',
         proxy: {
             type: 'ajax',
-            url: 'http://localhost:8080/ClinicalTrials/rest/params/advSearchRes',
+            url: 'http://clinictrials.cloudapp.net/ClinicalTrials/rest/params/advSearchRes',
             reader: {
                 type: 'json',
                 root: 'ClinicalTrials'
@@ -62,7 +62,8 @@ Ext.onReady(function() {
                   {header: "Official Role", width:80, dataIndex: 'officialRole', sortable: true},
                   {header: "Official Affiliation", width:80, dataIndex: 'officialAffiliation', sortable: true},
                   {header: "Retrieval Date", width:80, dataIndex: 'retDate', sortable: true},
-                  {header: "Tags", width:80, dataIndex: 'tags', sortable: true}
+                  {header: "Tags", width:80, dataIndex: 'tags', sortable: true},
+                  {header: "All Locations", width:80, dataIndex: 'allLocations', sortable: true}
               ],
        viewConfig: {
            forceFit: true
@@ -77,20 +78,18 @@ Ext.onReady(function() {
 	var search = new Ext.form.FormPanel({
 		standardSubmit: true,
         frame:true,
-        title: 'Search',
-        width: 350,
-        defaultType: 'textfield',
-        url: 'http://localhost:8080/ClinicalTrials/advSearch.html',
+        title: 'Search Trials',
+     //   bodyStyle:'padding:5px 415px 5px',
+        width: 1000,
+        defaultType: 'textareafield',
+        url: 'http://clinictrials.cloudapp.net/ClinicalTrials/rest/params/basicSearch',
         action: 'POST',
-        labelAlign: 'top',
         buttonAlign:'center',
 		items: [{
-			 	
-			 	labelAlign: 'top',
-			 	name: 'StringSearch',
+				xtype: 'textfield',
+			 	name: 'searchString',
                 allowBlank:false,
-                tooltip: 'Enter Search String',
-               
+                tooltip: 'Enter Search String'
 		}],
         buttons: [{
             text: 'Search',
@@ -104,10 +103,10 @@ Ext.onReady(function() {
 		var advsearch = new Ext.form.FormPanel({
 		standardSubmit: true,
         frame:true,
-        width: 350,
+        width: 1000,
         defaults: {width: 1000},
         defaultType: 'textfield',
-        url: 'http://localhost:8080/ClinicalTrials/advSearch.html',
+        url: 'http://clinictrials.cloudapp.net/ClinicalTrials/advSearch.html',
         action: 'POST',
         buttonAlign:'center',
 		buttons: [{
@@ -123,19 +122,37 @@ Ext.onReady(function() {
 	advsearch.render('mytraditionalform');
 
     // define a template to use for the detail view
-    var bookTplMarkup = [
-        'Tags: {tags}<br/>',
-        'Gender: {gender}<br/>'
-        
+   var bookTplMarkup = [
+		'<b>Trial ID:</b><br/><br/> {trialId}<br/><br/>',
+		'<b>Brief Title:</b><br/><br/> {briefTitle}<br/><br/>',
+		'<b>Official Title:</b><br/><br/> {officialTitle}<br/><br/>',
+		'<b>Sponsors:</b><br/><br/> {sponsors}<br/><br/>',
+		'<b>Authority:</b><br/><br/> {authority}<br/><br/>',
+		'<b>Study Type:</b><br/><br/> {studyType}<br/><br/>',
+		'<b>Study Design:</b><br/><br/> {studyDesign}<br/><br/>',
+		'<b>Status:</b><br/><br/> {status}<br/><br/>',
+		'<b>Start Date:</b><br/><br/> {stDate}<br/><br/>',
+		'<b>End Date:</b><br/><br/> {endDate}<br/><br/>',
+        '<b>Summary:</b><br/><br/> {summary}<br/><br/>',
+        '<b>Gender:</b><br/><br/> {gender}<br/><br/>',
+        '<b>Min Age:</b><br/><br/> {minAge}<br/><br/>',
+        '<b>Max Age:</b><br/><br/> {maxAge}<br/><br/>',
+        '<b>Official Last Name:</b><br/><br/> {officialLastName}<br/><br/>',
+        '<b>Official Role:</b><br/><br/> {officialRole}<br/><br/>',
+        '<b>Official Affiliation:</b><br/><br/> {officialAffiliation}<br/><br/>',
+        '<b>Retrieval Date:</b><br/><br/> {retDate}<br/><br/>',
+        '<b>Retrieval Date:</b><br/><br/> {retDate}<br/><br/>',
+        '<b>Tags:</b><br/><br/> {tags}<br/><br/>',
+        '<b>All Locations:</b><br/><br/> {allLocations}<br/><br/>'        
     ];
     var bookTpl = Ext.create('Ext.Template', bookTplMarkup);
     
 	Ext.create('Ext.Panel', {
         renderTo: 'binding-example',
         frame: true,
-        title: 'Book List',
+        title: 'Clinical Trial List',
         width: 1000,
-        height: 600,
+        height:2000,
         layout: 'border',        
         items: [
             grid, {
@@ -143,7 +160,7 @@ Ext.onReady(function() {
                 region: 'center',
                 bodyPadding: 7,
                 bodyStyle: "background: #eaeaea;",
-                html: 'Please select a book to see additional details.'
+                html: 'Please select a Clinical Trial to see additional details.'
         }]
     });
 	
