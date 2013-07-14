@@ -257,7 +257,7 @@ public class ClinicalTrialsWebServices {
 		PersistanceActions project= new PersistanceActions();
 		project.setDBRecords(connection,parm);
 
-		SendEmail.send(email, "http://clinictrials.cloudapp.net/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		SendEmail.send(email, "../ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 
 		DefaultParam.instance.getModel().put(id, parm);    
 		try {
