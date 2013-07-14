@@ -1,8 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>Advanced Search</title>
+<link href="Sencha/sencha-touch.css" rel="stylesheet" type="text/css" />
+<link href="Sencha/styles.css" rel="stylesheet" type="text/css" />
+<script src="Sencha/sencha-touch-all.js" type="text/javascript"></script>
+<script src="Sencha/ext-all.js" type="text/javascript"></script>
+<script src="Sencha/bootstrap.js" type="text/javascript"></script>
 <style>
 p.grpheader{
 background-color:#CCCCCC;
@@ -14,78 +20,223 @@ font-weight:bold;
 background-color:#FFFFCC;
 }
 </style>
+
+<script type="text/javascript">
+Ext.onReady(function() {
+   
+	var formPanel = Ext.create('Ext.form.Panel', {
+		standardSubmit: true,
+		frame: true,
+        title: 'Advanced Search',
+        width: 340,
+        bodyPadding: 5,
+        url: 'http://localhost:8080/ClinicalTrials/rest/params/advSearch',
+        action: 'POST',
+        fieldDefaults: {
+            labelAlign: 'left',
+            labelWidth: 90,
+            anchor: '100%'
+        },
+        items: [{
+            
+                //the width of this field in the HBox layout is set directly
+                //the other 2 items are given flex: 1, so will share the rest of the space
+                width:          50,
+
+
+                xtype:          'combo',
+                mode:           'local',
+                value:          'Open & Closed',
+                triggerAction:  'all',
+                forceSelection: true,
+                editable:       false,
+                fieldLabel:     'Status',
+                name:           'status',
+                hiddenName:     'Status',
+                displayField:   'name',
+                valueField:     'value',
+                store: 			new Ext.data.JsonStore({
+                    fields : ['name', 'value'],
+                    data   : [
+                        {name : 'Open & Closed',   value: 'Open & Closed'},
+                        {name : 'Open',  value: 'Open'},
+                        {name : 'Closed', value: 'Closed'}
+                    ]
+                })
+        	}, {
+            
+            //the width of this field in the HBox layout is set directly
+            //the other 2 items are given flex: 1, so will share the rest of the space
+            width:          50,
+
+
+            xtype:          'combo',
+            mode:           'local',
+            value:          'All Results',
+            triggerAction:  'all',
+            forceSelection: true,
+            editable:       false,
+            fieldLabel:     'Results',
+            name:           'result',
+            hiddenName:     'Results',
+            displayField:   'name',
+            valueField:     'value',
+            store: 			new Ext.data.JsonStore({
+                fields : ['name', 'value'],
+                data   : [
+                    {name : 'All Results',   value: 'All Results'},
+                    {name : 'With Results',   value: 'With Results'},
+                    {name : 'Without Results',   value: 'Without Results'}
+                    
+                ]
+            })
+    	},{
+        
+        //the width of this field in the HBox layout is set directly
+        //the other 2 items are given flex: 1, so will share the rest of the space
+        width:          50,
+
+
+        xtype:          'combo',
+        mode:           'local',
+        value:          'All Studies',
+        triggerAction:  'all',
+        forceSelection: true,
+        editable:       false,
+        fieldLabel:     'Study Type',
+        name:           'studyType',
+        hiddenName:     'Study Type',
+        displayField:   'name',
+        valueField:     'value',
+        store: 			new Ext.data.JsonStore({
+            fields : ['name', 'value'],
+            data   : [
+				{name : 'All Studies',   value: 'All Studies'},     
+                {name : 'Interventional',  value: 'Interventional'},
+                {name : 'Observational', value: 'Observational'},
+                {name : 'Expanded Access',  value: 'Expanded Access'}
+            ]
+        	})
+	    },{
+	        
+	        //the width of this field in the HBox layout is set directly
+	        //the other 2 items are given flex: 1, so will share the rest of the space
+	        width:          50,
+
+
+	        xtype:          'combo',
+	        mode:           'local',
+	        value:          'all',
+	        triggerAction:  'all',
+	        forceSelection: true,
+	        editable:       false,
+	        fieldLabel:     'Select Age Group',
+	        name:           'ageGroup',
+	        hiddenName:     'Select Age Group',
+	        displayField:   'name',
+	        valueField:     'value',
+	        store: 			new Ext.data.JsonStore({
+	            fields : ['name', 'value'],
+	            data   : [
+					{name : 'All Ages',   value: 'all'},     
+	                {name : 'Child',  value: 'child'},
+	                {name : 'Adults', value: 'adult'},
+	                {name : 'Seniors',  value: 'seniors'}
+	            ]
+	        	})
+		}, {        
+			xtype: 'radiogroup',
+            fieldLabel: 'Phase I',
+            items: [
+                {boxLabel: 'Yes', name: 'Phase1', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'Phase1', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{        
+			xtype: 'radiogroup',
+            fieldLabel: 'Phase II',
+            items: [
+                {boxLabel: 'Yes', name: 'PhaseII', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'PhaseII', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{        
+			xtype: 'radiogroup',
+            fieldLabel: 'Phase III',
+            items: [
+                {boxLabel: 'Yes', name: 'PhaseIII', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'PhaseIII', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{        
+			xtype: 'radiogroup',
+            fieldLabel: 'Phase IV',
+            items: [
+                {boxLabel: 'Yes', name: 'PhaseIV', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'PhaseIV', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{        
+			xtype: 'radiogroup',
+            fieldLabel: 'NIH',
+            items: [
+                {boxLabel: 'Yes', name: 'NIH', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'NIH', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{        
+			xtype: 'radiogroup',
+            fieldLabel: 'Industry',
+            items: [
+                {boxLabel: 'Yes', name: 'Industry', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'Industry', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{        
+			xtype: 'radiogroup',
+            fieldLabel: 'Other Federal Agency',
+            items: [
+                {boxLabel: 'Yes', name: 'federal', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'federal', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{        
+			xtype: 'radiogroup',
+            fieldLabel: 'University',
+            items: [
+                {boxLabel: 'Yes', name: 'University', value: 'yes', inputValue: 1},
+                {boxLabel: 'No', name: 'University', value: 'no', inputValue: 2, checked: true}
+            ]
+      
+    	},{
+            xtype: 'textfield',
+            name: 'tags',
+            inputType: 'text',
+            fieldLabel: 'Search Keyword:'
+        }],
+        buttons: [{
+            text: 'Submit',
+            handler: function() {
+            	formPanel.getForm().submit();
+            }
+        	},{
+                text: 'Reset',
+                handler: function(){
+                	formPanel.getForm().reset();
+                }
+            
+        }] 
+        
+    });
+
+    formPanel.render('form-ct');
+  
+ });
+
+
+</script>
 </head>
-
 <body>
-
-<h1 style="color:#660033;background:#99CCCC" align="center"> ADVANCED SEARCH </h1>
-<form action="../ClinicalTrials/rest/params/advSearch" method="post">
-	<p class="grpheader">Group: Study Filters</p>
-	<span class="fields" title="Helps to search clinical trials based on Open, Closed or Open & Closed Status">Status:</span> 
-	<select name="status">
-	  <option value="Open">Open</option>
-	  <option value="Closed">Closed</option>
-	  <option value="Open & Closed" selected="selected">Open & Closed</option>
-	 </select>
-	 <br/><br/>
-	 <span class="fields" title="To search clinical trials based on with or without results">Results:</span> 
-	 <select name="result">
-	  <option value="All Results" selected="selected">All Results</option>
-	  <option value="With Results">With Results</option>
-	  <option value="Without Results">Without Results</option>
-	 </select>
-	 <br/><br/>
-	 <span class="fields" title="Enable Clinical trials based on All Studies, Interventional, Observational, and Expanded Access">Study Type:</span> 
-	 <select name="studyType">
-	  <option value="All Studies" selected="selected">All Studies</option>
-	  <option value="Interventional">Interventional</option>
-	  <option value="Observational">Observational</option>
-	  <option value="Expanded Access">Expanded Access</option>
-	 </select>
-	 
-	<p class="grpheader">Group: Age Filter</p>
-	<span class="fields" title="By selecting this field, we only get clinical trials that are applicable to phase - I.">Select Age Group:</span> 
-	<select name="ageGroup">
-	  <option value="all" selected="selected">All Ages</option>
-	  <option value="child">Child</option>
-	  <option value="adult">Adults</option>
-	  <option value="seniors">Seniors</option>
-	 </select>
-	 
-	 <p class="grpheader">Group: Phases</p>
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to phase - I.">Phase 1</span> 
-	 <input type="radio" name="Phase1" value="yes" />Yes
-	 <input type="radio" name="Phase1" value="no" checked/>No<br/><br/>
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to phase - II.">Phase II</span> 
-	 <input type="radio" name="PhaseII" value="yes"/>Yes
-	 <input type="radio" name="PhaseII" value="no" checked/>No<br/><br/>
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to phase - III.">Phase III</span> 
-	 <input type="radio" name="PhaseIII" value="yes" />Yes
-	 <input type="radio" name="PhaseIII" value="no" checked/>No<br/><br/>	 
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to phase - IV.">Phase IV</span> 
-	 <input type="radio" name="PhaseIV" value="yes" />Yes
-	 <input type="radio" name="PhaseIV" value="no" checked/>No
-	 
-	  <p class="grpheader">Group: Funding Institution</p>
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to NIH.">NIH</span> 
-	 <input type="radio" name="NIH" value="yes" />Yes
-	 <input type="radio" name="NIH" value="no" checked/>No<br/><br/>
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to Industry.">Industry</span> 
-	 <input type="radio" name="Industry" value="yes" />Yes
-	 <input type="radio" name="Industry" value="no" checked/>No<br/><br/>
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to Other Federal Agency.">Other Federal    Agency</span> 
-	 <input type="radio" name="federal" value="yes" />Yes
-	 <input type="radio" name="federal" value="no" checked/>No<br/><br/>	 
-	 <span class="fields" title="By selecting this field, we only get clinical trials that are applicable to University.">University</span> 
-	 <input type="radio" name="University" value="yes" />Yes
-	 <input type="radio" name="University" value="no" checked/>No
-	 <p class="grpheader">Group: Date</p>
-	 <span class="fields" title="Looks for a search keyword or tag">Search Keyword:</span>   			     
-	 <input type="text" name="tags"/><br/><br/>
-	 <input type="button" value="Reset"/>
-	 <input type="submit" value="Submit"/>
-</form>
-
-
+<div id="form-ct"></div><br/>
 </body>
 </html>
