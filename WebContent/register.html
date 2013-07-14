@@ -38,40 +38,114 @@ Ext.onReady(function() {
              xtype: 'textfield',
             name: 'id',
             inputType: 'text',
-            fieldLabel: 'SSN'
+            fieldLabel: 'SSN',
+            allowBlank: false
+            
         },{
              xtype: 'textfield',
             name: 'name',
             inputType: 'text',
-            fieldLabel: 'Name'
+            fieldLabel: 'Name',
+            allowBlank: false
         },{
              xtype: 'textfield',
             name: 'dob',
             inputType: 'text',
-            fieldLabel: 'Date Of Birth'
+            fieldLabel: 'Date Of Birth',
+            allowBlank: false
         },{        
 			xtype: 'radiogroup',
             fieldLabel: 'Gender',
             items: [
                 {boxLabel: 'Male', name: 'sex', value: 'Male', inputValue: 1},
                 {boxLabel: 'Female', name: 'sex', value: 'Female', inputValue: 2}
-            ]
+            ],
+            allowBlank: false
       
     	},{
-             xtype: 'textfield',
+    		xtype: 'textfield',
             name: 'email',
-            inputType: 'text',
-            fieldLabel: 'Email ID'
+            fieldLabel: 'Email ID',
+            vtype: 'email',
+            allowBlank: false
         },{
              xtype: 'textfield',
             name: 'pwd',
             inputType: 'password',
-            fieldLabel: 'Password'
+            fieldLabel: 'Password',
+            allowBlank: false,
+            minLength: 6
         },{
              xtype: 'textfield',
             name: 'cnfpwd',
+            allowBlank: false,
+            minLength: 6,
             inputType: 'password',
-            fieldLabel: 'Confirm Password'
+            fieldLabel: 'Confirm Password',
+            
+            /**
+             * Custom validator implementation - checks that the value matches what was entered into
+             * the password1 field.
+             */
+            validator: function(value) {
+                var pswd = this.previousSibling('[name=pwd]');
+                return (value === pswd.getValue()) ? true : 'Passwords do not match.'
+            }
+        },
+        /*
+         * Terms of Use acceptance checkbox. Two things are special about this:
+         * 1) The boxLabel contains a HTML link to the Terms of Use page; a special click listener opens this
+         *    page in a modal Ext window for convenient viewing, and the Decline and Accept buttons in the window
+         *    update the checkbox's state automatically.
+         * 2) This checkbox is required, i.e. the form will not be able to be submitted unless the user has
+         *    checked the box. Ext does not have this type of validation built in for checkboxes, so we add a
+         *    custom getErrors method implementation.
+         */
+        {
+            xtype: 'checkboxfield',
+            name: 'acceptTerms',
+            fieldLabel: 'Terms of Use',
+            hideLabel: true,
+            style: 'margin-top:15px',
+            boxLabel: 'I have read and accept the <a href="http://www.sencha.com/legal/terms-of-use/" class="terms">Terms of Use</a>.',
+
+            // Listener to open the Terms of Use page link in a modal window
+            listeners: {
+                click: {
+                    element: 'boxLabelEl',
+                    fn: function(e) {
+                        var target = e.getTarget('.terms'),
+                            win;
+                        if (target) {
+                            win = Ext.widget('window', {
+                                title: 'Terms of Use',
+                                modal: true,
+                                html: '<iframe src="' + target.href + '" width="950" height="500" style="border:0"></iframe>',
+                                buttons: [{
+                                    text: 'Decline',
+                                    handler: function() {
+                                        this.up('window').close();
+                                        formPanel.down('[name=acceptTerms]').setValue(false);
+                                    }
+                                }, {
+                                    text: 'Accept',
+                                    handler: function() {
+                                        this.up('window').close();
+                                        formPanel.down('[name=acceptTerms]').setValue(true);
+                                    }
+                                }]
+                            });
+                            win.show();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            },
+
+            // Custom validation logic - requires the checkbox to be checked
+            getErrors: function() {
+                return this.getValue() ? [] : ['You must accept the Terms of Use']
+            }
         }],
         buttons: [{
             text: 'Register',
