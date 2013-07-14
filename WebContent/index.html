@@ -3,6 +3,14 @@
 <!-- DW6 -->
 <head>
 <!-- Copyright 2005 Macromedia, Inc. All rights reserved. -->
+<style>
+.forwardButtonCls {
+   background: #ccc;
+   color: #ffffff;
+   font-size: 14px;
+   border: none;
+   }
+</style>
 <title>Login Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="templatefiles/mm_travel2.css" type="text/css" />
@@ -20,14 +28,13 @@ var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
 </script>
 <script type="text/javascript">
 Ext.onReady(function() {
-
-	var formPanel = Ext.create('Ext.form.Panel', {
+	var formPanel = new Ext.create('Ext.form.Panel', {
 		standardSubmit: true,
 		frame: true,
-        title: 'Sign-Up',
-        width: 300,
+        title: 'Login',
+        width: 340,
         bodyPadding: 5,
-        url: '../ClinicalTrials/rest/params/add',
+        url: '../ClinicalTrials/rest/params/login',
         action: 'POST',
         fieldDefaults: {
             labelAlign: 'left',
@@ -35,58 +42,54 @@ Ext.onReady(function() {
             anchor: '100%'
         },
         items: [{
-             xtype: 'textfield',
-            name: 'id',
-            inputType: 'text',
-            fieldLabel: 'SSN'
-        },{
-             xtype: 'textfield',
-            name: 'name',
-            inputType: 'text',
-            fieldLabel: 'Name'
-        },{
-             xtype: 'textfield',
-            name: 'dob',
-            inputType: 'text',
-            fieldLabel: 'Date Of Birth'
-        },{        
-			xtype: 'radiogroup',
-            fieldLabel: 'Gender',
-            items: [
-                {boxLabel: 'Male', name: 'sex', value: 'Male', inputValue: 1},
-                {boxLabel: 'Female', name: 'sex', value: 'Female', inputValue: 2}
-            ]
-      
-    	},{
-             xtype: 'textfield',
+            xtype: 'textfield',
             name: 'email',
             inputType: 'text',
-            fieldLabel: 'Email ID'
+            fieldLabel: 'UserName',
+            allowBlank: false
         },{
-             xtype: 'textfield',
+            xtype: 'textfield',
             name: 'pwd',
             inputType: 'password',
-            fieldLabel: 'Password'
-        },{
-             xtype: 'textfield',
-            name: 'cnfpwd',
-            inputType: 'password',
-            fieldLabel: 'Confirm Password'
+            fieldLabel: 'Password',
+            allowBlank: false
         }],
+        
         buttons: [{
-            text: 'Register',
+            text: 'Login',
+            cls: 'forwardButtonCls',
             handler: function() {
             	formPanel.getForm().submit();
             }
         	},{
                 text: 'Reset',
+                cls: 'forwardButtonCls',
                 handler: function(){
                 	formPanel.getForm().reset();
                 }
-       }] 
-        
-    });
+            
+        }] 
+	});
+	var signup = new Ext.form.FormPanel({
+		standardSubmit: true,
+        frame: true,
+        title: 'Sign Up To Register',
+        width: 340,
+        defaults: {width: 340},
+        defaultType: 'textfield',
+        url: '../ClinicalTrials/register.html',
+        action: 'POST',
+        buttons: [{
+            text: 'Sign-up',
+            cls: 'forwardButtonCls',
+            handler: function() {
+            	signup.getForm().submit();
+            }
+        }] 
+    }); 
+
 	formPanel.render('bodytext');
+	signup.render('signupbtn');
 });
 </script>
 </head>
@@ -140,20 +143,24 @@ Ext.onReady(function() {
         </tr>
       </table>
  	 <br />
-  	</td>
+  	&nbsp;<br />
+  	&nbsp;<br />
+  	&nbsp;<br /> 	</td>
     <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
     <td width="305" colspan="2" valign="top"><img src="templatefiles/mm_spacer.gif" alt="" width="305" height="1" border="0" /><br />
-	
+	&nbsp;<br />
+	&nbsp;<br />
 	<table border="0" cellspacing="0" cellpadding="0" width="705">
         <tr>
-          <td class="pageName"><p>Sign Up to Register</p></td>
+          <td class="pageName">Welcome to Clinical Trials</td>
 		</tr>
-		
-		
 	&nbsp;<br />
 	&nbsp;<br />
 		<tr>
-          <td class="bodyText" id="bodytext"><p></p></td>
+          <td class="bodyText" id="bodytext"></td>
+        </tr>
+        <tr>
+        <td id="signupbtn"></td>
         </tr>
       </table>
 	   <br />	  </td>

@@ -3,13 +3,9 @@
 <!-- DW6 -->
 <head>
 <!-- Copyright 2005 Macromedia, Inc. All rights reserved. -->
-<title>Login Page</title>
+<title>Home Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="templatefiles/mm_travel2.css" type="text/css" />
-<link href="Sencha/sencha-touch.css" rel="stylesheet" type="text/css" />
-<link href="Sencha/styles.css" rel="stylesheet" type="text/css" />
-<script src="Sencha/sencha-touch-all.js" type="text/javascript"></script>
-<script src="Sencha/ext-all.js" type="text/javascript"></script>
 <script type="text/javascript">
 //--------------- LOCALIZEABLE GLOBALS ---------------
 var d=new Date();
@@ -17,77 +13,6 @@ var monthname=new Array("January","February","March","April","May","June","July"
 //Ensure correct for language. English is "January 1, 2004"
 var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
 //---------------   END LOCALIZEABLE   ---------------
-</script>
-<script type="text/javascript">
-Ext.onReady(function() {
-
-	var formPanel = Ext.create('Ext.form.Panel', {
-		standardSubmit: true,
-		frame: true,
-        title: 'Sign-Up',
-        width: 300,
-        bodyPadding: 5,
-        url: '../ClinicalTrials/rest/params/add',
-        action: 'POST',
-        fieldDefaults: {
-            labelAlign: 'left',
-            labelWidth: 90,
-            anchor: '100%'
-        },
-        items: [{
-             xtype: 'textfield',
-            name: 'id',
-            inputType: 'text',
-            fieldLabel: 'SSN'
-        },{
-             xtype: 'textfield',
-            name: 'name',
-            inputType: 'text',
-            fieldLabel: 'Name'
-        },{
-             xtype: 'textfield',
-            name: 'dob',
-            inputType: 'text',
-            fieldLabel: 'Date Of Birth'
-        },{        
-			xtype: 'radiogroup',
-            fieldLabel: 'Gender',
-            items: [
-                {boxLabel: 'Male', name: 'sex', value: 'Male', inputValue: 1},
-                {boxLabel: 'Female', name: 'sex', value: 'Female', inputValue: 2}
-            ]
-      
-    	},{
-             xtype: 'textfield',
-            name: 'email',
-            inputType: 'text',
-            fieldLabel: 'Email ID'
-        },{
-             xtype: 'textfield',
-            name: 'pwd',
-            inputType: 'password',
-            fieldLabel: 'Password'
-        },{
-             xtype: 'textfield',
-            name: 'cnfpwd',
-            inputType: 'password',
-            fieldLabel: 'Confirm Password'
-        }],
-        buttons: [{
-            text: 'Register',
-            handler: function() {
-            	formPanel.getForm().submit();
-            }
-        	},{
-                text: 'Reset',
-                handler: function(){
-                	formPanel.getForm().reset();
-                }
-       }] 
-        
-    });
-	formPanel.render('bodytext');
-});
 </script>
 </head>
 <body bgcolor="#C0DFFD">
@@ -140,20 +65,20 @@ Ext.onReady(function() {
         </tr>
       </table>
  	 <br />
-  	</td>
+  	&nbsp;<br />
+  	&nbsp;<br />
+  	&nbsp;<br /> 	</td>
     <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
     <td width="305" colspan="2" valign="top"><img src="templatefiles/mm_spacer.gif" alt="" width="305" height="1" border="0" /><br />
-	
+	&nbsp;<br />
+	&nbsp;<br />
 	<table border="0" cellspacing="0" cellpadding="0" width="705">
         <tr>
-          <td class="pageName"><p>Sign Up to Register</p></td>
+          <td class="pageName">Welcome to Clinical Trials</td>
 		</tr>
-		
-		
-	&nbsp;<br />
-	&nbsp;<br />
+
 		<tr>
-          <td class="bodyText" id="bodytext"><p></p></td>
+          <td class="bodyText" id="bodytext"></td>
         </tr>
       </table>
 	   <br />	  </td>
