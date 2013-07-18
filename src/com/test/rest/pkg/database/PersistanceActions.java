@@ -111,33 +111,7 @@ public class PersistanceActions {
 		}
 	}
 	
-	public void setPrefs(Connection connection, List<String> perm, List<String> gender, List<String> status, String userEmail)
-	{
-		PreparedStatement ps = null;
-		try
-		{
-			String query="INSERT into Preferences values (?,?,?,?)";
-			System.out.println(query);
-			ps = connection.prepareStatement(query);
-			ps.setString(1,userEmail);
-			ps.setString(2,perm.toString());
-			ps.setString(3,gender.toString());
-			ps.setString(4,status.toString());
-			ps.executeUpdate();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}finally{
-			if(ps!=null)
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		}
-	}
+	
 
 	public List<ClinicalTrials> getTrialRecords(Connection connection, String query) throws Exception
 	{
@@ -405,6 +379,78 @@ public class PersistanceActions {
 		}
 		
 		return trials;
+	}
+	
+	public void setPrefs(Connection connection, List<String> perm, List<String> gender, List<String> status, String userEmail)
+	{
+		PreparedStatement ps = null;
+		try
+		{
+			String query="INSERT into Preferences values (?,?,?,?)";
+			System.out.println(query);
+			ps = connection.prepareStatement(query);
+			ps.setString(1,userEmail);
+			ps.setString(2,perm.toString());
+			ps.setString(3,gender.toString());
+			ps.setString(4,status.toString());
+			ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			if(ps!=null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
+
+	public void setPrefs(Connection connection, String status, String result,
+			String studyType, String ageGroup, String phase1, String phaseII,
+			String phaseIII, String phaseIV, String nIH, String industry,
+			String federal, String university, String tags, String userEmail) {
+		// TODO Auto-generated method stub
+		
+		PreparedStatement ps = null;
+		try
+		{
+			String query="INSERT into Preferences values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			System.out.println(query);
+			ps = connection.prepareStatement(query);
+			ps.setString(1,userEmail);
+			ps.setString(2,status);
+			ps.setString(3,result);
+			ps.setString(4,studyType);
+			ps.setString(5,ageGroup);
+			ps.setString(6,phase1);
+			ps.setString(7,phaseII);
+			ps.setString(8,phaseIII);
+			ps.setString(9,phaseIV);
+			ps.setString(10,nIH);
+			ps.setString(11,industry);
+			ps.setString(12,federal);
+			ps.setString(13,university);
+			ps.setString(14,tags);
+			ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			if(ps!=null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+		
 	}
 
 

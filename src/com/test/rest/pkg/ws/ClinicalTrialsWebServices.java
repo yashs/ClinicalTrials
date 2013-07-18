@@ -68,6 +68,46 @@ public class ClinicalTrialsWebServices {
 
 		return params; 
 	}
+	
+	@POST
+	@Path("/pref")
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String preferences(@FormParam("status") String status,
+			@FormParam("result") String result,
+			@FormParam("studyType") String studyType,
+			@FormParam("ageGroup") String ageGroup,
+			@FormParam("Phase1") String phase1,
+			@FormParam("PhaseII") String phaseII,
+			@FormParam("PhaseIII") String phaseIII,
+			@FormParam("PhaseIV") String phaseIV,
+			@FormParam("NIH") String NIH,
+			@FormParam("Industry") String industry,
+			@FormParam("federal") String federal,
+			@FormParam("University") String university,
+			@FormParam("tags") String tags,
+			@Context HttpServletResponse servletResponse,
+			@Context HttpServletRequest servletRequest) throws Exception {
+
+		HttpSession session = servletRequest.getSession(true);
+		Database database= new Database();
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+		PersistanceActions project= new PersistanceActions();
+		System.out.println(session.getAttribute("user_email"));
+		System.out.println(studyType.toString());
+
+		project.setPrefs(connection, status, result, studyType, ageGroup, phase1, phaseII, phaseIII, phaseIV, NIH, industry, federal, university, tags, session.getAttribute("user_email").toString());
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
+		}
+		return "Your Preferences have been set";
+	}
 
 	@GET
 	@Path("advSearchRes")
@@ -268,7 +308,7 @@ public class ClinicalTrialsWebServices {
 		PersistanceActions project= new PersistanceActions();
 		project.setDBRecords(connection,parm);
 
-		SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		SendEmail.send(email, "http://http://clinictrials.cloudapp.net/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 
 		DefaultParam.instance.getModel().put(id, parm);    
 		try {
@@ -298,7 +338,7 @@ public class ClinicalTrialsWebServices {
 			if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
 				HttpSession session = servletRequest.getSession(true);
 				session.setAttribute("user_email", email);
-				servletResponse.sendRedirect("../../landing.html");
+				servletResponse.sendRedirect("../../preferences.html");
 			}
 			else
 				servletResponse.sendRedirect("../../loginFailed.html");
@@ -312,36 +352,7 @@ public class ClinicalTrialsWebServices {
 		return null;
 	}
 
-	@POST
-	@Path("/pref")
-	@Produces(MediaType.TEXT_HTML)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String preferences(
-			@FormParam("mcname") List<String> studyType,
-			@FormParam("Gender") List<String> gender,
-			@FormParam("Status") List<String> status,
-			@Context HttpServletResponse servletResponse,
-			@Context HttpServletRequest servletRequest) throws Exception {
-
-		HttpSession session = servletRequest.getSession(true);
-		Database database= new Database();
-		Connection connection = null;
-		try{
-			connection = database.Get_Connection();
-		PersistanceActions project= new PersistanceActions();
-		System.out.println(session.getAttribute("user_email"));
-		System.out.println(studyType.toString());
-
-		project.setPrefs(connection, studyType, gender, status, session.getAttribute("user_email").toString());
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			if(connection!=null)
-				connection.close();
-		}
-		return "Your Preferences have been set";
-	}
+	
 
 	// Defines that the next path parameter after todos is
 	// treated as a parameter and passed to the TodoResources
