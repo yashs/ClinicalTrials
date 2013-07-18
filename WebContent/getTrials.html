@@ -10,6 +10,7 @@
 <link href="Sencha/styles.css" rel="stylesheet" type="text/css" />
 <script src="Sencha/sencha-touch-all.js" type="text/javascript"></script>
 <script src="Sencha/ext-all.js" type="text/javascript"></script>
+<script src="Sencha/js/jquery.min.js"></script>
 <script type="text/javascript">
 //--------------- LOCALIZEABLE GLOBALS ---------------
 var d=new Date();
@@ -27,6 +28,108 @@ var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
    }
    
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	 $("#charts").click(function(){
+		 Ext.define('Bond', {
+		        extend: 'Ext.data.Model',
+		        fields: ['status', 'data']
+		    });
+
+		    var store1 = new Ext.data.Store({
+		        model: 'Bond',
+		        proxy: {
+		            type: 'ajax',
+		            url: 'http://localhost:8080/ClinicalTrials/test2.json',
+		            reader: {
+		                type: 'json',
+		                root: 'ClinicalTrials'
+		            }
+		        }
+		    });
+		  
+		    
+		   store1.load();
+			
+		
+		    var temp = '';
+		    var win = Ext.create('Ext.Window', {
+		        modal:true,
+		    	width: 800,
+		        height: 600,
+		        hidden: false,
+		        maximizable: true,
+		        title: 'Column Chart',
+		        renderTo: Ext.getBody(),
+		        layout: 'fit',
+		        tbar: [{
+		            text: 'Reload Data',
+		            handler: function() {
+		            	store1.load();
+		            }
+		        }],
+		        items: {
+		            id: 'chartCmp',
+		            xtype: 'chart',
+		            style: 'background:#fff',
+		            animate: true,
+		            shadow: true,
+		            store: store1,
+		            axes: [{
+		                type: 'Category',
+		                position: 'left',
+		                fields: ['status'],
+		                title: 'STATUS',
+		                grid: true,
+		                label:{
+		                	renderer: function(status){
+		                		
+		                		return '';
+		                	}
+		                }
+		                 
+		            }, {
+		                type: 'Category',
+		                position: 'bottom',
+		                fields: ['data'],
+		                title: 'Date',
+		                label: {
+		                    rotate: {
+		                        degrees:330
+		                    },
+
+		                }
+
+		                
+		            }],
+		            series: [{
+		            	showInLegend: true,	
+		            	type: 'line',
+		                axis: 'middle',
+		                highlight: true,
+		                xField: 'data',
+		                yField: 'status',
+		                style: {
+		                    
+		                    fill: 'red'
+		                },
+		                label: {
+		                    display: 'insideEnd',
+		                    'text-anchor': 'middle',
+		                      field: 'status',
+		                     // renderer: Ext.util.Format.numberRenderer('0'),
+		                      orientation: 'vertical',
+		                      color: '#333'
+		                 },
+		            }]
+		        }
+		    });
+		    win.focus();
+	 });
+});
+
+</script>
 <script type="text/javascript">
 
 Ext.onReady(function() {
@@ -181,6 +284,7 @@ Ext.onReady(function() {
             var detailPanel = Ext.getCmp('detailPanel');
             bookTpl.overwrite(detailPanel.body, selectedRecord[0].data);
         }
+        
     });
 	
      
@@ -194,7 +298,8 @@ Ext.onReady(function() {
   <tr bgcolor="#3366CC">
     <td width="382" colspan="3" rowspan="2"><img src="templatefiles/mm_travel_photo.jpg" alt="Header image" width="382" height="127" border="0" /></td>
     <td width="348" height="63" colspan="3" id="logo" valign="bottom" align="left" nowrap="nowrap">Clinical Trials</td>
-	<td width="10" id="logo"></td>
+    <td width="10" id="logo">Login</td>
+	
   </tr>
 
   <tr bgcolor="#3366CC">
@@ -222,7 +327,7 @@ Ext.onReady(function() {
 		 &nbsp;<br /></td>
         </tr>
         <tr>
-          <td width="165"><a href="javascript:;" class="navText">Navigation Bar</a></td>
+          <td width="165"><a href="javascript:;" class="navText"><div id="charts">Charts</div></a></td>
         </tr>
         <tr>
           <td width="165"><a href="javascript:;" class="navText">2</a></td>
