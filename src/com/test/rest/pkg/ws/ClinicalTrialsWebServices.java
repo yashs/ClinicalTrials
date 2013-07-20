@@ -212,10 +212,10 @@ public class ClinicalTrialsWebServices {
 		return trials; 
 	}
 	
-	@POST
+	@GET
 	@Path("getTrialRecs")
 	@Produces({MediaType.APPLICATION_JSON})
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public List<ClinicalTrials> getTrialRecords(@QueryParam("trialId") String trialId,
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {

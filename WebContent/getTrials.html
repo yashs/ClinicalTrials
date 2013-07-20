@@ -32,16 +32,17 @@ var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
 $(document).ready(function(){
 	
 	 $("#charts").click(function(){
+		 
 		 Ext.define('Bond', {
 		        extend: 'Ext.data.Model',
-		        fields: ['status', 'data']
+		        fields: ['status', 'retDate']
 		    });
 
 		    var store1 = new Ext.data.Store({
 		        model: 'Bond',
 		        proxy: {
 		            type: 'ajax',
-		            url: '../ClinicalTrials/test2.json',
+		            url: '../ClinicalTrials/rest/params/trialRecs',
 		            reader: {
 		                type: 'json',
 		                root: 'ClinicalTrials'
@@ -79,7 +80,7 @@ $(document).ready(function(){
 		            axes: [{
 		                type: 'Category',
 		                position: 'left',
-		                fields: ['status'],
+		                fields: ['retDate'],
 		                title: 'STATUS',
 		                grid: true,
 		                label:{
@@ -92,23 +93,21 @@ $(document).ready(function(){
 		            }, {
 		                type: 'Category',
 		                position: 'bottom',
-		                fields: ['data'],
+		                fields: ['retDate'],
 		                title: 'Date',
 		                label: {
-		                    rotate: {
-		                        degrees:330
-		                    },
-
-		                }
-
-		                
+		                    
+							renderer: function(retDate){
+		                		return retDate;
+		                	}
+		                }		                
 		            }],
 		            series: [{
 		            	showInLegend: true,	
 		            	type: 'line',
 		                axis: 'middle',
 		                highlight: true,
-		                xField: 'data',
+		                xField: 'retDate',
 		                yField: 'status',
 		                style: {
 		                    
@@ -133,13 +132,17 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 Ext.onReady(function() {
-	Ext.define('Bond', {
+	var selectedRec = '';
+	var trialId = 0;
+	
+	
+	Ext.define('SearchRes', {
         extend: 'Ext.data.Model',
         fields: ['trialId', 'briefTitle', 'officialTitle', 'sponsors','authority', 'studyType','studyDesign','summary','status','stDate','endDate','phase','criteria','gender','minAge','maxAge','officialLastName','officialRole','officialAffiliation','retDate','tags','allLocations']
     });
 
     var store = new Ext.data.Store({
-        model: 'Bond',
+        model: 'SearchRes',
         proxy: {
             type: 'ajax',
             url: '../ClinicalTrials/rest/params/advSearchRes',
@@ -281,10 +284,32 @@ Ext.onReady(function() {
 	// update panel body on selection change
     grid.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
         if (selectedRecord.length) {
-            var detailPanel = Ext.getCmp('detailPanel');
+        	var detailPanel = Ext.getCmp('detailPanel');
             bookTpl.overwrite(detailPanel.body, selectedRecord[0].data);
         }
         
+        selectedRec = selectedRecord[0].data.trialId;
+        Ext.Ajax.request({
+      	   url: '../ClinicalTrials/rest/params/getTrialRecs',
+      	   method: 'GET',
+      	   
+      	   standardSubmit: true,
+      	   type: 'json',
+      	   params : {
+      		  trialId: selectedRec
+      	   },
+      	   scope: this,
+      	   success: function(response, opts) {
+      	      //var obj = Ext.decode(response.responseText);
+      	      //console.dir(obj);
+      		 console.log('Sucess');
+      	      
+      	   },
+      	   failure: function(response, opts) {
+      	      console.log('server-side failure with status code ' + response.status);
+      	    
+      	   }
+      	});
     });
 	
      
