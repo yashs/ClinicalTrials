@@ -53,6 +53,15 @@ public class ClinicalTrialsWebServices {
 		params.addAll(DefaultParam.instance.getModel().values());
 		return params; 
 	}
+	
+	@GET
+	@Path("/chart")
+	@Produces(MediaType.TEXT_XML)
+	public String showChart(@Context HttpServletRequest servletRequest, @QueryParam("trial_id") String trial_id) {
+		HttpSession session = servletRequest.getSession(true);
+		System.out.println("Testing:    "+trial_id);
+		return "success";
+	}
 
 	// Return the list of todos for applications
 	@GET
@@ -109,6 +118,7 @@ public class ClinicalTrialsWebServices {
 		return "Your Preferences have been set";
 	}
 
+	@SuppressWarnings("unchecked")
 	@GET
 	@Path("advSearchRes")
 	@Produces({MediaType.APPLICATION_JSON})
@@ -116,6 +126,17 @@ public class ClinicalTrialsWebServices {
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
 		HttpSession session = servletRequest.getSession(true);
 		trials = (List<ClinicalTrials>) session.getAttribute("advSearchedTrials");
+		return trials; 
+	}
+	
+	@SuppressWarnings("unchecked")
+	@GET
+	@Path("trialRecs")
+	@Produces({MediaType.APPLICATION_JSON})
+	public List<ClinicalTrials> getSearchedTrialRecs(@Context HttpServletResponse servletResponse,@Context HttpServletRequest servletRequest) throws Exception {
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		HttpSession session = servletRequest.getSession(true);
+		trials = (List<ClinicalTrials>) session.getAttribute("trialRecs");
 		return trials; 
 	}
 
@@ -188,7 +209,35 @@ public class ClinicalTrialsWebServices {
 			if(connection!=null)
 				connection.close();
 		}
+		return trials; 
+	}
+	
+	@POST
+	@Path("getTrialRecs")
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public List<ClinicalTrials> getTrialRecords(@QueryParam("trialId") String trialId,
+			@Context HttpServletResponse servletResponse,
+			@Context HttpServletRequest servletRequest) throws Exception {
 
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		Database database= new Database();
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
+			trials = project.getSearchedTrialRecords(connection,trialId);
+			HttpSession session = servletRequest.getSession(true);
+			session.setAttribute("trialRecs", trials);
+
+			servletResponse.sendRedirect("../../getTrials.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
+		}
 		return trials; 
 	}
 

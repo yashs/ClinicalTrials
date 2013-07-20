@@ -453,6 +453,20 @@ public class PersistanceActions {
 		
 	}
 
+	public List<ClinicalTrials> getSearchedTrialRecords(Connection connection,
+			String trialId) {
+		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+		String query = "select * from clinical_trials where trial_id='" +trialId+"'";
+		try {
+			trials = getTrialRecords(connection, query);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return trials;		
+	}
+
 
 
 }
