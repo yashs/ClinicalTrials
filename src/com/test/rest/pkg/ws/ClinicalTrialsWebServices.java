@@ -30,8 +30,6 @@ import com.test.rest.pkg.database.PersistanceActions;
 import com.test.rest.pkg.misc.SendEmail;
 import com.test.rest.pkg.misc.UserInfo;
 
-import com.google.gson.Gson;
-
 
 @Path("/params")
 public class ClinicalTrialsWebServices {
@@ -58,6 +56,7 @@ public class ClinicalTrialsWebServices {
 	@Path("/chart")
 	@Produces(MediaType.TEXT_XML)
 	public String showChart(@Context HttpServletRequest servletRequest, @QueryParam("trial_id") String trial_id) {
+		@SuppressWarnings("unused")
 		HttpSession session = servletRequest.getSession(true);
 		System.out.println("Testing:    "+trial_id);
 		return "success";
@@ -103,11 +102,16 @@ public class ClinicalTrialsWebServices {
 		Connection connection = null;
 		try{
 			connection = database.Get_Connection();
+			List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
 		PersistanceActions project= new PersistanceActions();
 		System.out.println(session.getAttribute("user_email"));
 		System.out.println(studyType.toString());
 
 		project.setPrefs(connection, status, result, studyType, ageGroup, phase1, phaseII, phaseIII, phaseIV, NIH, industry, federal, university, tags, session.getAttribute("user_email").toString());
+		Thread.sleep(1000);
+		trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
+		session.setAttribute("advSearchedTrials", trials);
+		servletResponse.sendRedirect("../../getTrials.html");
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -387,7 +391,16 @@ public class ClinicalTrialsWebServices {
 			if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
 				HttpSession session = servletRequest.getSession(true);
 				session.setAttribute("user_email", email);
-				servletResponse.sendRedirect("../../preferences.html");
+				int prefStatus = project.getPrefStatus(connection,email);
+				int regStatus = project.getRegStatus(connection,email);
+				if(regStatus == 0)
+					servletResponse.sendRedirect("../../regComplete1.html");
+				if(prefStatus == 0)
+					servletResponse.sendRedirect("../../preferences.html");
+				else{
+					ArrayList<String> preferences = new ArrayList<String>();
+					//preferences = project.getPrefs(connection,email);
+				}
 			}
 			else
 				servletResponse.sendRedirect("../../loginFailed.html");
