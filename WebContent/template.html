@@ -6,6 +6,15 @@
 <title>Home Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="templatefiles/mm_travel2.css" type="text/css" />
+
+<script type="text/javascript">
+//--------------- LOCALIZEABLE GLOBALS ---------------
+var d=new Date();
+var monthname=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+//Ensure correct for language. English is "January 1, 2004"
+var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+//---------------   END LOCALIZEABLE   ---------------
+</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -15,14 +24,6 @@
   ga('create', 'UA-42616450-1', 'cloudapp.net');
   ga('send', 'pageview');
 
-</script>
-<script type="text/javascript">
-//--------------- LOCALIZEABLE GLOBALS ---------------
-var d=new Date();
-var monthname=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
-//Ensure correct for language. English is "January 1, 2004"
-var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-//---------------   END LOCALIZEABLE   ---------------
 </script>
 </head>
 <body bgcolor="#C0DFFD">
