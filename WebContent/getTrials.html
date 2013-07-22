@@ -328,13 +328,27 @@ Ext.onReady(function() {
   ga('send', 'pageview');
 
 </script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42616450-1']);
+  _gaq.push(['_setDomainName', 'cloudapp.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </head>
 <body bgcolor="#C0DFFD">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr bgcolor="#3366CC">
-    <td width="382" colspan="3" rowspan="2"><img src="templatefiles/mm_travel_photo.jpg" alt="Header image" width="382" height="127" border="0" /></td>
-    <td width="348" height="63" colspan="3" id="logo" valign="bottom" align="left" nowrap="nowrap">Clinical Trials</td>
-    <td width="10" id="logo">Login</td>
+    <td width="382" colspan="3" rowspan="2"><img src="templatefiles/sjsu_horiz.jpg" alt="Header image" width="382" height="127" border="0" /></td>
+    <td width="700" height="63" colspan="10" id="logo" valign="bottom" align="left" nowrap="nowrap"><font size = "14">Clinical Trials</font></td>
+    <td width="10" id="logo"></td>
 	
   </tr>
 
@@ -406,19 +420,24 @@ Ext.onReady(function() {
 		&nbsp;<br />
 		<table border="0" cellspacing="0" cellpadding="0" width="190">
 			<tr>
-			<td colspan="3" class="subHeader" align="center">New Updates</td>
+			<td colspan="3" class="subHeader" align="center">External References:</td>
 			</tr>
 
 			<tr>
 			<td width="40"><img src="templatefiles/mm_spacer.gif" alt="" width="40" height="1" border="0" /></td>
 			<td width="110" id="sidebar" class="smallText"><br />
-			<p><img src="templatefiles/mm_travel_photo1.jpg" alt="Image 1" width="110" height="110" vspace="6" border="0" /><br />
-			More...<br />
-			<a href="javascript:;">Read more &gt;</a></p>
+			<p><img src="templatefiles/clinical_trials.jpg" alt="Image 1" width="200" height="110" vspace="6" border="0" />
+			<a href="http://www.clinicaltrials.gov">Goto www.clinicaltrials.gov &gt;</a></p><br />
+			<br />
 
-			<p><img src="templatefiles/mm_travel_photo2.jpg" alt="Image 2" width="110" height="110" vspace="6" border="0" /><br />
-			More...<br />
-			<a href="javascript:;">Read more &gt;</a></p>
+			<p><img src="templatefiles/clinical_trends.jpg" alt="Image 2" width="200" height="110" vspace="6" border="0" /><br />
+			Charts & Trends...<br />
+			<a href="http://www.clinicaltrials.gov/ct2/resources/trends">Read more &gt;</a></p>
+			<br />
+
+			<p><img src="templatefiles/clinical_map.jpeg" alt="Image 2" width="200" height="110" vspace="6" border="0" /><br />
+			Clinical Trial Map...<br />
+			<a href="http://www.clinicaltrials.gov/ct2/search/map">Read more &gt;</a></p>
 			<br />
 			&nbsp;<br />
 			&nbsp;<br />			</td>
