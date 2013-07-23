@@ -3,7 +3,9 @@ package com.test.rest.pkg.ws;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,25 +43,23 @@ public class ClinicalTrialsWebServices {
 	@Context
 	Request request;
 
-
-	// Return the list of parameters to the user in the browser
 	@GET
-	@Path("/xmlcount")
+	@Path("/signout")
 	@Produces(MediaType.TEXT_XML)
-	public List<UserInfo> getParametersBrowser() {
-		List<UserInfo> params = new ArrayList<UserInfo>();
-		params.addAll(DefaultParam.instance.getModel().values());
-		return params; 
+	public void signout(@Context HttpServletResponse servletResponse,@Context HttpServletRequest servletRequest) throws IOException {
+		HttpSession session = servletRequest.getSession(true);
+		session.removeAttribute("user_email");
+		servletResponse.sendRedirect("../../index.html");
 	}
-	
+
 	@GET
 	@Path("/chart")
 	@Produces(MediaType.TEXT_XML)
-	public String showChart(@Context HttpServletRequest servletRequest, @QueryParam("trial_id") String trial_id) {
+	public void showChart(@Context HttpServletResponse servletResponse,@Context HttpServletRequest servletRequest, @QueryParam("trial_id") String trial_id) throws IOException {
 		@SuppressWarnings("unused")
 		HttpSession session = servletRequest.getSession(true);
-		System.out.println("Testing:    "+trial_id);
-		return "success";
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
 	}
 
 	// Return the list of todos for applications
@@ -76,12 +76,12 @@ public class ClinicalTrialsWebServices {
 
 		return params; 
 	}
-	
+
 	@POST
 	@Path("/pref")
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String preferences(@FormParam("status") String status,
+	public void preferences(@FormParam("status") String status,
 			@FormParam("result") String result,
 			@FormParam("studyType") String studyType,
 			@FormParam("ageGroup") String ageGroup,
@@ -98,28 +98,30 @@ public class ClinicalTrialsWebServices {
 			@Context HttpServletRequest servletRequest) throws Exception {
 
 		HttpSession session = servletRequest.getSession(true);
-		Database database= new Database();
-		Connection connection = null;
-		try{
-			connection = database.Get_Connection();
-			List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		PersistanceActions project= new PersistanceActions();
-		System.out.println(session.getAttribute("user_email"));
-		System.out.println(studyType.toString());
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			Database database= new Database();
+			Connection connection = null;
+			try{
+				connection = database.Get_Connection();
+				List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+				PersistanceActions project= new PersistanceActions();
+				System.out.println(session.getAttribute("user_email"));
+				System.out.println(studyType.toString());
 
-		project.setPrefs(connection, status, result, studyType, ageGroup, phase1, phaseII, phaseIII, phaseIV, NIH, industry, federal, university, tags, session.getAttribute("user_email").toString());
-		Thread.sleep(1000);
-		trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
-		session.setAttribute("advSearchedTrials", trials);
-		servletResponse.sendRedirect("../../getTrials.html");
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			if(connection!=null)
-				connection.close();
+				project.updatePrefs(connection, status, result, studyType, ageGroup, phase1, phaseII, phaseIII, phaseIV, NIH, industry, federal, university, tags, session.getAttribute("user_email").toString(),1);
+				//Thread.sleep(1000);
+				trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
+				session.setAttribute("advSearchedTrials", trials);
+				servletResponse.sendRedirect("../../getTrials.html");
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				if(connection!=null)
+					connection.close();
+			}
 		}
-		return "Your Preferences have been set";
 	}
 
 	@SuppressWarnings("unchecked")
@@ -127,12 +129,18 @@ public class ClinicalTrialsWebServices {
 	@Path("advSearchRes")
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<ClinicalTrials> getSearchedTrials(@Context HttpServletResponse servletResponse,@Context HttpServletRequest servletRequest) throws Exception {
-		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
 		HttpSession session = servletRequest.getSession(true);
-		trials = (List<ClinicalTrials>) session.getAttribute("advSearchedTrials");
-		return trials; 
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+			session = servletRequest.getSession(true);
+			trials = (List<ClinicalTrials>) session.getAttribute("advSearchedTrials");
+			return trials; 
+		}
+		return null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@GET
 	@Path("trialRecs")
@@ -140,8 +148,13 @@ public class ClinicalTrialsWebServices {
 	public List<ClinicalTrials> getSearchedTrialRecs(@Context HttpServletResponse servletResponse,@Context HttpServletRequest servletRequest) throws Exception {
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
 		HttpSession session = servletRequest.getSession(true);
-		trials = (List<ClinicalTrials>) session.getAttribute("trialRecs");
-		return trials; 
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			trials = (List<ClinicalTrials>) session.getAttribute("trialRecs");
+			return trials; 
+		}
+		return trials;
 	}
 
 	@POST
@@ -163,27 +176,33 @@ public class ClinicalTrialsWebServices {
 			@FormParam("tags") String tags,
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {
+		
+		HttpSession session = servletRequest.getSession(true);
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+			Database database= new Database();
+			Connection connection = null;
+			try{
+				connection = database.Get_Connection();
+				PersistanceActions project= new PersistanceActions();
+				trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
 
-		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		Database database= new Database();
-		Connection connection = null;
-		try{
-			connection = database.Get_Connection();
-			PersistanceActions project= new PersistanceActions();
-			trials = project.getSearchedTrials(connection,status,result,studyType,ageGroup,phase1,phaseII,phaseIII,phaseIV,NIH,industry,federal,university,tags);
+				session = servletRequest.getSession(true);
+				session.setAttribute("advSearchedTrials", trials);
+				servletResponse.sendRedirect("../../getTrials.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				if(connection!=null)
+					connection.close();
+			}
 
-			HttpSession session = servletRequest.getSession(true);
-			session.setAttribute("advSearchedTrials", trials);
-			servletResponse.sendRedirect("../../getTrials.html");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			if(connection!=null)
-				connection.close();
+			return trials; 
 		}
-
-		return trials; 
+		return null;
 	}
 
 	@POST
@@ -194,28 +213,34 @@ public class ClinicalTrialsWebServices {
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {
 
-		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		Database database= new Database();
-		Connection connection = null;
-		try{
-			connection = database.Get_Connection();
-			PersistanceActions project= new PersistanceActions();
-			trials = project.getSearchedTrials(connection,searchString);
+		HttpSession session = servletRequest.getSession(true);
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+			Database database= new Database();
+			Connection connection = null;
+			try{
+				connection = database.Get_Connection();
+				PersistanceActions project= new PersistanceActions();
+				trials = project.getSearchedTrials(connection,searchString);
 
-			HttpSession session = servletRequest.getSession(true);
-			session.setAttribute("advSearchedTrials", trials);
+				session = servletRequest.getSession(true);
+				session.setAttribute("advSearchedTrials", trials);
 
-			servletResponse.sendRedirect("../../getTrials.html");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			if(connection!=null)
-				connection.close();
+				servletResponse.sendRedirect("../../getTrials.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				if(connection!=null)
+					connection.close();
+			}
+			return trials; 
 		}
-		return trials; 
+		return null;
 	}
-	
+
 	@GET
 	@Path("getTrialRecs")
 	@Produces({MediaType.APPLICATION_JSON})
@@ -224,25 +249,31 @@ public class ClinicalTrialsWebServices {
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {
 
-		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		Database database= new Database();
-		Connection connection = null;
-		try{
-			connection = database.Get_Connection();
-			PersistanceActions project= new PersistanceActions();
-			trials = project.getSearchedTrialRecords(connection,trialId);
-			HttpSession session = servletRequest.getSession(true);
-			session.setAttribute("trialRecs", trials);
+		HttpSession session = servletRequest.getSession(true);
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+			Database database= new Database();
+			Connection connection = null;
+			try{
+				connection = database.Get_Connection();
+				PersistanceActions project= new PersistanceActions();
+				trials = project.getSearchedTrialRecords(connection,trialId);
+				session = servletRequest.getSession(true);
+				session.setAttribute("trialRecs", trials);
 
-			servletResponse.sendRedirect("../../getTrials.html");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			if(connection!=null)
-				connection.close();
+				servletResponse.sendRedirect("../../getTrials.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				if(connection!=null)
+					connection.close();
+			}
+			return trials; 
 		}
-		return trials; 
+		return null;
 	}
 
 	@GET
@@ -290,21 +321,29 @@ public class ClinicalTrialsWebServices {
 	@GET
 	@Path("getTrials")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<ClinicalTrials> getClinicalTrials() throws Exception {
-		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		Database database= new Database();
-		Connection connection = null;
-		try{
-			connection = database.Get_Connection();
-			PersistanceActions project= new PersistanceActions();
-			trials=project.getTrialRecords(connection,null);
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			if(connection!=null)
-				connection.close();
+	public List<ClinicalTrials> getClinicalTrials(@Context HttpServletResponse servletResponse,
+			@Context HttpServletRequest servletRequest) throws Exception {
+
+		HttpSession session = servletRequest.getSession(true);
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+			Database database= new Database();
+			Connection connection = null;
+			try{
+				connection = database.Get_Connection();
+				PersistanceActions project= new PersistanceActions();
+				trials=project.getTrialRecords(connection,null);
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				if(connection!=null)
+					connection.close();
+			}
+			return trials; 
 		}
-		return trials; 
+		return null;
 	}
 
 	// to get the total number of records
@@ -319,25 +358,30 @@ public class ClinicalTrialsWebServices {
 	@GET
 	@Path("/confirmRegistration")
 	@Produces(MediaType.TEXT_PLAIN)
-	public void confirmRegistration(@Context HttpServletResponse servletResponse) {
+	public void confirmRegistration(@Context HttpServletRequest servletRequest,@Context HttpServletResponse servletResponse) throws IOException {
 		// MultivaluedMap<String,String> urlParameters = uriInfo.getQueryParameters();
-		
-		String hashCode = uriInfo.getQueryParameters().toString();
-		boolean valid = PersistanceActions.validateConfirmationLink(hashCode); 
-		if (valid) 
-			try {
-				servletResponse.sendRedirect("../../regValid.html");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		else
-			try {
-				servletResponse.sendRedirect("../../regInvalid.html");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+		HttpSession session = servletRequest.getSession(true);
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			String hashCode = uriInfo.getQueryParameters().toString();
+			boolean valid = PersistanceActions.validateConfirmationLink(hashCode); 
+			if (valid) 
+				try {
+					servletResponse.sendRedirect("../../regValid.html");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else
+				try {
+					servletResponse.sendRedirect("../../regInvalid.html");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 	}
 
 	@POST
@@ -349,26 +393,33 @@ public class ClinicalTrialsWebServices {
 			@FormParam("dob") String dob,
 			@FormParam("email") String email,
 			@FormParam("pwd") String pwd,
-			@Context HttpServletResponse servletResponse) throws Exception {
-		pwd = Encrypt.encrypt(pwd);
-		System.out.println(name);
-		name=name.replace(" ", "_");
-		System.out.println(name);
-		//System.out.println("This is the Encrypted Password:     "+pwd);
-		UserInfo parm = new UserInfo(id,name,dob,email,"male",pwd);
-		Database database= new Database();
-		Connection connection = database.Get_Connection();
-		PersistanceActions project= new PersistanceActions();
-		project.setDBRecords(connection,parm);
+			@Context HttpServletResponse servletResponse, @Context HttpServletRequest servletRequest) throws Exception {
 
-		SendEmail.send(email, "http://http://clinictrials.cloudapp.net/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		HttpSession session = servletRequest.getSession(true);
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			pwd = Encrypt.encrypt(pwd);
+			System.out.println(name);
+			name=name.replace(" ", "_");
+			System.out.println(name);
+			//System.out.println("This is the Encrypted Password:     "+pwd);
+			UserInfo parm = new UserInfo(id,name,dob,email,"male",pwd);
+			Database database= new Database();
+			Connection connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
+			project.setDBRecords(connection,parm);
+			project.setPrefs(connection, "NULL","NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", email,0);
 
-		DefaultParam.instance.getModel().put(id, parm);    
-		try {
-			servletResponse.sendRedirect("../../regComplete.html");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+
+			DefaultParam.instance.getModel().put(id, parm);    
+			try {
+				servletResponse.sendRedirect("../../regComplete.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -376,45 +427,55 @@ public class ClinicalTrialsWebServices {
 	@Path("/login")
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String login(
+	public void login(
 			@FormParam("email") String email,
 			@FormParam("pwd") String pwd,
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {
-		pwd = Encrypt.encrypt(pwd);		
-		Database database= new Database();
-		Connection connection = null;
-		try{
-			connection = database.Get_Connection();
-			PersistanceActions project= new PersistanceActions();
-			String isAuth = project.userAuthenticate(connection, email, pwd);
-			if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
-				HttpSession session = servletRequest.getSession(true);
-				session.setAttribute("user_email", email);
-				int prefStatus = project.getPrefStatus(connection,email);
-				int regStatus = project.getRegStatus(connection,email);
-				if(regStatus == 0)
-					servletResponse.sendRedirect("../../regComplete1.html");
-				if(prefStatus == 0)
-					servletResponse.sendRedirect("../../preferences.html");
-				else{
-					ArrayList<String> preferences = new ArrayList<String>();
-					//preferences = project.getPrefs(connection,email);
+		
+		HttpSession session = servletRequest.getSession(true);
+		if(session.getAttribute("user_email") == null)
+			servletResponse.sendRedirect("../../loginFirst.html");
+		else{
+			pwd = Encrypt.encrypt(pwd);		
+			Database database= new Database();
+			Connection connection = null;
+			try{
+				connection = database.Get_Connection();
+				PersistanceActions project= new PersistanceActions();
+				String isAuth = project.userAuthenticate(connection, email, pwd);
+				if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
+					session = servletRequest.getSession(true);
+					session.setAttribute("user_email", email);
+					int prefStatus = project.getPrefStatus(connection,email);
+					int regStatus = project.getRegStatus(connection,email);
+					if(regStatus == 0){
+						servletResponse.sendRedirect("../../regComplete1.html");
+					}
+					if(prefStatus == 0)
+						servletResponse.sendRedirect("../../preferences.html");
+					else{
+						Map<String, String> preferences = new HashMap<String,String>();
+						preferences = project.getPrefs(connection,email);
+						List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+						trials = project.getSearchedTrials(connection,preferences.get("status"),preferences.get("result"),preferences.get("studyType"),preferences.get("ageGroup"),preferences.get("phase1"),preferences.get("phaseII"),preferences.get("phaseIII"),preferences.get("phaseIV"),preferences.get("NIH"),preferences.get("industry"),preferences.get("federal"),preferences.get("university"),preferences.get("tags"));
+						session.setAttribute("advSearchedTrials", trials);
+						servletResponse.sendRedirect("../../getTrials.html");
+					}
 				}
+				else
+					servletResponse.sendRedirect("../../loginFailed.html");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				if(connection!=null)
+					connection.close();
 			}
-			else
-				servletResponse.sendRedirect("../../loginFailed.html");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			if(connection!=null)
-				connection.close();
 		}
-		return null;
 	}
 
-	
+
 
 	// Defines that the next path parameter after todos is
 	// treated as a parameter and passed to the TodoResources

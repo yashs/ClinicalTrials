@@ -9,6 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.core.Context;
+
 import com.test.rest.pkg.clinicaltrials.ClinicalTrials;
 import com.test.rest.pkg.misc.UserInfo;
 import com.test.rest.pkg.ws.DefaultParam;
@@ -20,22 +25,20 @@ public class PersistanceActions {
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String retString = "";
 		try
 		{
-			ps = connection.prepareStatement("SELECT * FROM Users Where email='"+email+"'");
+			String query = "SELECT * FROM Users Where email='"+email+"'";
+			ps = connection.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
 				if(rs.getString("password").equals(pwd))
 					if(!rs.getBoolean("user_status")){
-						ps.close();
-						rs.close();
-						return "Please Activate Your Account";
+						retString = "Please Activate Your Account";
 					}
 					else{
-						ps.close(); 
-						rs.close();
-						return "AUTHENTICATED";
+						retString = "AUTHENTICATED";
 					}
 			}
 		}
@@ -48,7 +51,10 @@ public class PersistanceActions {
 			if(rs!=null)
 				rs.close();
 		}
-		return "Authentication Failed";
+		if(retString.equals(""))
+			retString = "Authentication Failed";
+		
+		return retString;
 	}
 
 	public void getDBRecords(Connection connection) throws Exception
@@ -383,7 +389,7 @@ public class PersistanceActions {
 		return trials;
 	}
 	
-	/*public ArrayList<String> getPrefs(Connection connection, String email) {
+	public Map<String,String> getPrefs(Connection connection, String email) throws SQLException {
 		
 		String query = "select * from preferences where user_email='" + email + "'";
 		Map<String,String> preferences = new HashMap<String,String>();
@@ -392,18 +398,22 @@ public class PersistanceActions {
 		try{
 		ps = connection.prepareStatement(query);
 		rs = ps.executeQuery();
+
 		while(rs.next())
 		{
-			preferences.put(rs.getString("trial_id"));
-			preferences.add(rs.getString("brief_title"));
-			preferences.add(rs.getString("official_title"));
-			preferences.setSponsors(rs.getString("sponsors"));
-			preferences.setAuthority(rs.getString("authority"));
-			preferences.setStudyType(rs.getString("study_type"));
-			preferences.setStudyDesign(rs.getString("study_design"));
-			preferences.setSummary(rs.getString("summary"));
-			preferences.setStatus(rs.getString("status"));
-			preferences.setStDate(rs.getString("start_date"));
+			preferences.put("status",rs.getString("status"));
+			preferences.put("result",rs.getString("result"));
+			preferences.put("studyType",rs.getString("studyType"));
+			preferences.put("ageGroup",rs.getString("ageGroup"));
+			preferences.put("phase1",rs.getString("phase1"));
+			preferences.put("phaseII",rs.getString("phaseII"));
+			preferences.put("phaseII",rs.getString("phaseIII"));
+			preferences.put("phaseIV",rs.getString("phaseIV"));
+			preferences.put("NIH",rs.getString("NIH"));
+			preferences.put("industry",rs.getString("industry"));
+			preferences.put("federal",rs.getString("federal"));
+			preferences.put("university",rs.getString("university"));
+			preferences.put("tags",rs.getString("tags"));
 		}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -413,15 +423,15 @@ public class PersistanceActions {
 			if(rs!=null)
 				rs.close();
 		}
-		return trials;
-	}*/
+		return preferences;
+	}
 		
 
 	
 	public void setPrefs(Connection connection, String status, String result,
 			String studyType, String ageGroup, String phase1, String phaseII,
 			String phaseIII, String phaseIV, String nIH, String industry,
-			String federal, String university, String tags, String userEmail) {
+			String federal, String university, String tags, String userEmail,int defaultStatus) {
 		// TODO Auto-generated method stub
 		
 		PreparedStatement ps = null;
@@ -444,7 +454,7 @@ public class PersistanceActions {
 			ps.setString(12,federal);
 			ps.setString(13,university);
 			ps.setString(14,tags);
-			ps.setInt(15,1);
+			ps.setInt(15,defaultStatus);
 			ps.executeUpdate();
 		}
 		catch(Exception e)
@@ -459,8 +469,47 @@ public class PersistanceActions {
 					e.printStackTrace();
 				}
 		}
+	}
+	
+	public void updatePrefs(Connection connection, String status, String result,
+			String studyType, String ageGroup, String phase1, String phaseII,
+			String phaseIII, String phaseIV, String nIH, String industry,
+			String federal, String university, String tags, String userEmail,int defaultStatus) {
+		// TODO Auto-generated method stub
 		
-		
+		PreparedStatement ps = null;
+		try
+		{
+			String query="UPDATE Preferences set status =?, result=?, studyType=?, ageGroup=?, phase1=?, phaseII=?, phaseIII=?, phaseIV=?, nIH=?, industry=?, federal=?, university=?, tags=? WHERE user_email='"+ userEmail +"'";
+			System.out.println(query);
+			ps = connection.prepareStatement(query);
+			ps.setString(1,status);
+			ps.setString(2,result);
+			ps.setString(3,studyType);
+			ps.setString(4,ageGroup);
+			ps.setString(5,phase1);
+			ps.setString(6,phaseII);
+			ps.setString(7,phaseIII);
+			ps.setString(8,phaseIV);
+			ps.setString(9,nIH);
+			ps.setString(10,industry);
+			ps.setString(11,federal);
+			ps.setString(12,university);
+			ps.setString(13,tags);
+			ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			if(ps!=null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 	}
 
 	public List<ClinicalTrials> getSearchedTrialRecords(Connection connection,
@@ -498,7 +547,7 @@ public class PersistanceActions {
 	}
 
 	public int getRegStatus(Connection connection, String email) throws SQLException {
-		String query = "select * from preferences where email='" +email+"'";
+		String query = "select * from users where email='" +email+"'";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try{
