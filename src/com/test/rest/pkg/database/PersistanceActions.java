@@ -176,11 +176,12 @@ public class PersistanceActions {
 	{
 		PreparedStatement ps = null;
 		try
-		{
+		{	
+			long unixTime = System.currentTimeMillis() / 1000L;
 			String query="SET NAMES 'utf8mb4'";
 			ps = connection.prepareStatement(query);
 			ps.execute();
-			query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			query="INSERT into clinical_trials values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(query);
 			ps.setString(1,trial.getTrialId());
 			ps.setString(2,trial.getBriefTitle());
@@ -204,6 +205,7 @@ public class PersistanceActions {
 			ps.setString(20,trial.getRetDate());
 			ps.setString(21,trial.getTags());
 			ps.setString(22,trial.getAllLocations());
+			ps.setLong(23,unixTime);
 			ps.executeUpdate();
 			ps.close();
 		}
@@ -270,7 +272,7 @@ public class PersistanceActions {
 	
 	public List<ClinicalTrials> getSearchedTrials(Connection connection, String searchString) {
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		String query = "select * from clinical_trials where trial_id='" +searchString +"' OR tags like '%" + searchString +"%'";
+		String query = "select * from clinical_trials where trial_id='" +searchString +"' OR tags like '%" + searchString +"%' group by trial_id order by time_stamp desc";
 		System.out.println(query);
 		try {
 			trials = getTrialRecords(connection, query);
@@ -376,6 +378,8 @@ public class PersistanceActions {
 			query = query.substring(0,query.length()-5);
 		else
 			query = query.substring(0,query.length()-7);
+		
+		query = query + " group by trial_id order by time_stamp desc";
 		
 		System.out.println("This is the final query\n" + query);
 		

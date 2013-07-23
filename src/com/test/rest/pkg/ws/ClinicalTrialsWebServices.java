@@ -176,7 +176,7 @@ public class ClinicalTrialsWebServices {
 			@FormParam("tags") String tags,
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {
-		
+
 		HttpSession session = servletRequest.getSession(true);
 		if(session.getAttribute("user_email") == null)
 			servletResponse.sendRedirect("../../loginFirst.html");
@@ -432,46 +432,42 @@ public class ClinicalTrialsWebServices {
 			@FormParam("pwd") String pwd,
 			@Context HttpServletResponse servletResponse,
 			@Context HttpServletRequest servletRequest) throws Exception {
-		
+
 		HttpSession session = servletRequest.getSession(true);
-		if(session.getAttribute("user_email") == null)
-			servletResponse.sendRedirect("../../loginFirst.html");
-		else{
-			pwd = Encrypt.encrypt(pwd);		
-			Database database= new Database();
-			Connection connection = null;
-			try{
-				connection = database.Get_Connection();
-				PersistanceActions project= new PersistanceActions();
-				String isAuth = project.userAuthenticate(connection, email, pwd);
-				if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
-					session = servletRequest.getSession(true);
-					session.setAttribute("user_email", email);
-					int prefStatus = project.getPrefStatus(connection,email);
-					int regStatus = project.getRegStatus(connection,email);
-					if(regStatus == 0){
-						servletResponse.sendRedirect("../../regComplete1.html");
-					}
-					if(prefStatus == 0)
-						servletResponse.sendRedirect("../../preferences.html");
-					else{
-						Map<String, String> preferences = new HashMap<String,String>();
-						preferences = project.getPrefs(connection,email);
-						List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-						trials = project.getSearchedTrials(connection,preferences.get("status"),preferences.get("result"),preferences.get("studyType"),preferences.get("ageGroup"),preferences.get("phase1"),preferences.get("phaseII"),preferences.get("phaseIII"),preferences.get("phaseIV"),preferences.get("NIH"),preferences.get("industry"),preferences.get("federal"),preferences.get("university"),preferences.get("tags"));
-						session.setAttribute("advSearchedTrials", trials);
-						servletResponse.sendRedirect("../../getTrials.html");
-					}
+		pwd = Encrypt.encrypt(pwd);		
+		Database database= new Database();
+		Connection connection = null;
+		try{
+			connection = database.Get_Connection();
+			PersistanceActions project= new PersistanceActions();
+			String isAuth = project.userAuthenticate(connection, email, pwd);
+			if (isAuth.equals("AUTHENTICATED") || isAuth.equals("Please Activate Your Account")){
+				session = servletRequest.getSession(true);
+				session.setAttribute("user_email", email);
+				int prefStatus = project.getPrefStatus(connection,email);
+				int regStatus = project.getRegStatus(connection,email);
+				if(regStatus == 0){
+					servletResponse.sendRedirect("../../regComplete1.html");
 				}
-				else
-					servletResponse.sendRedirect("../../loginFailed.html");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally{
-				if(connection!=null)
-					connection.close();
+				if(prefStatus == 0)
+					servletResponse.sendRedirect("../../preferences.html");
+				else{
+					Map<String, String> preferences = new HashMap<String,String>();
+					preferences = project.getPrefs(connection,email);
+					List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
+					trials = project.getSearchedTrials(connection,preferences.get("status"),preferences.get("result"),preferences.get("studyType"),preferences.get("ageGroup"),preferences.get("phase1"),preferences.get("phaseII"),preferences.get("phaseIII"),preferences.get("phaseIV"),preferences.get("NIH"),preferences.get("industry"),preferences.get("federal"),preferences.get("university"),preferences.get("tags"));
+					session.setAttribute("advSearchedTrials", trials);
+					servletResponse.sendRedirect("../../getTrials.html");
+				}
 			}
+			else
+				servletResponse.sendRedirect("../../loginFailed.html");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(connection!=null)
+				connection.close();
 		}
 	}
 
