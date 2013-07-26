@@ -388,7 +388,7 @@ public class ClinicalTrialsWebServices {
 	@Path("/add")
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public void newParameters(@FormParam("id") String id,
+	public void register(@FormParam("id") String id,
 			@FormParam("name") String name,
 			@FormParam("dob") String dob,
 			@FormParam("email") String email,
@@ -396,30 +396,26 @@ public class ClinicalTrialsWebServices {
 			@Context HttpServletResponse servletResponse, @Context HttpServletRequest servletRequest) throws Exception {
 
 		HttpSession session = servletRequest.getSession(true);
-		if(session.getAttribute("user_email") == null)
-			servletResponse.sendRedirect("../../loginFirst.html");
-		else{
-			pwd = Encrypt.encrypt(pwd);
-			System.out.println(name);
-			name=name.replace(" ", "_");
-			System.out.println(name);
-			//System.out.println("This is the Encrypted Password:     "+pwd);
-			UserInfo parm = new UserInfo(id,name,dob,email,"male",pwd);
-			Database database= new Database();
-			Connection connection = database.Get_Connection();
-			PersistanceActions project= new PersistanceActions();
-			project.setDBRecords(connection,parm);
-			project.setPrefs(connection, "NULL","NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", email,0);
+		pwd = Encrypt.encrypt(pwd);
+		System.out.println(name);
+		name=name.replace(" ", "_");
+		System.out.println(name);
+		//System.out.println("This is the Encrypted Password:     "+pwd);
+		UserInfo parm = new UserInfo(id,name,dob,email,"male",pwd);
+		Database database= new Database();
+		Connection connection = database.Get_Connection();
+		PersistanceActions project= new PersistanceActions();
+		project.setDBRecords(connection,parm);
+		project.setPrefs(connection, "NULL","NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", email,0);
 
-			SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 
-			DefaultParam.instance.getModel().put(id, parm);    
-			try {
-				servletResponse.sendRedirect("../../regComplete.html");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		DefaultParam.instance.getModel().put(id, parm);    
+		try {
+			servletResponse.sendRedirect("../../regComplete.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
