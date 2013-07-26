@@ -362,9 +362,6 @@ public class ClinicalTrialsWebServices {
 		// MultivaluedMap<String,String> urlParameters = uriInfo.getQueryParameters();
 
 		HttpSession session = servletRequest.getSession(true);
-		if(session.getAttribute("user_email") == null)
-			servletResponse.sendRedirect("../../loginFirst.html");
-		else{
 			String hashCode = uriInfo.getQueryParameters().toString();
 			boolean valid = PersistanceActions.validateConfirmationLink(hashCode); 
 			if (valid) 
@@ -381,7 +378,6 @@ public class ClinicalTrialsWebServices {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		}
 	}
 
 	@POST
