@@ -29,14 +29,15 @@ var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
    }
    
 </style>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	 $("#charts").click(function(){
+	 $("#statusChart").click(function(){
 		 
 		 Ext.define('Bond', {
 		        extend: 'Ext.data.Model',
-		        fields: ['status', 'retDate']
+		        fields: ['status','retDate']
 		    });
 
 		    var store1 = new Ext.data.Store({
@@ -55,7 +56,8 @@ $(document).ready(function(){
 		   store1.load();
 			
 		
-		    var temp = '';
+		   
+		    var statusTemp = '';
 		    var win = Ext.create('Ext.Window', {
 		        modal:true,
 		    	width: 800,
@@ -81,7 +83,7 @@ $(document).ready(function(){
 		            axes: [{
 		                type: 'Category',
 		                position: 'left',
-		                fields: ['retDate'],
+		                fields: ['status'],
 		                title: 'STATUS',
 		                grid: true,
 		                label:{
@@ -116,10 +118,26 @@ $(document).ready(function(){
 		                },
 		                label: {
 		                    display: 'insideEnd',
-		                    'text-anchor': 'middle',
+		                    position: 'top',
+		                    'text-anchor': 'end',
 		                      field: 'status',
-		                     // renderer: Ext.util.Format.numberRenderer('0'),
-		                      orientation: 'vertical',
+		                     renderer: function(status){
+		                    	 if(statusTemp != ''){
+		                    		 if(statusTemp.toLowerCase() == status.toLowerCase()){
+			                    		 return "Same Status";			                    		 
+			                    	 }
+			                    	 else{
+			                    		  statusTemp = status;
+			                    		  return "Different Status\n"+status;
+			                    	 }
+		                    		 
+		                    	 }
+		                    	                  	 
+		                    	 statusTemp = status;
+		                    	 return status;
+		                    	
+		                     },
+		                      orientation: 'horizontal',
 		                      color: '#333'
 		                 },
 		            }]
@@ -130,6 +148,261 @@ $(document).ready(function(){
 });
 
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	 $("#locationChart").click(function(){
+		 
+		 Ext.define('Bond', {
+		        extend: 'Ext.data.Model',
+		        fields: ['allLocations','retDate']
+		    });
+
+		    var store1 = new Ext.data.Store({
+		        model: 'Bond',
+		        proxy: {
+		            type: 'ajax',
+		            url: '../ClinicalTrials/rest/params/trialRecs',
+		            reader: {
+		                type: 'json',
+		                root: 'ClinicalTrials'
+		            }
+		        }
+		    });
+		  
+		    
+		   store1.load();
+			
+		
+		    var temp = '';
+		    var locationTemp = '';
+		    var win = Ext.create('Ext.Window', {
+		        modal:true,
+		    	width: 800,
+		        height: 600,
+		        hidden: false,
+		        maximizable: true,
+		        title: 'Column Chart',
+		        renderTo: Ext.getBody(),
+		        layout: 'fit',
+		        tbar: [{
+		            text: 'Reload Data',
+		            handler: function() {
+		            	store1.load();
+		            }
+		        }],
+		        items: {
+		            id: 'chartCmp',
+		            xtype: 'chart',
+		            style: 'background:#fff',
+		            animate: true,
+		            shadow: true,
+		            store: store1,
+		            axes: [{
+		                type: 'Category',
+		                position: 'left',
+		                fields: ['allLocations'],
+		                title: 'Location',
+		                grid: true,
+		                label:{
+		                	renderer: function(allLocations){
+		                		
+		                		return '';
+		                	}
+		                }
+		                 
+		            }, {
+		                type: 'Category',
+		                position: 'bottom',
+		                fields: ['retDate'],
+		                title: 'Date',
+		                label: {
+		                    
+							renderer: function(retDate){
+		                		return retDate;
+		                	}
+		                }		                
+		            }],
+		            series: [{
+		            	showInLegend: true,	
+		            	type: 'line',
+		                axis: 'middle',
+		                highlight: true,
+		                xField: 'retDate',
+		                yField: 'allLocations',
+		                style: {
+		                    
+		                    fill: 'red'
+		                },
+		                label: {
+		                    display: 'insideEnd',
+		                    position: 'top',
+		                    'text-anchor': 'end',
+		                      field: 'allLocations',
+		                     renderer: function(allLocations){
+		                    	 if(locationTemp != ''){
+		                    		 if(locationTemp.toLowerCase() == allLocations.toLowerCase()){
+			                    		 return "Same Location";			                    		 
+			                    	 }
+			                    	 else{			                    		 
+			                    		 var diffLocationStr='';
+			                    		 var splitAllLoc = allLocations.split(";");
+			                    		 locationTemp = locationTemp.split(";");
+			                    		 for (var i = 0; i < locationTemp.length; i++) {
+					                    	  if(locationTemp[i] != splitAllLoc[i]){
+					                    		  diffLocationStr +=locationTemp[i] + "\n";
+					                    	  }					                    	  
+				                    	 }
+			                    		 locationTemp = allLocations;
+			                    		 return "Different Location\n"+diffLocationStr;
+			                    		 
+			                    	 }
+		                    		 
+		                    	 }
+		                    	                  	 
+		                    	 locationTemp = allLocations;
+		                    	 return "Origin";
+		                    	
+		                     },
+		                      orientation: 'horizontal',
+		                      color: '#333'
+		                 },
+		            }]
+		        }
+		    });
+		    win.focus();
+	 });
+});
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	 $("#criteriaChart").click(function(){
+		 
+		 Ext.define('Bond', {
+		        extend: 'Ext.data.Model',
+		        fields: ['criteria','retDate']
+		    });
+
+		    var store1 = new Ext.data.Store({
+		        model: 'Bond',
+		        proxy: {
+		            type: 'ajax',
+		            url: '../ClinicalTrials/rest/params/trialRecs',
+		            reader: {
+		                type: 'json',
+		                root: 'ClinicalTrials'
+		            }
+		        }
+		    });
+		  
+		    
+		   store1.load();
+			
+		    var criteriaTemp = '';
+		    var win = Ext.create('Ext.Window', {
+		        modal:true,
+		    	width: 800,
+		        height: 600,
+		        hidden: false,
+		        maximizable: true,
+		        title: 'Column Chart',
+		        renderTo: Ext.getBody(),
+		        layout: 'fit',
+		        tbar: [{
+		            text: 'Reload Data',
+		            handler: function() {
+		            	store1.load();
+		            }
+		        }],
+		        items: {
+		            id: 'chartCmp',
+		            xtype: 'chart',
+		            style: 'background:#fff',
+		            animate: true,
+		            shadow: true,
+		            store: store1,
+		            axes: [{
+		                type: 'Category',
+		                position: 'left',
+		                fields: ['criteria'],
+		                title: 'Criteria',
+		                grid: true,
+		                label:{
+		                	renderer: function(criteria){
+		                		
+		                		return '';
+		                	}
+		                }
+		                 
+		            }, {
+		                type: 'Category',
+		                position: 'bottom',
+		                fields: ['retDate'],
+		                title: 'Date',
+		                label: {
+		                    
+							renderer: function(retDate){
+		                		return retDate;
+		                	}
+		                }		                
+		            }],
+		            series: [{
+		            	showInLegend: true,	
+		            	type: 'line',
+		                axis: 'middle',
+		                highlight: true,
+		                xField: 'retDate',
+		                yField: 'criteria',
+		                style: {
+		                    
+		                    fill: 'red'
+		                },
+		                label: {
+		                    display: 'insideEnd',
+		                    position: 'top',
+		                    'text-anchor': 'end',
+		                      field: 'criteria',
+		                     renderer: function(criteria){
+		                    	 if(criteriaTemp != ''){
+		                    		 if(criteriaTemp.toLowerCase() == criteria.toLowerCase()){
+			                    		 return "Same Criteria";			                    		 
+			                    	 }
+			                    	 else{		
+			                    		 var diffCriStr ='';
+			                    		 var splitAllCri = criteria.split(".");
+			                    		 criteriaTemp = criteriaTemp.split(".");
+			                    		 for (var i = 0; i < criteriaTemp.length; i++) {
+					                    	  if(criteriaTemp[i] != splitAllCri[i]){
+					                    		  diffCriStr +=criteriaTemp[i] + "\n";
+					                    	  }					                    	  
+				                    	 }
+			                    		 criteriaTemp = criteria;
+			                    		 return "Different Criteria\n"+diffCriStr;
+			                    		 
+			                    	 }
+		                    		 
+		                    	 }
+		                    	                  	 
+		                    	 criteriaTemp = criteria;
+		                    	 return "Original Criteria";
+		                    	
+		                     },
+		                      orientation: 'horizontal',
+		                      color: '#333'
+		                 },
+		            }]
+		        }
+		    });
+		    win.focus();
+	 });
+});
+
+</script>
+
 <script type="text/javascript">
 
 Ext.onReady(function() {
@@ -303,7 +576,7 @@ Ext.onReady(function() {
       	   success: function(response, opts) {
       	      //var obj = Ext.decode(response.responseText);
       	      //console.dir(obj);
-      		 console.log('Sucess');
+      		 console.log('Success');
       	      
       	   },
       	   failure: function(response, opts) {
@@ -377,16 +650,22 @@ Ext.onReady(function() {
 		 &nbsp;<br /></td>
         </tr>
         <tr>
-          <td width="165"><a href="javascript:;" class="navText"><div id="charts">Charts</div></a></td>
+        <td width="165" style="font-weight:bold;font-size:15px"><div align="left">Charts</span></div></td>
+      </tr>
+        <tr>
+          <td width="165"><a href="javascript:;" class="navText"><div id="statusChart">Status</div></a></td>
         </tr>
         <tr>
-          <td width="165"><a href="javascript:;" class="navText">2</a></td>
+          <td width="165"><a href="javascript:;" class="navText"><div id="locationChart">Location</div></a></td>
         </tr>
         <tr>
-          <td width="165"><a href="javascript:;" class="navText">3</a></td>
+          <td width="165"><a href="javascript:;" class="navText"><div id="criteriaChart">Criteria</div></a></td>
         </tr>
         <tr>
-          <td width="165"><a href="javascript:;" class="navText">4</a></td>
+        <td width="165" style="font-weight:bold;font-size:15px"><div align="left">Preferences</span></div></td>
+      </tr>
+        <tr>
+          <td width="165"><a href="javascript:;" class="navText">Preference</a></td>
         </tr>
         <tr>
           <td width="165"><a href="javascript:;" class="navText">5</a></td>
