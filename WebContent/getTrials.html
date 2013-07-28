@@ -44,7 +44,7 @@ $(document).ready(function(){
 		        model: 'Bond',
 		        proxy: {
 		            type: 'ajax',
-		            url: '../ClinicalTrials/rest/params/trialRecs',
+		            url: '../ClinicalTrialsMobile/rest/params/trialRecs',
 		            reader: {
 		                type: 'json',
 		                root: 'ClinicalTrials'
@@ -54,18 +54,16 @@ $(document).ready(function(){
 		  
 		    
 		   store1.load();
-			
-		
 		   
 		    var statusTemp = '';
 		    var win = Ext.create('Ext.Window', {
 		        modal:true,
-		    	width: 800,
+		    	width: 400,
 		        height: 600,
 		        hidden: false,
 		        maximizable: true,
 		        title: 'Column Chart',
-		        renderTo: Ext.getBody(),
+		        renderTo: 'binding-example',
 		        layout: 'fit',
 		        tbar: [{
 		            text: 'Reload Data',
@@ -163,7 +161,7 @@ $(document).ready(function(){
 		        model: 'Bond',
 		        proxy: {
 		            type: 'ajax',
-		            url: '../ClinicalTrials/rest/params/trialRecs',
+		            url: '../ClinicalTrialsMobile/rest/params/trialRecs',
 		            reader: {
 		                type: 'json',
 		                root: 'ClinicalTrials'
@@ -179,12 +177,12 @@ $(document).ready(function(){
 		    var locationTemp = '';
 		    var win = Ext.create('Ext.Window', {
 		        modal:true,
-		    	width: 800,
+		    	width: 400,
 		        height: 600,
 		        hidden: false,
 		        maximizable: true,
 		        title: 'Column Chart',
-		        renderTo: Ext.getBody(),
+		        renderTo: 'binding-example',
 		        layout: 'fit',
 		        tbar: [{
 		            text: 'Reload Data',
@@ -291,7 +289,7 @@ $(document).ready(function(){
 		        model: 'Bond',
 		        proxy: {
 		            type: 'ajax',
-		            url: '../ClinicalTrials/rest/params/trialRecs',
+		            url: '../ClinicalTrialsMobile/rest/params/trialRecs',
 		            reader: {
 		                type: 'json',
 		                root: 'ClinicalTrials'
@@ -305,12 +303,12 @@ $(document).ready(function(){
 		    var criteriaTemp = '';
 		    var win = Ext.create('Ext.Window', {
 		        modal:true,
-		    	width: 800,
+		    	width: 400,
 		        height: 600,
 		        hidden: false,
 		        maximizable: true,
 		        title: 'Column Chart',
-		        renderTo: Ext.getBody(),
+		        renderTo: 'binding-example',
 		        layout: 'fit',
 		        tbar: [{
 		            text: 'Reload Data',
@@ -419,7 +417,7 @@ Ext.onReady(function() {
         model: 'SearchRes',
         proxy: {
             type: 'ajax',
-            url: '../ClinicalTrials/rest/params/advSearchRes',
+            url: '../ClinicalTrialsMobile/rest/params/advSearchRes',
             reader: {
                 type: 'json',
                 root: 'ClinicalTrials'
@@ -462,18 +460,19 @@ Ext.onReady(function() {
        split: true,
        region: 'north',
        height: 300,
-        width: 600,
+        width: 400,
         renderTo: Ext.getBody()
     });
 	
 	var search = new Ext.form.FormPanel({
 		standardSubmit: true,
         frame:true,
+        id: 'formPanel',
         title: 'Search Trials',
      //   bodyStyle:'padding:5px 415px 5px',
-        width: 600,
+        width: 400,
         defaultType: 'textareafield',
-        url: '../ClinicalTrials/rest/params/basicSearch',
+        url: '../ClinicalTrialsMobile/rest/params/basicSearch',
         action: 'POST',
         buttonAlign:'center',
 		items: [{
@@ -494,10 +493,10 @@ Ext.onReady(function() {
 		var advsearch = new Ext.form.FormPanel({
 		standardSubmit: true,
         frame:true,
-        width: 600,
-        defaults: {width: 600},
+        width: 400,
+        defaults: {width: 400},
         defaultType: 'textfield',
-        url: '../ClinicalTrials/advSearch.html',
+        url: '../ClinicalTrialsMobile/advSearch.html',
         action: 'POST',
         buttonAlign:'center',
 		buttons: [{
@@ -542,7 +541,7 @@ Ext.onReady(function() {
         renderTo: 'binding-example',
         frame: true,
         title: 'Clinical Trial List',
-        width: 600,
+        width: 400,
         height:3000,
         layout: 'border',        
         items: [
@@ -564,7 +563,7 @@ Ext.onReady(function() {
         
         selectedRec = selectedRecord[0].data.trialId;
         Ext.Ajax.request({
-      	   url: '../ClinicalTrials/rest/params/getTrialRecs',
+      	   url: '../ClinicalTrialsMobile/rest/params/getTrialRecs',
       	   method: 'GET',
       	   
       	   standardSubmit: true,
@@ -615,125 +614,75 @@ Ext.onReady(function() {
   })();
 
 </script>
+
 </head>
-<body bgcolor="#C0DFFD">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr bgcolor="#3366CC">
-    <td width="382" colspan="3" rowspan="2"><img src="templatefiles/sjsu_horiz.jpg" alt="Header image" width="382" height="127" border="0" /></td>
-    <td width="700" height="63" colspan="10" id="logo" valign="bottom" align="left" nowrap="nowrap"><font size = "14"><b><u>Clinical Trials</u></b></font><sub>--Beta v2.0</sub></td>
-    <td width="10" id="logo" rowspan="2" valign="top" align="left"><a href="../ClinicalTrials/rest/params/signout"><SUB>SignOut</SUB></a></td>
-	
-  </tr>
 
-  <tr bgcolor="#3366CC">
-    <td height="64" colspan="3" id="tagline" valign="top" align="center"></td>
-	<td width="100%">&nbsp;</td>
-  </tr>
-
-  <tr>
-    <td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
-  </tr>
-
-  <tr bgcolor="#CCFF99">
-  	<td colspan="10" id="dateformat" height="25">&nbsp;&nbsp;<script type="text/javascript">
+<body>
+<table cellspacing="0" cellpadding="0">
+	<tr>
+		<td colspan="4"><img src="templatefiles/sjsu_horiz.jpg" alt="Header image" width="382" height="127" border="0" /></td>
+	</tr>
+	<tr>
+    	<td colspan="4" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="0" height="0" border="0" /></td>
+  	</tr>
+  	
+	<tr bgcolor="#CCCCCC">
+		<td colspan="4"><span class="header">Clinical Trials</span><sub style="font-weight:bold;font-size:12px">Beta v2.0</sub>
+		</td>
+	</tr>
+	<tr bgcolor="#CCCCCC">
+		<td colspan="4" id="dateformat" height="25" style="font-weight:bold">&nbsp;&nbsp;<script type="text/javascript">
       document.write(TODAY);	</script>	</td>
-  </tr>
- <tr>
-    <td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
-  </tr>
-
- <tr>
-    <td width="165" valign="top" bgcolor="#E6F3FF">
-	<table border="0" cellspacing="0" cellpadding="0" width="165" id="navigation">
-        <tr>
-          <td width="165">&nbsp;<br />
-		 &nbsp;<br /></td>
-        </tr>
-        <tr>
-        <td width="165" style="font-weight:bold;font-size:15px"><div align="left">Charts</span></div></td>
-      </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText"><div id="statusChart">Status</div></a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText"><div id="locationChart">Location</div></a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText"><div id="criteriaChart">Criteria</div></a></td>
-        </tr>
-        <tr>
-        <td width="165" style="font-weight:bold;font-size:15px"><div align="left">Preferences</span></div></td>
-      </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">Preference</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">5</a></td>
-        </tr>
-      </table>
- 	<br />
-  	&nbsp;<br />
-  	&nbsp;<br />
-  	&nbsp;<br /> 	</td>
-    <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
-    <td width="305" colspan="2" valign="top"><img src="templatefiles/mm_spacer.gif" alt="" width="305" height="1" border="0" /><br />
+	</tr>
+	<tr>
+    	<td colspan="4" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="0" height="0" border="0" /></td>
+  	</tr>
+  	<tr>
+  		<td>
+  			<a href="javascript:;" class="navText"><div id="statusChart">Status</div></a>
+  		</td>
+  		<td>
+  			<a href="javascript:;" class="navText"><div id="locationChart">Location</div></a>
+  		</td>
+  		<td>
+  			<a href="javascript:;" class="navText"><div id="criteriaChart">Criteria</div></a>
+  		</td>
+  		<td>
+  			<a href="../ClinicalTrialsMobile/preferences.html" class="navText"><div id="preferences">Preferences</div></a>
+  		</td>
+  	</tr>
+  	
+	<tr>
+		<td colspan="4">
+			<table border="0" cellspacing="0" cellpadding="0" width="400">
+        		<tr>
+		          <td class="pageName"><p>Searched Trial List</p></td>
+				</tr>
+				&nbsp;<br />
+				&nbsp;<br />
+				<tr>
+		          <td class="bodyText" id="mytraditionalform"><p></p></td>
+		        </tr>
+		       
+		        <tr>
+		       	 <td class="bodyText" id="binding-example"><p></p></td>
+		        </tr>
+		        
+      		</table>
+		</td>
+	</tr>
 	
-	<table border="0" cellspacing="0" cellpadding="0" width="705">
-        <tr>
-          <td class="pageName"><p>Searched Trial List</p></td>
-		</tr>
-		
-		
-	&nbsp;<br />
-	&nbsp;<br />
-		<tr>
-          <td class="bodyText" id="mytraditionalform"><p></p></td>
-        </tr>
-        <tr>
-       	 <td class="bodyText" id="binding-example"><p></p></td>
-        </tr>
-      </table>
-	  <br />	  </td>
-    <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
-        <td width="190" valign="top"><br />
-		&nbsp;<br />
-		<table border="0" cellspacing="0" cellpadding="0" width="190">
-			<tr>
-			<td colspan="3" class="subHeader" align="center">External References:</td>
-			</tr>
-
-			<tr>
-			<td width="40"><img src="templatefiles/mm_spacer.gif" alt="" width="40" height="1" border="0" /></td>
-			<td width="110" id="sidebar" class="smallText"><br />
-			<p><img src="templatefiles/clinical_trials.jpg" alt="Image 1" width="200" height="110" vspace="6" border="0" />
-			<a href="http://www.clinicaltrials.gov">Goto www.clinicaltrials.gov &gt;</a></p><br />
-			<br />
-
-			<p><img src="templatefiles/clinical_trends.jpg" alt="Image 2" width="200" height="110" vspace="6" border="0" /><br />
-			Charts & Trends...<br />
-			<a href="http://www.clinicaltrials.gov/ct2/resources/trends">Read more &gt;</a></p>
-			<br />
-
-			<p><img src="templatefiles/clinical_map.jpeg" alt="Image 2" width="200" height="110" vspace="6" border="0" /><br />
-			Clinical Trial Map...<br />
-			<a href="http://www.clinicaltrials.gov/ct2/search/map">Read more &gt;</a></p>
-			<br />
-			&nbsp;<br />
-			&nbsp;<br />			</td>
-			<td width="40">&nbsp;</td>
-			</tr>
-		</table>	</td>
-	<td width="100%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td width="165">&nbsp;</td>
-    <td width="50">&nbsp;</td>
-    <td width="167">&nbsp;</td>
-    <td width="138">&nbsp;</td>
-    <td width="50">&nbsp;</td>
-    <td width="190">&nbsp;</td>
-	<td width="100%">&nbsp;</td>
-  </tr>
+	<tr>
+    	<td colspan="4" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="1" /></td>
+  	</tr>
+	<tr>
+		<td bgcolor="#CCCCCC" colspan="4">
+			<div class="footer">Copyright San Jose State University</div>
+		</td>
+	</tr>
+	<tr>
+    	<td colspan="4" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+  	</tr>
 </table>
 </body>
 </html>

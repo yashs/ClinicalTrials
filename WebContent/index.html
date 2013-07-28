@@ -32,9 +32,9 @@ Ext.onReady(function() {
 		standardSubmit: true,
 		frame: true,
         title: 'Login',
-        width: 340,
+        width: 400,
         bodyPadding: 5,
-        url: '../ClinicalTrials/rest/params/login',
+        url: '../ClinicalTrialsMobile/rest/params/login',
         action: 'POST',
         fieldDefaults: {
             labelAlign: 'left',
@@ -74,10 +74,10 @@ Ext.onReady(function() {
 		standardSubmit: true,
         frame: true,
         title: 'Sign Up To Register',
-        width: 340,
-        defaults: {width: 340},
+        width: 400,
+        defaults: {width: 400},
         defaultType: 'textfield',
-        url: '../ClinicalTrials/register.html',
+        url: '../ClinicalTrialsMobile/register.html',
         action: 'POST',
         buttons: [{
             text: 'Sign-up',
@@ -117,116 +117,56 @@ Ext.onReady(function() {
 
 </script>
 </head>
-<body bgcolor="#C0DFFD">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr bgcolor="#3366CC">
-    <td width="382" colspan="3" rowspan="2"><img src="templatefiles/sjsu_horiz.jpg" alt="Header image" width="382" height="127" border="0" /></td>
-    <td width="700" height="63" colspan="10" id="logo" valign="bottom" align="left" nowrap="nowrap"><font size = "14"><b><u>Clinical Trials</u></b></font><sub>--Beta v2.0</sub></td>
-	<td width="20"></td>
-  </tr>
 
-  <tr bgcolor="#3366CC">
-    <td height="64" colspan="3" id="tagline" valign="top" align="center"></td>
-	<td width="100%">&nbsp;</td>
-  </tr>
-
-  <tr>
-    <td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
-  </tr>
-
-  <tr bgcolor="#CCFF99">
-  	<td colspan="7" id="dateformat" height="25">&nbsp;&nbsp;<script type="text/javascript">
+<body>
+<table cellspacing="0" cellpadding="0">
+	<tr>
+		<td><img src="templatefiles/sjsu_horiz.jpg" alt="Header image" width="382" height="127" border="0" /></td>
+	</tr>
+	<tr>
+    	<td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="0" height="0" border="0" /></td>
+  	</tr>
+  	
+	<tr bgcolor="#CCCCCC">
+		<td colspan="7"><span class="header">Clinical Trials</span><sub style="font-weight:bold;font-size:12px">Beta v2.0</sub>
+		</td>
+	</tr>
+	<tr bgcolor="#CCCCCC">
+		<td colspan="7" id="dateformat" height="25" style="font-weight:bold">&nbsp;&nbsp;<script type="text/javascript">
       document.write(TODAY);	</script>	</td>
-  </tr>
- <tr>
-    <td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
-  </tr>
-
- <tr>
-    <td width="165" valign="top" bgcolor="#E6F3FF">
-	<table border="0" cellspacing="0" cellpadding="0" width="165" id="navigation">
-        <tr>
-          <td width="165">&nbsp;<br />
-		 &nbsp;<br /></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">Navigation Bar</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">2</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">3</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">4</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">5</a></td>
-        </tr>
-      </table>
- 	<br />
-  	&nbsp;<br />
-  	&nbsp;<br />
-  	&nbsp;<br /> 	</td>
-    <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
-    <td width="305" colspan="2" valign="top"><img src="templatefiles/mm_spacer.gif" alt="" width="305" height="1" border="0" /><br />
-	&nbsp;<br />
-	&nbsp;<br />
-	<table border="0" cellspacing="0" cellpadding="0" width="705">
-        <tr>
-          <td class="pageName">Welcome to Clinical Trials</td>
-		</tr>
-	&nbsp;<br />
-	&nbsp;<br />
-		<tr>
-          <td class="bodyText" id="bodytext"></td>
-        </tr>
-        <tr>
-        <td id="signupbtn"></td>
-        </tr>
-      </table>
-	  <br />	  </td>
-    <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
-        <td width="190" valign="top"><br />
-		&nbsp;<br />
-		<table border="0" cellspacing="0" cellpadding="0" width="190">
-			<tr>
-			<td colspan="3" class="subHeader" align="center">External References:</td>
-			</tr>
-
-			<tr>
-			<td width="40"><img src="templatefiles/mm_spacer.gif" alt="" width="40" height="1" border="0" /></td>
-			<td width="110" id="sidebar" class="smallText"><br />
-			<p><img src="templatefiles/clinical_trials.jpg" alt="Image 1" width="200" height="110" vspace="6" border="0" />
-			<a href="http://www.clinicaltrials.gov">Goto www.clinicaltrials.gov &gt;</a></p><br />
-			<br />
-
-			<p><img src="templatefiles/clinical_trends.jpg" alt="Image 2" width="200" height="110" vspace="6" border="0" /><br />
-			Charts & Trends...<br />
-			<a href="http://www.clinicaltrials.gov/ct2/resources/trends">Read more &gt;</a></p>
-			<br />
-
-			<p><img src="templatefiles/clinical_map.jpeg" alt="Image 2" width="200" height="110" vspace="6" border="0" /><br />
-			Clinical Trial Map...<br />
-			<a href="http://www.clinicaltrials.gov/ct2/search/map">Read more &gt;</a></p>
-			<br />
-			&nbsp;<br />
-			&nbsp;<br />			</td>
-			<td width="40">&nbsp;</td>
-			</tr>
-		</table>	</td>
-	<td width="100%">&nbsp;</td>
-  </tr>
-  <tr>
-    <td width="165">&nbsp;</td>
-    <td width="50">&nbsp;</td>
-    <td width="167">&nbsp;</td>
-    <td width="138">&nbsp;</td>
-    <td width="50">&nbsp;</td>
-    <td width="190">&nbsp;</td>
-	<td width="100%">&nbsp;</td>
-  </tr>
+	</tr>
+	<tr>
+    	<td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="0" height="0" border="0" /></td>
+  	</tr>
+  	
+	<tr>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="0" width="400">
+        		<tr>
+         			 <td class="pageName"><p>Welcome to Clinical Trials</p></td>
+				</tr>
+		
+		
+				&nbsp;<br />
+				&nbsp;<br />
+				<tr>
+				  <td class="bodyText" id="bodytext"><p></p></td>
+				</tr>
+      		</table>
+		</td>
+	</tr>
+	
+	<tr>
+    	<td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="1" /></td>
+  	</tr>
+	<tr>
+		<td bgcolor="#CCCCCC">
+			<div class="footer">Copyright San Jose State University</div>
+		</td>
+	</tr>
+	<tr>
+    	<td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+  	</tr>
 </table>
 </body>
 </html>

@@ -111,11 +111,12 @@ a:hover {
 	}
 	
 .navText {
-	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	font: 15px Verdana, Arial, Helvetica, sans-serif;
 	color: #003366;
 	line-height:16px;
 	letter-spacing:.1em;
-	text-decoration: none;
+	text-decoration: underline;
+	font-weight:bold;
 	}
 	
 .footer{
