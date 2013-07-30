@@ -404,7 +404,7 @@ public class ClinicalTrialsWebServices {
 		project.setDBRecords(connection,parm);
 		project.setPrefs(connection, "NULL","NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", email,0);
 
-		SendEmail.send(email, "http://localhost:8080/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
+		SendEmail.send(email, "http://clinictrials.cloudapp.net/ClinicalTrials/rest/params/confirmRegistration?hashCode="+name+";"+Encrypt.encrypt(id));
 
 		DefaultParam.instance.getModel().put(id, parm);    
 		try {
