@@ -322,20 +322,20 @@ public class PersistanceActions {
 				query = query + "(max_age > 64) AND ";
 		}
 		
-		if(phase1.equalsIgnoreCase("Yes") || phaseII.equalsIgnoreCase("Yes") || phaseIII.equalsIgnoreCase("Yes") || phaseIV.equalsIgnoreCase("Yes")){
+		if(phase1.equalsIgnoreCase("1") || phaseII.equalsIgnoreCase("1") || phaseIII.equalsIgnoreCase("1") || phaseIV.equalsIgnoreCase("1")){
 			flag=true;
 			String phaseQuery = "(";
 			
-			if (phase1.equalsIgnoreCase("Yes"))
+			if (phase1.equalsIgnoreCase("1"))
 				phaseQuery = phaseQuery + "phase = 'Phase 1' OR ";
 
-			if (phaseII.equalsIgnoreCase("Yes"))
+			if (phaseII.equalsIgnoreCase("1"))
 				phaseQuery = phaseQuery + "phase = 'Phase 2' OR ";
 
-			if (phaseIII.equalsIgnoreCase("Yes"))
+			if (phaseIII.equalsIgnoreCase("1"))
 				phaseQuery = phaseQuery + "phase = 'Phase 3' OR ";
 
-			if (phaseIV.equalsIgnoreCase("Yes"))
+			if (phaseIV.equalsIgnoreCase("1"))
 				phaseQuery = phaseQuery + "phase = 'Phase 4' OR ";
 
 			phaseQuery = phaseQuery.substring(0,phaseQuery.length()-4);
@@ -343,23 +343,23 @@ public class PersistanceActions {
 		}	
 		
 		
-		if(nih.equalsIgnoreCase("Yes") || university.equalsIgnoreCase("Yes") || federal.equalsIgnoreCase("Yes") || industry.equalsIgnoreCase("Yes")){
+		if(nih.equalsIgnoreCase("1") || university.equalsIgnoreCase("1") || federal.equalsIgnoreCase("1") || industry.equalsIgnoreCase("1")){
 			flag=true;
 			String fundQuery = "(";
-				if (nih.equalsIgnoreCase("Yes")){
+				if (nih.equalsIgnoreCase("1")){
 					
 					fundQuery = fundQuery + "(official_affiliation like '%NIH%' OR official_affiliation like '%nhlbi%') OR ";
 				}
 				
-				if (university.equalsIgnoreCase("Yes")){
+				if (university.equalsIgnoreCase("1")){
 					fundQuery = fundQuery + "(official_affiliation like '%university%') OR ";
 				}
 				
-				if (federal.equalsIgnoreCase("Yes")){
+				if (federal.equalsIgnoreCase("1")){
 					fundQuery = fundQuery + "(official_affiliation like '%federal%') OR ";
 				}
 				
-				if (industry.equalsIgnoreCase("Yes")){
+				if (industry.equalsIgnoreCase("1")){
 					fundQuery = fundQuery + "(official_affiliation not like '%fed%' OR official_affiliation not like '%university%' OR official_affiliation not like '%nih%' OR official_affiliation not like '%nhlbi%') OR ";
 				}
 				
