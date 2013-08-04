@@ -24,7 +24,7 @@ public class ClinicalTrialsLoader {
 		// TODO Auto-generated method stub
 		try {
 
-			File fXmlFile = new File("/Users/yasshrivastava/Downloads/ClinicalTrials");
+			File fXmlFile = new File("/Users/yasshrivastava/git/ClinicalTrials/Data");
 			File[] xmlFiles = fXmlFile.listFiles();
 			int i=0;
 			for(File file:xmlFiles){
