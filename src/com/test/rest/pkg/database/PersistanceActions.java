@@ -411,7 +411,7 @@ public class PersistanceActions {
 			preferences.put("ageGroup",rs.getString("ageGroup"));
 			preferences.put("phase1",rs.getString("phase1"));
 			preferences.put("phaseII",rs.getString("phaseII"));
-			preferences.put("phaseII",rs.getString("phaseIII"));
+			preferences.put("phaseIII",rs.getString("phaseIII"));
 			preferences.put("phaseIV",rs.getString("phaseIV"));
 			preferences.put("NIH",rs.getString("NIH"));
 			preferences.put("industry",rs.getString("industry"));
@@ -484,7 +484,7 @@ public class PersistanceActions {
 		PreparedStatement ps = null;
 		try
 		{
-			String query="UPDATE Preferences set status =?, result=?, studyType=?, ageGroup=?, phase1=?, phaseII=?, phaseIII=?, phaseIV=?, nIH=?, industry=?, federal=?, university=?, tags=? WHERE user_email='"+ userEmail +"'";
+			String query="UPDATE Preferences set status =?, result=?, studyType=?, ageGroup=?, phase1=?, phaseII=?, phaseIII=?, phaseIV=?, nIH=?, industry=?, federal=?, university=?, tags=?, pref_status = ? WHERE user_email='"+ userEmail +"'";
 			System.out.println(query);
 			ps = connection.prepareStatement(query);
 			ps.setString(1,status);
@@ -500,6 +500,7 @@ public class PersistanceActions {
 			ps.setString(11,federal);
 			ps.setString(12,university);
 			ps.setString(13,tags);
+			ps.setInt(14,defaultStatus);
 			ps.executeUpdate();
 		}
 		catch(Exception e)

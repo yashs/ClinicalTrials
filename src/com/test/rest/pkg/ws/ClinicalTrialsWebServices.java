@@ -287,7 +287,7 @@ public class ClinicalTrialsWebServices {
 		ClinicalTrialsLoader.loadTrials();
 
 		try {
-			servletResponse.sendRedirect("../../loginPage.html");
+			servletResponse.sendRedirect("../../index.html");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
