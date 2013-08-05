@@ -60,6 +60,26 @@ Ext.onReady(function() {
             
         }] 
 	});
+	var signup = new Ext.form.FormPanel({
+		standardSubmit: true,
+        frame: true,
+        title: 'Sign Up To Register',
+        width: 400,
+        defaults: {width: 400},
+        defaultType: 'textfield',
+        url: '../ClinicalTrialsMobile/register.html',
+        action: 'POST',
+        buttons: [{
+            text: 'Sign-up',
+            cls: 'forwardButtonCls',
+            handler: function() {
+            	signup.getForm().submit();
+            }
+        }] 
+    }); 
+
+	
+	signup.render('signupbtn');
 	formPanel.render('bodytext');
 });
 </script>
@@ -123,6 +143,9 @@ Ext.onReady(function() {
 				&nbsp;<br />
 				<tr>
 				  <td class="bodyText" id="bodytext"><p></p></td>
+				</tr>
+				<tr>
+					<td id="signupbtn"></td>
 				</tr>
       		</table>
 		</td>
