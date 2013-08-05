@@ -67,6 +67,26 @@ Ext.onReady(function() {
             
         }] 
 	});
+	
+	var signup = new Ext.form.FormPanel({
+		standardSubmit: true,
+        frame: true,
+        title: 'Sign Up To Register',
+        width: 340,
+        defaults: {width: 340},
+        defaultType: 'textfield',
+        url: '../ClinicalTrials/register.html',
+        action: 'POST',
+        buttons: [{
+            text: 'Sign-up',
+            cls: 'forwardButtonCls',
+            handler: function() {
+            	signup.getForm().submit();
+            }
+        }] 
+    }); 
+
+	signup.render('signupbtn');
 	formPanel.render('bodytext');
 });
 </script>
@@ -123,25 +143,7 @@ Ext.onReady(function() {
  <tr>
     <td width="165" valign="top" bgcolor="#E6F3FF">
 	<table border="0" cellspacing="0" cellpadding="0" width="165" id="navigation">
-        <tr>
-          <td width="165">&nbsp;<br />
-		 &nbsp;<br /></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">Navigation Bar</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">2</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">3</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">4</a></td>
-        </tr>
-        <tr>
-          <td width="165"><a href="javascript:;" class="navText">5</a></td>
-        </tr>
+        
       </table>
  	<br />
   	&nbsp;<br />
@@ -159,6 +161,9 @@ Ext.onReady(function() {
 	&nbsp;<br />
 		<tr>
           <td class="bodyText" id="bodytext"></td>
+        </tr>
+         <tr>
+        <td id="signupbtn"></td>
         </tr>
       </table>
 	  <br />	  </td>
@@ -193,7 +198,11 @@ Ext.onReady(function() {
 		</table>	</td>
 	<td width="100%">&nbsp;</td>
   </tr>
-  <tr>
+ 
+   <tr>
+    <td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+    </tr>
+    <tr>
     <td width="165">&nbsp;</td>
     <td width="50">&nbsp;</td>
     <td width="167">&nbsp;</td>
@@ -202,6 +211,25 @@ Ext.onReady(function() {
     <td width="190">&nbsp;</td>
 	<td width="100%">&nbsp;</td>
   </tr>
+    <tr>
+    	<td></td>
+    	<td><a href="aboutus.html">AboutUs</a>&nbsp;|&nbsp;</td>
+    	<td><a href="http://www.clinicaltrials.gov" target="_blank">Reference</a></td>
+    	<td>Copyright @ SanJose University</td>
+    </tr>
+    <tr>
+    <td width="165">&nbsp;</td>
+    <td width="50">&nbsp;</td>
+    <td width="167">&nbsp;</td>
+    <td width="138">&nbsp;</td>
+    <td width="50">&nbsp;</td>
+    <td width="190">&nbsp;</td>
+	<td width="100%">&nbsp;</td>
+  </tr>
+    <tr><td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0"></img></td>
+ 
+  </tr>
+
 </table>
 </body>
 </html>

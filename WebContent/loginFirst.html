@@ -67,8 +67,27 @@ Ext.onReady(function() {
             
         }] 
 	});
+	var signup = new Ext.form.FormPanel({
+		standardSubmit: true,
+        frame: true,
+        title: 'Sign Up To Register',
+        width: 340,
+        defaults: {width: 340},
+        defaultType: 'textfield',
+        url: '../ClinicalTrials/register.html',
+        action: 'POST',
+        buttons: [{
+            text: 'Sign-up',
+            cls: 'forwardButtonCls',
+            handler: function() {
+            	signup.getForm().submit();
+            }
+        }] 
+    }); 
 	formPanel.render('bodytext');
+	signup.render('signupbtn');
 });
+
 </script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -160,6 +179,9 @@ Ext.onReady(function() {
 		<tr>
           <td class="bodyText" id="bodytext"></td>
         </tr>
+         <tr>
+        <td id="signupbtn"></td>
+        </tr>
       </table>
 	  <br />	  </td>
     <td width="50"><img src="templatefiles/mm_spacer.gif" alt="" width="50" height="1" border="0" /></td>
@@ -193,7 +215,10 @@ Ext.onReady(function() {
 		</table>	</td>
 	<td width="100%">&nbsp;</td>
   </tr>
-  <tr>
+    <tr>
+    <td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+    </tr>
+    <tr>
     <td width="165">&nbsp;</td>
     <td width="50">&nbsp;</td>
     <td width="167">&nbsp;</td>
@@ -202,6 +227,25 @@ Ext.onReady(function() {
     <td width="190">&nbsp;</td>
 	<td width="100%">&nbsp;</td>
   </tr>
+    <tr>
+    	<td></td>
+    	<td><a href="aboutus.html">AboutUs</a>&nbsp;|&nbsp;</td>
+    	<td><a href="http://www.clinicaltrials.gov" target="_blank">Reference</a></td>
+    	<td>Copyright @ SanJose University</td>
+    </tr>
+    <tr>
+    <td width="165">&nbsp;</td>
+    <td width="50">&nbsp;</td>
+    <td width="167">&nbsp;</td>
+    <td width="138">&nbsp;</td>
+    <td width="50">&nbsp;</td>
+    <td width="190">&nbsp;</td>
+	<td width="100%">&nbsp;</td>
+  </tr>
+    <tr><td colspan="7" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="1" height="1" border="0"></img></td>
+ 
+  </tr>
+
 </table>
 </body>
 </html>
