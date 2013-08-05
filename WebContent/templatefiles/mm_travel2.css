@@ -118,3 +118,7 @@ a:hover {
 	text-decoration: none;
 	}
 	
+a.signout:hover
+{
+color:yellow;
+}
