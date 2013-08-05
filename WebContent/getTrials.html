@@ -627,7 +627,7 @@ Ext.onReady(function() {
 <body>
 <table cellspacing="0" cellpadding="0">
 	<tr>
-		<td colspan="4"><img src="templatefiles/sjsu_horiz.jpg" alt="Header image" width="382" height="127" border="0" /></td>
+		<td colspan="4"><img src="templatefiles/sjsu_horiz.jpg" alt="Header image" width="382" height="100" border="0" /></td>
 	</tr>
 	<tr>
     	<td colspan="4" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="0" height="0" border="0" /></td>
@@ -638,12 +638,26 @@ Ext.onReady(function() {
 		</td>
 	</tr>
 	<tr bgcolor="#CCCCCC">
-		<td colspan="4" id="dateformat" height="25" style="font-weight:bold">&nbsp;&nbsp;<script type="text/javascript">
+		<td colspan="3" id="dateformat" height="25" style="font-weight:bold">&nbsp;&nbsp;<script type="text/javascript">
       document.write(TODAY);	</script>	</td>
+      <td>
+  			<a href="../ClinicalTrialsMobile/rest/params/signout" style="font-size:15px">SignOut</a>
+  		</td>
 	</tr>
 	<tr>
     	<td colspan="4" bgcolor="#003366"><img src="templatefiles/mm_spacer.gif" alt="" width="0" height="0" border="0" /></td>
   	</tr>
+  	<tr>
+  		<td colspan="3">
+  			<a href="../ClinicalTrialsMobile/preferences.html" class="navText"><div id="preferences">Preferences</div></a>
+  		</td>
+  		
+  	</tr>
+  	<tr><td>&nbsp;</td></tr>
+  	<tr>
+  		<td class="pageName"><p>Charts</p>
+  		</td>
+  	</tr>  	
   	<tr>
   		<td>
   			<a href="javascript:;" class="navText"><div id="statusChart">Status</div></a>
@@ -651,12 +665,10 @@ Ext.onReady(function() {
   		<td>
   			<a href="javascript:;" class="navText"><div id="locationChart">Location</div></a>
   		</td>
-  		<td>
+  		<td colspan="2">
   			<a href="javascript:;" class="navText"><div id="criteriaChart">Criteria</div></a>
   		</td>
-  		<td>
-  			<a href="../ClinicalTrialsMobile/preferences.html" class="navText"><div id="preferences">Preferences</div></a>
-  		</td>
+  				
   	</tr>
   	
 	<tr>
