@@ -520,7 +520,7 @@ public class PersistanceActions {
 	public List<ClinicalTrials> getSearchedTrialRecords(Connection connection,
 			String trialId) {
 		List<ClinicalTrials> trials = new ArrayList<ClinicalTrials>();
-		String query = "select * from clinical_trials where trial_id='" +trialId+"'";
+		String query = "select * from clinical_trials where trial_id='" +trialId+"' order by time_stamp asc";
 		try {
 			trials = getTrialRecords(connection, query);
 		} catch (Exception e) {
